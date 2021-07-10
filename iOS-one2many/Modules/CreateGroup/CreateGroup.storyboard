@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Group View Controller-->
+        <scene sceneID="JtM-Dx-zm6">
+            <objects>
+                <viewController storyboardIdentifier="CreateGroupViewController" id="38G-VI-Y4k" customClass="CreateGroupViewController" customModule="Many_to_many_call" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dke-wZ-fMb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8q-JY-08O">
+                                <rect key="frame" x="0.0" y="71" width="414" height="106"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WhF-bW-Zpd">
+                                        <rect key="frame" x="16" y="0.0" width="382" height="56"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="xLU-mQ-jTW">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="56"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Contacts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9y-Of-e0f">
+                                        <rect key="frame" x="16" y="78" width="121" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="WhF-bW-Zpd" firstAttribute="top" secondItem="g8q-JY-08O" secondAttribute="top" id="C6f-C5-irB"/>
+                                    <constraint firstAttribute="trailing" secondItem="WhF-bW-Zpd" secondAttribute="trailing" constant="16" id="JUN-NO-di5"/>
+                                    <constraint firstItem="d9y-Of-e0f" firstAttribute="top" secondItem="WhF-bW-Zpd" secondAttribute="bottom" constant="22" id="M0w-7b-wAo"/>
+                                    <constraint firstAttribute="bottom" secondItem="d9y-Of-e0f" secondAttribute="bottom" constant="7.5" id="UAc-Dx-eQz"/>
+                                    <constraint firstItem="d9y-Of-e0f" firstAttribute="leading" secondItem="WhF-bW-Zpd" secondAttribute="leading" id="mTa-Xn-TJJ"/>
+                                    <constraint firstItem="WhF-bW-Zpd" firstAttribute="leading" secondItem="g8q-JY-08O" secondAttribute="leading" constant="16" id="pLl-f0-p6d"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PaN-pu-Apo">
+                                <rect key="frame" x="0.0" y="189" width="414" height="673"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view hidden="YES" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKS-SF-Poc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ebn-81-cgO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="bottom" secondItem="PaN-pu-Apo" secondAttribute="bottom" id="6vk-Lc-XtF"/>
+                            <constraint firstItem="iKS-SF-Poc" firstAttribute="leading" secondItem="ebn-81-cgO" secondAttribute="leading" id="8qe-Rj-r0v"/>
+                            <constraint firstItem="PaN-pu-Apo" firstAttribute="leading" secondItem="ebn-81-cgO" secondAttribute="leading" id="91n-BQ-LZC"/>
+                            <constraint firstItem="iKS-SF-Poc" firstAttribute="top" secondItem="ebn-81-cgO" secondAttribute="top" id="Cal-ZR-Uya"/>
+                            <constraint firstItem="PaN-pu-Apo" firstAttribute="top" secondItem="g8q-JY-08O" secondAttribute="bottom" constant="12" id="ETJ-PM-ghD"/>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="trailing" secondItem="PaN-pu-Apo" secondAttribute="trailing" id="GM0-Jb-7Ec"/>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="bottom" secondItem="iKS-SF-Poc" secondAttribute="bottom" id="VUp-G3-npa"/>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="leading" secondItem="g8q-JY-08O" secondAttribute="leading" id="Vck-vh-9dw"/>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="trailing" secondItem="iKS-SF-Poc" secondAttribute="trailing" id="X1P-a3-qie"/>
+                            <constraint firstItem="ebn-81-cgO" firstAttribute="trailing" secondItem="g8q-JY-08O" secondAttribute="trailing" id="kUT-Bg-HMk"/>
+                            <constraint firstItem="g8q-JY-08O" firstAttribute="top" secondItem="ebn-81-cgO" secondAttribute="top" constant="27" id="o7M-Ua-73a"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blurView" destination="iKS-SF-Poc" id="dTg-b7-jG1"/>
+                        <outlet property="searchBar" destination="xLU-mQ-jTW" id="yFs-dh-Ey0"/>
+                        <outlet property="tableView" destination="PaN-pu-Apo" id="sFy-Ig-Zzh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QSF-et-8Pu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="84" y="159"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
