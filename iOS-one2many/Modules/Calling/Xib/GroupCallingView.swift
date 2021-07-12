@@ -106,8 +106,6 @@ class GroupCallingView: UIView {
             localView.isHidden = false
             cameraSwitch.isHidden = false
             cameraButton.isHidden = false
-//        case .screenshare:
-//            break
         }
     }
     
@@ -131,7 +129,6 @@ class GroupCallingView: UIView {
             cameraSwitch.isHidden = true
             speakerButton.isHidden = true
             cameraButton.isEnabled = false
-            
             setNames()
         case .ringing:
             cameraSwitch.isHidden = true

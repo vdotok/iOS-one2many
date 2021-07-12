@@ -8,6 +8,7 @@
 import UIKit
 import iOSSDKStreaming
 import MMWormhole
+import ReplayKit
 
 protocol BroadcastDelegate: AnyObject {
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
@@ -28,6 +29,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var speakerIcon: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
+    @IBOutlet weak var broadCastDummyView: UIStackView!
     
     var session: VTokBaseSession?
     weak var delegate: BroadcastDelegate?
@@ -85,7 +87,9 @@ class BroadcastView: UIView {
         return jsonString
     }
     
-    func updateView(with session: VTokBaseSession)  {
+    func updateView(with session: VTokBaseSession) {
+        self.session = session
+       
         switch session.sessionDirection {
         case .incoming:
             setIncomingView(for: session)
@@ -97,6 +101,8 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
+        self.session = session
+        setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
     }
     
@@ -104,6 +110,7 @@ class BroadcastView: UIView {
         switch session.sessionType {
         case .call:
             smallLocalView.isHidden = false
+            localView.isHidden = false
             smallLocalView.removeAllSubViews()
             smallLocalView.addSubview(userStream.renderer)
             userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
@@ -111,6 +118,7 @@ class BroadcastView: UIView {
             
         case .screenshare:
             localView.isHidden = false
+            smallLocalView.isHidden = false
             localView.removeAllSubViews()
             localView.addSubview(userStream.renderer)
             userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
@@ -155,6 +163,8 @@ class BroadcastView: UIView {
             speakerIcon.isHidden = true
             smallLocalView.isHidden = true
             muteButton.isHidden = true
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
         case .videoCall:
             screenShareBtn.isHidden = true
             screenShareAudio.isHidden = true
@@ -162,13 +172,16 @@ class BroadcastView: UIView {
             speakerIcon.isHidden = true
             smallLocalView.isHidden = true
             muteButton.isHidden = false
-        case .screenShareWithAppAudioAndVideoCall,.screenShareWithVideoCall :
+            broadCastDummyView.isHidden = true
+        case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
             screenShareBtn.isHidden = false
             screenShareAudio.isHidden = false
             cameraSwitchIcon.isHidden = false
             speakerIcon.isHidden = true
             smallLocalView.isHidden = true
             muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
         }
         
     }
@@ -184,6 +197,31 @@ extension BroadcastView {
                 return view
             }
         return BroadcastView()
+    }
+    
+    func addRPViewToSSButton() {
+        
+        let recordingView = RPSystemBroadcastPickerView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+        recordingView.preferredExtension = AppsGroup.SCREEN_SHARE_PREFERED_EXTENSION
+        guard let options = session?.broadcastOption else {return}
+        
+        switch options {
+        case .screenShareWithMicAudio:
+            recordingView.showsMicrophoneButton = true
+        default:
+            recordingView.showsMicrophoneButton = false
+        }
+        recordingView.tintColor = .white
+        
+        for subView in recordingView.subviews {
+            if subView is UIButton, let button = subView as? UIButton{
+                if let image = UIImage(named: "EndScreenShare"){
+                    button.setImage(nil, for: .normal)
+                }
+            }
+        }
+        hangupBtn.addSubview(recordingView)
+
     }
 }
 

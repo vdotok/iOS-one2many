@@ -32,7 +32,7 @@ protocol CallingViewModel: CallingViewModelInput {
     func disableVideo(session: VTokBaseSession, state: VideoState)
 }
 
-class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
+class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
 
     private let router: CallingRouter
     var output: CallingViewModelOutput?
@@ -65,13 +65,52 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
     }
     
     func viewModelDidLoad() {
+        addNotificationObserver()
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
             vtokSdk?.set(sessionDelegate: self, for: baseSession)
         }
         
         loadViews()
-//        listenForScreenShareSession()
+        
+
     }
+    
+    func addNotificationObserver(){
+          // Add Key-Value observer on isCaptured property of uiscreen.main
+        UIScreen.main.addObserver(self, forKeyPath: "captured", options: .new, context: nil)
+
+      }
+    
+    // MARK:- Key-Value Observer callback
+
+      override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+          if keyPath == "captured" {
+
+            if !UIScreen.main.isCaptured {
+              //    UIApplication.shared.isIdleTimerDisabled = false
+                guard let options = broadcastData?.broadcastOptions,
+                      let sdk = vtokSdk,
+                    let session = session
+                else {return}
+                switch options {
+                case .screenShareWithAppAudioAndVideoCall:
+                    sdk.hangup(session: session)
+                case .screenShareWithVideoCall:
+                    sdk.hangup(session: session)
+              
+                case .screenShareWithAppAudio:
+                    output?(.dismissCallView)
+                case .screenShareWithMicAudio:
+                    output?(.dismissCallView)
+                case .videoCall:
+                    output?(.dismissCallView)
+                }
+                
+              }
+
+          }
+
+      }
     
     private func listenForScreenShareSession() {
         wormhole.listenForMessage(withIdentifier: "screenShareSessionDidInitiated", listener: { [weak self] (messageObject) -> Void in
@@ -134,7 +173,7 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
-            DispatchQueue.main.asyncAfter(deadline: .now() , execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
                 self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
             })
         
@@ -169,6 +208,7 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
+                                              sessionType: .call,
                                               associatedSessionUUID: associatedSessionUUID,broadcastOption: broadcastData?.broadcastOptions)
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
@@ -192,6 +232,14 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
         let token = generatable.getUUID(string: time + tenantId + response.refID!)
         return token
         
+    }
+    
+    deinit {
+        removeObservers()
+    }
+    
+    func removeObservers() {
+        UIScreen.main.removeObserver(self, forKeyPath: "captured")
     }
 }
 
@@ -219,6 +267,7 @@ extension CallingViewModelImpl {
         let data = ScreenShareAppData(url: authResponse.mediaServerMap.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
+        self.session = session
         output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
@@ -399,7 +448,7 @@ extension CallingViewModelImpl {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {return}
             self.counter += 1
-            if self.counter > 30 {
+            if self.counter > 10000 {
                 guard let session = self.session else {return}
                 self.counter = 0
                 self.timer.invalidate()
