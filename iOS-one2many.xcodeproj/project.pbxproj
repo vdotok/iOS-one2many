@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3DBC3849AD5108A15510AF13 /* Pods_iOS_one2many.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064DEF2C152400DA99A68C66 /* Pods_iOS_one2many.framework */; };
+		3D1A713FFB066F5D3A4286B9 /* Pods_iOS_one2many.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16DA03DF13060812DA093D38 /* Pods_iOS_one2many.framework */; };
 		5D0A252C2697098D00231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
 		5D0A253626970C6100231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
 		5D0A253826970C9800231087 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83A8EB2678B68000F001DE /* Constants.swift */; };
@@ -43,10 +43,6 @@
 		5D7CD57A2678B1E2004799EA /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD5782678B1E2004799EA /* VideoCell.swift */; };
 		5D7CD57B2678B1E2004799EA /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7CD5792678B1E2004799EA /* VideoCell.xib */; };
 		5D83A8EC2678B68000F001DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83A8EB2678B68000F001DE /* Constants.swift */; };
-		5D85731B2699B61A0024E096 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */; };
-		5D85731C2699B61A0024E096 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5D85731D2699B6230024E096 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */; };
-		5D85731E2699B6230024E096 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5D8BC0522678DB6E001F1B9B /* IncomingCall.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8BC0512678DB6E001F1B9B /* IncomingCall.xib */; };
 		5D8BC0542678DB83001F1B9B /* IncomingCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8BC0532678DB83001F1B9B /* IncomingCall.swift */; };
 		5DA2C2722677922E00B6F36C /* CreateGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DA2C26D2677922E00B6F36C /* CreateGroup.storyboard */; };
@@ -114,17 +110,14 @@
 		5DE4B3A126970899009DAE5B /* BroadcastSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4B3A026970899009DAE5B /* BroadcastSetupViewController.swift */; };
 		5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39B26970899009DAE5B /* ScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39026970899009DAE5B /* ScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6EC9CAF919C03A2761640F4B /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11AB06AE810172E2CEAC835F /* Pods_ScreenShare.framework */; };
+		A81C25452699BD6400FB1C95 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; };
+		A81C25462699BD6400FB1C95 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A81C25472699BD6C00FB1C95 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; };
+		A81C25482699BD6C00FB1C95 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C0995B3EBB055C7E5A10556E /* Pods_ScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90BF38C334A72FC4100FB889 /* Pods_ScreenShare.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5D8573192699B6100024E096 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5D8573152699B6100024E096 /* iOSSDKStreaming.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5D146FA225DE4823000852FB;
-			remoteInfo = iOSSDKStreaming;
-		};
 		5DE4B3A326970899009DAE5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DA7BBDB267562A800A3E292 /* Project object */;
@@ -139,6 +132,13 @@
 			remoteGlobalIDString = 5DE4B38F26970899009DAE5B;
 			remoteInfo = ScreenShare;
 		};
+		A81C25412699BD0E00FB1C95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A81C253D2699BD0E00FB1C95 /* iOSSDKStreaming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D146FA225DE4823000852FB;
+			remoteInfo = iOSSDKStreaming;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,7 +148,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5D85731E2699B6230024E096 /* iOSSDKStreaming.framework in Embed Frameworks */,
+				A81C25482699BD6C00FB1C95 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,7 +159,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5D85731C2699B61A0024E096 /* iOSSDKStreaming.framework in Embed Frameworks */,
+				A81C25462699BD6400FB1C95 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,9 +179,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		064DEF2C152400DA99A68C66 /* Pods_iOS_one2many.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_one2many.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11AB06AE810172E2CEAC835F /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		493C740BEAE86EDB1473CEF4 /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
+		052760DB94359FA7EFD4257C /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		16DA03DF13060812DA093D38 /* Pods_iOS_one2many.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_one2many.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34D321C1934D488809DF87E8 /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		5D0A252B2697098D00231087 /* AppsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
 		5D0A253B26981F0000231087 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
 		5D0A25572698420700231087 /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
@@ -214,7 +214,6 @@
 		5D7CD5782678B1E2004799EA /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		5D7CD5792678B1E2004799EA /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		5D83A8EB2678B68000F001DE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		5D8573152699B6100024E096 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 		5D8BC0512678DB6E001F1B9B /* IncomingCall.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncomingCall.xib; sourceTree = "<group>"; };
 		5D8BC0532678DB83001F1B9B /* IncomingCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingCall.swift; sourceTree = "<group>"; };
 		5DA2C26D2677922E00B6F36C /* CreateGroup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateGroup.storyboard; sourceTree = "<group>"; };
@@ -288,9 +287,10 @@
 		5DE4B3B0269708B8009DAE5B /* iOS-one2many.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "iOS-one2many.entitlements"; sourceTree = "<group>"; };
 		5DE4B3B126970933009DAE5B /* ScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		5DE4B3B226970944009DAE5B /* ScreenShareSetupUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShareSetupUI.entitlements; sourceTree = "<group>"; };
-		9386E99B8CD750678C33C51C /* Pods-ScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
-		D4718C48DB8590A4C074F7AC /* Pods-iOS-one2many.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-one2many.release.xcconfig"; path = "Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many.release.xcconfig"; sourceTree = "<group>"; };
-		D7242B55523499D233EA9B39 /* Pods-iOS-one2many.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-one2many.debug.xcconfig"; path = "Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many.debug.xcconfig"; sourceTree = "<group>"; };
+		90BF38C334A72FC4100FB889 /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A81C253D2699BD0E00FB1C95 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
+		CD0FA716CE683C842682D03C /* Pods-iOS-one2many.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-one2many.debug.xcconfig"; path = "Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many.debug.xcconfig"; sourceTree = "<group>"; };
+		FC13E03B5C849B1F9202F5F1 /* Pods-iOS-one2many.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-one2many.release.xcconfig"; path = "Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,8 +298,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D85731B2699B61A0024E096 /* iOSSDKStreaming.framework in Frameworks */,
-				3DBC3849AD5108A15510AF13 /* Pods_iOS_one2many.framework in Frameworks */,
+				A81C25452699BD6400FB1C95 /* iOSSDKStreaming.framework in Frameworks */,
+				3D1A713FFB066F5D3A4286B9 /* Pods_iOS_one2many.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,8 +308,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */,
-				6EC9CAF919C03A2761640F4B /* Pods_ScreenShare.framework in Frameworks */,
-				5D85731D2699B6230024E096 /* iOSSDKStreaming.framework in Frameworks */,
+				C0995B3EBB055C7E5A10556E /* Pods_ScreenShare.framework in Frameworks */,
+				A81C25472699BD6C00FB1C95 /* iOSSDKStreaming.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,14 +387,6 @@
 			path = Xib;
 			sourceTree = "<group>";
 		};
-		5D8573162699B6100024E096 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5DA2C26C2677921600B6F36C /* CreateGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,8 +444,8 @@
 		5DA7BBE5267562A800A3E292 /* iOS-one2many */ = {
 			isa = PBXGroup;
 			children = (
+				A81C253C2699BCFC00FB1C95 /* Streaming */,
 				5DE4B3B0269708B8009DAE5B /* iOS-one2many.entitlements */,
-				5DE686E62688DDE50010A4D1 /* Streaming */,
 				5DA7BC262675FDF700A3E292 /* Modules */,
 				5DA7BC212675FDCA00A3E292 /* Model */,
 				5DA7BC182675FD5B00A3E292 /* Common */,
@@ -637,32 +629,40 @@
 			path = ScreenShareSetupUI;
 			sourceTree = "<group>";
 		};
-		5DE686E62688DDE50010A4D1 /* Streaming */ = {
+		9B19ADD66EA896176EE4051A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5D8573152699B6100024E096 /* iOSSDKStreaming.xcodeproj */,
+				5DE4B39126970899009DAE5B /* ReplayKit.framework */,
+				5DE4B39D26970899009DAE5B /* UIKit.framework */,
+				90BF38C334A72FC4100FB889 /* Pods_ScreenShare.framework */,
+				16DA03DF13060812DA093D38 /* Pods_iOS_one2many.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A81C253C2699BCFC00FB1C95 /* Streaming */ = {
+			isa = PBXGroup;
+			children = (
+				A81C253D2699BD0E00FB1C95 /* iOSSDKStreaming.xcodeproj */,
 			);
 			path = Streaming;
 			sourceTree = "<group>";
 		};
-		9B19ADD66EA896176EE4051A /* Frameworks */ = {
+		A81C253E2699BD0E00FB1C95 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				064DEF2C152400DA99A68C66 /* Pods_iOS_one2many.framework */,
-				5DE4B39126970899009DAE5B /* ReplayKit.framework */,
-				5DE4B39D26970899009DAE5B /* UIKit.framework */,
-				11AB06AE810172E2CEAC835F /* Pods_ScreenShare.framework */,
+				A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B6FB81162196AF1941014299 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D7242B55523499D233EA9B39 /* Pods-iOS-one2many.debug.xcconfig */,
-				D4718C48DB8590A4C074F7AC /* Pods-iOS-one2many.release.xcconfig */,
-				9386E99B8CD750678C33C51C /* Pods-ScreenShare.debug.xcconfig */,
-				493C740BEAE86EDB1473CEF4 /* Pods-ScreenShare.release.xcconfig */,
+				052760DB94359FA7EFD4257C /* Pods-ScreenShare.debug.xcconfig */,
+				34D321C1934D488809DF87E8 /* Pods-ScreenShare.release.xcconfig */,
+				CD0FA716CE683C842682D03C /* Pods-iOS-one2many.debug.xcconfig */,
+				FC13E03B5C849B1F9202F5F1 /* Pods-iOS-one2many.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -674,13 +674,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DA7BBF7267562AA00A3E292 /* Build configuration list for PBXNativeTarget "iOS-one2many" */;
 			buildPhases = (
-				C135B21371A4AB91EDE611DB /* [CP] Check Pods Manifest.lock */,
+				8BA58FB746151CD3C4B8AED4 /* [CP] Check Pods Manifest.lock */,
 				5DA7BBDF267562A800A3E292 /* Sources */,
 				5DA7BBE0267562A800A3E292 /* Frameworks */,
 				5DA7BBE1267562A800A3E292 /* Resources */,
 				5D63EB1E26875CC50094DA42 /* Embed Frameworks */,
-				F8F6C30CA496B252C19CA1BA /* [CP] Embed Pods Frameworks */,
 				5DE4B3AF26970899009DAE5B /* Embed App Extensions */,
+				5C131954D5AFEE5789A947A2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -697,7 +697,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DE4B3AC26970899009DAE5B /* Build configuration list for PBXNativeTarget "ScreenShare" */;
 			buildPhases = (
-				002963F232BD3803F2428D53 /* [CP] Check Pods Manifest.lock */,
+				8FAF8B4B9EA047C0C779BE9A /* [CP] Check Pods Manifest.lock */,
 				5DE4B38C26970899009DAE5B /* Sources */,
 				5DE4B38D26970899009DAE5B /* Frameworks */,
 				5DE4B38E26970899009DAE5B /* Resources */,
@@ -762,8 +762,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5D8573162699B6100024E096 /* Products */;
-					ProjectRef = 5D8573152699B6100024E096 /* iOSSDKStreaming.xcodeproj */;
+					ProductGroup = A81C253E2699BD0E00FB1C95 /* Products */;
+					ProjectRef = A81C253D2699BD0E00FB1C95 /* iOSSDKStreaming.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -776,11 +776,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5D85731A2699B6100024E096 /* iOSSDKStreaming.framework */ = {
+		A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = iOSSDKStreaming.framework;
-			remoteRef = 5D8573192699B6100024E096 /* PBXContainerItemProxy */;
+			remoteRef = A81C25412699BD0E00FB1C95 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -827,29 +827,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		002963F232BD3803F2428D53 /* [CP] Check Pods Manifest.lock */ = {
+		5C131954D5AFEE5789A947A2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ScreenShare-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C135B21371A4AB91EDE611DB /* [CP] Check Pods Manifest.lock */ = {
+		8BA58FB746151CD3C4B8AED4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -871,21 +866,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8F6C30CA496B252C19CA1BA /* [CP] Embed Pods Frameworks */ = {
+		8FAF8B4B9EA047C0C779BE9A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScreenShare-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1145,7 +1145,7 @@
 		};
 		5DA7BBF8267562AA00A3E292 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7242B55523499D233EA9B39 /* Pods-iOS-one2many.debug.xcconfig */;
+			baseConfigurationReference = CD0FA716CE683C842682D03C /* Pods-iOS-one2many.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1164,7 +1164,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1173,7 +1173,7 @@
 		};
 		5DA7BBF9267562AA00A3E292 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4718C48DB8590A4C074F7AC /* Pods-iOS-one2many.release.xcconfig */;
+			baseConfigurationReference = FC13E03B5C849B1F9202F5F1 /* Pods-iOS-one2many.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1192,7 +1192,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1213,7 +1213,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call.ScreenShareSetupUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call.ScreenShareSetupUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1235,7 +1235,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call.ScreenShareSetupUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call.ScreenShareSetupUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1245,7 +1245,7 @@
 		};
 		5DE4B3AD26970899009DAE5B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9386E99B8CD750678C33C51C /* Pods-ScreenShare.debug.xcconfig */;
+			baseConfigurationReference = 052760DB94359FA7EFD4257C /* Pods-ScreenShare.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ScreenShare/ScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1258,7 +1258,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call.ScreenShare";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call.ScreenShare";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1268,7 +1268,7 @@
 		};
 		5DE4B3AE26970899009DAE5B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 493C740BEAE86EDB1473CEF4 /* Pods-ScreenShare.release.xcconfig */;
+			baseConfigurationReference = 34D321C1934D488809DF87E8 /* Pods-ScreenShare.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ScreenShare/ScreenShare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1281,7 +1281,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.Many-to-many-call.ScreenShare";
+				PRODUCT_BUNDLE_IDENTIFIER = "usama.farooq.one-to-many-call.ScreenShare";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

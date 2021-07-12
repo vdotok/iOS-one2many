@@ -8,11 +8,12 @@ target 'iOS-one2many' do
   # Pods for IOS-one2many
   pod 'KRProgressHUD'
   pod 'IQKeyboardManagerSwift'
-  pod 'InternalStrategy', :path => '/Users/usamafarooq/Documents/Norgic/internal pods/internal_strategy'
+  pod 'InternalStrategy', :path => '../internal_strategy'
 
 end
 target 'ScreenShare' do
   # Pods for screen share
     use_frameworks!
     pod 'MMWormhole'
+    pod 'InternalStrategy', :path => '../internal_strategy'
 end

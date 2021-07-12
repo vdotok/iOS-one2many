@@ -9,5 +9,5 @@ import Foundation
 
 struct AppsGroup {
     static let  group = "group.com.vdotok.broadcast"
-    static let SCREEN_SHARE_PREFERED_EXTENSION = "usama.farooq.Many-to-many-call.ScreenShare"
+    static let SCREEN_SHARE_PREFERED_EXTENSION = "usama.farooq.one-to-many-call.ScreenShare"
 }
