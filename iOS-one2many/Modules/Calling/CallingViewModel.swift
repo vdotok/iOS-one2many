@@ -70,6 +70,24 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
         }
         
         loadViews()
+//        listenForScreenShareSession()
+    }
+    
+    private func listenForScreenShareSession() {
+        wormhole.listenForMessage(withIdentifier: "screenShareSessionDidInitiated", listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String {
+                self?.setScreenShareSession(with: message)
+            }
+         
+        })
+    }
+    
+    private func setScreenShareSession(with message: String) {
+        guard let data = message.data(using: .utf8) else {return }
+        session = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+        guard let from = session?.from, let to = session?.to, let sessionUUID = session?.sessionUUID else{return}
+        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany)
+        output?(.loadBroadcastView(session: baseSession))
         
     }
     
@@ -151,7 +169,7 @@ class CallingViewModelImpl: CallingViewModel, CallingViewModelInput {
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
-                                              associatedSessionUUID: associatedSessionUUID)
+                                              associatedSessionUUID: associatedSessionUUID,broadcastOption: broadcastData?.broadcastOptions)
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
 //            output?(.loadView(mediaType: sessionMediaType))
@@ -201,6 +219,7 @@ extension CallingViewModelImpl {
         let data = ScreenShareAppData(url: authResponse.mediaServerMap.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
+        output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         

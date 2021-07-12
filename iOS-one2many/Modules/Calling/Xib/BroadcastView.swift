@@ -9,6 +9,14 @@ import UIKit
 import iOSSDKStreaming
 import MMWormhole
 
+protocol BroadcastDelegate: AnyObject {
+    func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
+    func didTapHangUp(for session: VTokBaseSession)
+    func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState)
+    func didTapFlipCamera(for session: VTokBaseSession, type: CameraType)
+    
+}
+
 class BroadcastView: UIView {
     
     @IBOutlet weak var localView: UIView!
@@ -19,8 +27,10 @@ class BroadcastView: UIView {
     @IBOutlet weak var cameraSwitchIcon: UIButton!
     @IBOutlet weak var speakerIcon: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var muteButton: UIButton!
     
     var session: VTokBaseSession?
+    weak var delegate: BroadcastDelegate?
     
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group,
                               optionalDirectory: "wormhole")
@@ -35,6 +45,30 @@ class BroadcastView: UIView {
         screenShareBtn.isSelected = !sender.isSelected
         let message = getScreenShareScreen(state: screenShareBtn.isSelected ? .none : .passAll)
         wormhole.passMessageObject(message, identifier: "updateScreenState")
+    }
+    
+    @IBAction func didTapHangup(_ sender: UIButton) {
+        guard let session = session else {return}
+        delegate?.didTapHangUp(for: session)
+    }
+    
+    @IBAction func didTapFlip(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapFlipCamera(for: session, type: sender.isSelected ? .front : .rear)
+    }
+    
+    @IBAction func didTapSpeaker(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
+    }
+    
+    @IBAction func didTapMute(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+        
     }
     
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
@@ -54,9 +88,10 @@ class BroadcastView: UIView {
     func updateView(with session: VTokBaseSession)  {
         switch session.sessionDirection {
         case .incoming:
-            setIncomingView()
+            setIncomingView(for: session)
         case .outgoing:
-            setOutGoingView()
+            guard let options = session.broadcastOption else {return}
+            setOutGoingView(for: options)
         }
     }
     
@@ -90,20 +125,52 @@ class BroadcastView: UIView {
         renderer.fixInSuperView()
     }
 
-    private func setIncomingView() {
-        screenShareBtn.isHidden = true
-        screenShareAudio.isHidden = true
-        cameraSwitchIcon.isHidden = true
-        speakerIcon.isHidden = true
-        smallLocalView.isHidden = true
+    private func setIncomingView(for session: VTokBaseSession) {
+        
+        if let _ = session.associatedSessionUUID {
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = false
+            smallLocalView.isHidden = true
+            muteButton.isHidden = true
+        } else {
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = false
+            smallLocalView.isHidden = true
+            muteButton.isHidden = true
+        }
+     
     }
     
-    private func setOutGoingView() {
-        screenShareBtn.isHidden = false
-        screenShareAudio.isHidden = false
-        cameraSwitchIcon.isHidden = false
-        speakerIcon.isHidden = false
-        smallLocalView.isHidden = false
+    private func setOutGoingView(for options: BroadcastOptions) {
+        
+        switch options {
+        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = false
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = true
+        case .videoCall:
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = false
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+        case .screenShareWithAppAudioAndVideoCall,.screenShareWithVideoCall :
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = false
+            cameraSwitchIcon.isHidden = false
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+        }
+        
     }
 
 }

@@ -125,6 +125,7 @@ extension CallingViewController {
         broadcastView = BroadcastView.loadView()
         guard let broadcastView = self.broadcastView else {return}
         broadcastView.updateView(with: session)
+        broadcastView.delegate = self
         broadcastView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(broadcastView)
         broadcastView.fixInSuperView()
@@ -136,7 +137,7 @@ extension CallingViewController {
         guard let groupCallingView = self.groupCallingView else {return}
         groupCallingView.loadViewFor(mediaType: mediaType)
         groupCallingView.users = viewModel.users
-        groupCallingView.delegate = self
+//        groupCallingView.delegate = self
         groupCallingView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(groupCallingView)
         
@@ -185,27 +186,24 @@ extension CallingViewController: IncomingCallDelegate {
     
 }
 
-extension CallingViewController: VideoDelegate {
-    func didTapVideo(for baseSession: VTokBaseSession, state: VideoState) {
-        viewModel.disableVideo(session: baseSession, state: state)
-    }
+extension CallingViewController: BroadcastDelegate {
+   
     
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState) {
         viewModel.mute(session: baseSession, state: state)
     }
     
-    func didTapEnd(for baseSession: VTokBaseSession) {
-        viewModel.hangupCall(session: baseSession)
+    func didTapHangUp(for session: VTokBaseSession) {
+        viewModel.hangupCall(session: session)
     }
     
-    func didTapFlip(for baseSession: VTokBaseSession, type: CameraType) {
-        viewModel.flipCamera(session: baseSession, state: type)
+    func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState) {
+        viewModel.speaker(session: session, state: state)
         
     }
     
-    func didTapSpeaker(baseSession: VTokBaseSession, state: SpeakerState) {
-        viewModel.speaker(session: baseSession, state: state)
-        
+    func didTapFlipCamera(for session: VTokBaseSession, type: CameraType) {
+        viewModel.flipCamera(session: session, state: type)
     }
     
     

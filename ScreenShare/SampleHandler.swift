@@ -87,6 +87,13 @@ class SampleHandler: RPBroadcastSampleHandler {
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
     
+    func getScreenShareDataString() -> NSString? {
+        guard let data = screenShareData?.baseSession else {return nil}
+        let jsonData = try! JSONEncoder().encode(data)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        return jsonString
+    }
+    
 
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
         // User has requested to start the broadcast. Setup info from the UI extension can be supplied but optional.
@@ -135,6 +142,8 @@ extension SampleHandler: SDKConnectionDelegate {
         case .registered:
             print("==== screeen share registerd ====")
             guard let sdk = vtokSdk, let session = screenShareData else {return}
+            guard let message = getScreenShareDataString() else {return}
+            wormhole.passMessageObject(message, identifier: "screenShareSessionDidInitiated")
             sdk.initiate(session: session.baseSession, sessionDelegate: self)
         case .disconnected(_):
             print("==== screeen failed to registerd ====")
