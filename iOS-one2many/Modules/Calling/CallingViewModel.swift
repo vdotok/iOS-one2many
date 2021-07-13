@@ -145,7 +145,6 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case .incomingCall:
             guard let session = session else {return}
             guard let selectedUser =  users?.filter({$0.refID == session.to.first}).first else {return}
-           
             playSound()
             output?(.loadIncomingCallView(session: session, user: selectedUser))
             self.session = session
@@ -173,7 +172,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
             })
         

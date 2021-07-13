@@ -109,16 +109,22 @@ class BroadcastView: UIView {
     private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
         switch session.sessionType {
         case .call:
-            smallLocalView.isHidden = false
-            localView.isHidden = false
-            smallLocalView.removeAllSubViews()
-            smallLocalView.addSubview(userStream.renderer)
-            userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
-            userStream.renderer.fixInSuperView()
+            if session.associatedSessionUUID != nil {
+                smallLocalView.removeAllSubViews()
+                smallLocalView.addSubview(userStream.renderer)
+                userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                userStream.renderer.fixInSuperView()
+            } else {
+                localView.removeAllSubViews()
+                localView.addSubview(userStream.renderer)
+                smallLocalView.isHidden = true
+                userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                userStream.renderer.fixInSuperView()
+            }
+         
+            
             
         case .screenshare:
-            localView.isHidden = false
-            smallLocalView.isHidden = false
             localView.removeAllSubViews()
             localView.addSubview(userStream.renderer)
             userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +146,7 @@ class BroadcastView: UIView {
             screenShareAudio.isHidden = true
             cameraSwitchIcon.isHidden = true
             speakerIcon.isHidden = false
-            smallLocalView.isHidden = true
+            smallLocalView.isHidden = false
             muteButton.isHidden = true
         } else {
             screenShareBtn.isHidden = true
@@ -215,7 +221,7 @@ extension BroadcastView {
         
         for subView in recordingView.subviews {
             if subView is UIButton, let button = subView as? UIButton{
-                if let image = UIImage(named: "EndScreenShare"){
+                if let _ = UIImage(named: "EndScreenShare") {
                     button.setImage(nil, for: .normal)
                 }
             }

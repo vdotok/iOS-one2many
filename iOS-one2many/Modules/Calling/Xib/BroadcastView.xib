@@ -35,7 +35,7 @@
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzh-oz-lq2">
                     <rect key="frame" x="24" y="542" width="150" height="200"/>
-                    <color key="backgroundColor" systemColor="linkColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="FhN-Zw-vfA"/>
                         <constraint firstAttribute="height" constant="200" id="GVc-F8-32d"/>
@@ -60,6 +60,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-0z-VbI">
                             <rect key="frame" x="0.5" y="88.5" width="32" height="32"/>
                             <state key="normal" image="Volumn On"/>
+                            <state key="selected" image="Volume Off"/>
                             <connections>
                                 <action selector="didTapSpeaker:" destination="iN0-l3-epB" eventType="touchUpInside" id="563-90-faD"/>
                             </connections>
@@ -104,6 +105,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
                             <rect key="frame" x="228.5" y="0.0" width="60" height="60"/>
                             <state key="normal" image="mute"/>
+                            <state key="selected" image="unMute"/>
                             <connections>
                                 <action selector="didTapAppAudio:" destination="iN0-l3-epB" eventType="touchUpInside" id="0wR-JQ-NtS"/>
                                 <action selector="didTapMute:" destination="iN0-l3-epB" eventType="touchUpInside" id="2ft-pQ-g9u"/>
@@ -145,6 +147,7 @@
     </objects>
     <resources>
         <image name="User" width="24" height="24"/>
+        <image name="Volume Off" width="32" height="32"/>
         <image name="Volumn On" width="32" height="32"/>
         <image name="appaudio" width="51" height="46"/>
         <image name="broadcast" width="87" height="109"/>
@@ -152,12 +155,10 @@
         <image name="mute" width="60" height="60"/>
         <image name="noun_Switch" width="32" height="32"/>
         <image name="screenshare" width="57.5" height="52"/>
+        <image name="unMute" width="60" height="60"/>
         <namedColor name="AppLightGrey">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
