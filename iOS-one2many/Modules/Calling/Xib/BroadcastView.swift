@@ -138,6 +138,8 @@ class BroadcastView: UIView {
             
             
         case .screenshare:
+            localView.isHidden = false
+            smallLocalView.isHidden = false
             localView.removeAllSubViews()
             localView.addSubview(userStream.renderer)
             userStream.renderer.translatesAutoresizingMaskIntoConstraints = false

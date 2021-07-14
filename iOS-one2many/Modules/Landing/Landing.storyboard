@@ -65,12 +65,16 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-EU-ikF">
-                                <rect key="frame" x="147" y="528" width="120" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-EU-ikF">
+                                <rect key="frame" x="147" y="528" width="120" height="40"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="UNj-i6-T1r"/>
+                                    <constraint firstAttribute="height" constant="40" id="a5d-Vc-UrO"/>
                                 </constraints>
-                                <state key="normal" title="Continue"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="didTapContinue:" destination="yNj-G0-2LL" eventType="touchUpInside" id="NgL-va-V5P"/>
                                 </connections>
@@ -128,6 +132,7 @@
                     <connections>
                         <outlet property="blurView" destination="OTe-AT-BHW" id="X7X-Kg-y9M"/>
                         <outlet property="camera" destination="DyE-Pw-STe" id="Twu-yC-x5w"/>
+                        <outlet property="continueBtn" destination="Ur2-EU-ikF" id="MGl-2G-Ym7"/>
                         <outlet property="groupBroadcastButton" destination="V3X-Y2-N0m" id="Xog-d4-eTc"/>
                         <outlet property="publicBroadcastButton" destination="exA-10-lk0" id="Y9U-59-U1X"/>
                         <outlet property="screenShareAppAudioBtn" destination="DPJ-BO-9uM" id="CYA-1X-JwJ"/>

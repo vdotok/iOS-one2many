@@ -14,6 +14,11 @@ public class LandingViewController: UIViewController {
     @IBOutlet weak var publicBroadcastButton: UIButton!
     @IBOutlet weak var screenShareAppAudioBtn: BorderButton!
     @IBOutlet weak var screenShareMicAudioBtn: BorderButton!
+    @IBOutlet weak var continueBtn: UIButton! {
+        didSet {
+            continueBtn.layer.cornerRadius = 8
+        }
+    }
     @IBOutlet weak var camera: BorderButton!
     var viewModel: LandingViewModel!
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
@@ -60,6 +65,8 @@ public class LandingViewController: UIViewController {
     
     @IBAction func didTapBroadCastOption(_ sender: UIButton) {
         
+       
+    
         switch sender.tag {
         case 102:
           // screen sharing with app audio
@@ -79,6 +86,16 @@ public class LandingViewController: UIViewController {
             break
         default:
             break
+        }
+        
+        if screenShareAppAudioBtn.isSelected == true ||
+           screenShareMicAudioBtn.isSelected == true ||
+           camera.isSelected == true  {
+            continueBtn.backgroundColor = .appDarkGreenColor
+            continueBtn.isEnabled = true
+        } else {
+            continueBtn.backgroundColor = .appDarkGray
+            continueBtn.isEnabled = false
         }
     }
     
