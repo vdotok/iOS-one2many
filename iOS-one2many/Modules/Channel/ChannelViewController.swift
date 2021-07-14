@@ -12,23 +12,11 @@ import iOSSDKStreaming
 public class ChannelViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var logoutButton: UIButton!
-    @IBOutlet weak var emptyLogoutButton: UIButton!
     @IBOutlet weak var blurView: UIView!
-    @IBOutlet weak var onlineView: UIView! {
-        didSet {
-            onlineView.layer.cornerRadius = onlineView.frame.height/2
-        }
-    }
-    @IBOutlet weak var emptyViewOnlineView: UIView! {
-        didSet  {
-            emptyViewOnlineView.layer.cornerRadius = emptyViewOnlineView.frame.height/2
-        }
-    }
+    
     lazy var refreshControl = UIRefreshControl()
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
     var viewModel: ChannelViewModel!
@@ -87,11 +75,9 @@ public class ChannelViewController: UIViewController {
                 tableView(isHidden: viewModel.groups.count > 0 ? false : true)
                 tableView.reloadData()
             case .connected:
-                onlineView.backgroundColor = .green
-                emptyViewOnlineView.backgroundColor = .green
+               break
             case .disconnected:
-                onlineView.backgroundColor = .red
-                emptyViewOnlineView.backgroundColor = .red
+               break
             case .failure(let message):
                 ProgressHud.showError(message: message, viewController: self)
             case .update(let row):
@@ -126,10 +112,6 @@ extension ChannelViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
-        
-        let title = "Logout \(user.fullName!)"
-        logoutButton.setTitle(title, for: .normal)
-        emptyLogoutButton.setTitle(title, for: .normal)
         configureNavigationView()
     }
     
@@ -164,8 +146,6 @@ extension ChannelViewController {
         titleLabel.font = UIFont(name: "Inter-Regular", size: 21)
         subTitle.textColor = .appLightIndigoColor
         subTitle.font = UIFont(name: "Poppins-Regular", size: 14)
-        logoutButton.tintColor = .appIndigoColor
-        logoutButton.titleLabel?.font = UIFont.init(name: "Manrope-Bold", size: 14)
        
     }
     private func tableView(isHidden: Bool) {

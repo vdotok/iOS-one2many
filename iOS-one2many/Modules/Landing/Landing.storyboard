@@ -66,7 +66,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-EU-ikF">
-                                <rect key="frame" x="147" y="528" width="120" height="40"/>
+                                <rect key="frame" x="147" y="455" width="120" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="UNj-i6-T1r"/>
@@ -108,6 +108,10 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CN-em-ezE">
+                                <rect key="frame" x="184" y="767" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTe-AT-BHW">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,8 +128,10 @@
                             <constraint firstItem="pcr-We-rQf" firstAttribute="top" secondItem="XcF-7s-VQe" secondAttribute="top" constant="50" id="P9p-8w-ep2"/>
                             <constraint firstItem="pcr-We-rQf" firstAttribute="centerX" secondItem="XcF-7s-VQe" secondAttribute="centerX" id="RHc-rT-zTF"/>
                             <constraint firstItem="XcF-7s-VQe" firstAttribute="trailing" secondItem="OTe-AT-BHW" secondAttribute="trailing" id="Wpr-Hr-EhI"/>
+                            <constraint firstItem="XcF-7s-VQe" firstAttribute="bottom" secondItem="4CN-em-ezE" secondAttribute="bottom" constant="65" id="YcK-GQ-U7b"/>
                             <constraint firstItem="Ur2-EU-ikF" firstAttribute="centerX" secondItem="xxp-KI-QrO" secondAttribute="centerX" id="d7a-ZC-gL5"/>
-                            <constraint firstItem="Ur2-EU-ikF" firstAttribute="top" secondItem="xxp-KI-QrO" secondAttribute="bottom" constant="103" id="reb-dN-WbL"/>
+                            <constraint firstItem="Ur2-EU-ikF" firstAttribute="top" secondItem="xxp-KI-QrO" secondAttribute="bottom" constant="30" id="reb-dN-WbL"/>
+                            <constraint firstItem="4CN-em-ezE" firstAttribute="centerX" secondItem="XcF-7s-VQe" secondAttribute="centerX" id="tEl-tN-0Ev"/>
                             <constraint firstItem="xxp-KI-QrO" firstAttribute="top" secondItem="pcr-We-rQf" secondAttribute="bottom" constant="57" id="wYQ-70-QlZ"/>
                         </constraints>
                     </view>
@@ -134,6 +140,7 @@
                         <outlet property="camera" destination="DyE-Pw-STe" id="Twu-yC-x5w"/>
                         <outlet property="continueBtn" destination="Ur2-EU-ikF" id="MGl-2G-Ym7"/>
                         <outlet property="groupBroadcastButton" destination="V3X-Y2-N0m" id="Xog-d4-eTc"/>
+                        <outlet property="logoutBtn" destination="4CN-em-ezE" id="Yry-QU-qNY"/>
                         <outlet property="publicBroadcastButton" destination="exA-10-lk0" id="Y9U-59-U1X"/>
                         <outlet property="screenShareAppAudioBtn" destination="DPJ-BO-9uM" id="CYA-1X-JwJ"/>
                         <outlet property="screenShareMicAudioBtn" destination="0H1-ff-Tvz" id="u9Z-kX-80y"/>

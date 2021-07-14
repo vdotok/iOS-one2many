@@ -20,6 +20,8 @@ public class LandingViewController: UIViewController {
         }
     }
     @IBOutlet weak var camera: BorderButton!
+    @IBOutlet weak var logoutBtn: UIButton!
+    
     var viewModel: LandingViewModel!
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
@@ -34,6 +36,7 @@ public class LandingViewController: UIViewController {
         configureAppearance()
         bindViewModel()
         viewModel.viewModelDidLoad()
+        configureNavigationBar()
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -149,12 +152,30 @@ public class LandingViewController: UIViewController {
             }
         }
     }
+    
+    
+    private func configureNavigationBar() {
+        let navigationTitle = UILabel()
+        navigationTitle.text = "Available Features"
+        navigationTitle.font = UIFont(name: "Manrope-Medium", size: 20)
+        navigationTitle.textColor = .appDarkGreenColor
+        navigationTitle.sizeToFit()
+        
+        let leftItem = UIBarButtonItem(customView: navigationTitle)
+        self.navigationItem.leftBarButtonItem = leftItem
+    }
 }
 
 extension LandingViewController {
     func configureAppearance() {
         radioController.buttonsArray = [publicBroadcastButton,groupBroadcastButton]
         radioController.defaultButton = publicBroadcastButton
+        guard let data = VDOTOKObject<UserResponse>().getData() else {return}
+        let title = "LOG OUT AS \(data.fullName!)"
+        logoutBtn.backgroundColor = .clear
+        logoutBtn.tintColor = .appDarkGray
+        logoutBtn.titleLabel?.font = UIFont.init(name: "Manrope-Bold", size: 14)
+        logoutBtn.setTitle(title, for: .normal)
     }
     
     private func moveToPublicView() {

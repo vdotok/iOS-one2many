@@ -3,16 +3,10 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Manrope-Bold.ttf">
-            <string>Manrope-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Channel View Controller-->
         <scene sceneID="Ymx-Ww-E8W">
@@ -22,27 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xFB-n0-Jdh">
-                                <rect key="frame" x="252" y="782" width="10" height="10"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="DUY-26-KzF"/>
-                                    <constraint firstAttribute="height" constant="10" id="s5U-zX-SNF"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rR9-b3-GfU">
-                                <rect key="frame" x="176" y="762" width="62" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="BzC-05-Jlc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Manrope-Bold" family="Manrope" pointSize="14"/>
-                                <state key="normal" title="LOG OUT">
-                                    <color key="titleColor" name="AppIndigoColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapLogout:" destination="kaK-U3-1Th" eventType="touchUpInside" id="KgH-ds-FPw"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wb4-Tb-5XG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="718"/>
                             </tableView>
@@ -54,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="auf-65-iJQ">
-                                        <rect key="frame" x="70" y="250.5" width="274" height="507.5"/>
+                                        <rect key="frame" x="70" y="324.5" width="274" height="433.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Face" translatesAutoresizingMaskIntoConstraints="NO" id="Y4X-hd-r0h">
                                                 <rect key="frame" x="57" y="0.0" width="160" height="160"/>
@@ -77,7 +50,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="VvN-wE-7mw">
-                                                <rect key="frame" x="39" y="303.5" width="196" height="204"/>
+                                                <rect key="frame" x="39" y="303.5" width="196" height="130"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcy-S3-dpX" customClass="NextButton" customModule="iOS_one2many" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="196" height="56"/>
@@ -97,29 +70,8 @@
                                                             <action selector="didTapReferesh:" destination="kaK-U3-1Th" eventType="touchUpInside" id="EfE-Oh-iJj"/>
                                                         </connections>
                                                     </button>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mnn-hO-JdE">
-                                                        <rect key="frame" x="0.0" y="148" width="196" height="56"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qh6-op-NuA">
-                                                                <rect key="frame" x="0.0" y="13" width="186" height="30"/>
-                                                                <state key="normal" title="LOG OUT"/>
-                                                                <connections>
-                                                                    <action selector="didTapLogout:" destination="kaK-U3-1Th" eventType="touchUpInside" id="oah-1z-mNE"/>
-                                                                </connections>
-                                                            </button>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yg-3l-Nh1">
-                                                                <rect key="frame" x="186" y="23" width="10" height="10"/>
-                                                                <color key="backgroundColor" systemColor="systemRedColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="10" id="I09-R1-thC"/>
-                                                                    <constraint firstAttribute="width" constant="10" id="n7b-s7-Bjb"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="mnn-hO-JdE" firstAttribute="height" secondItem="n3h-ga-qKK" secondAttribute="height" id="M6d-fU-H0g"/>
                                                     <constraint firstItem="n3h-ga-qKK" firstAttribute="height" secondItem="bcy-S3-dpX" secondAttribute="height" id="NnZ-og-gAI"/>
                                                 </constraints>
                                             </stackView>
@@ -144,24 +96,16 @@
                             <constraint firstItem="H3J-VC-ziS" firstAttribute="trailing" secondItem="wb4-Tb-5XG" secondAttribute="trailing" id="N5b-8g-cBS"/>
                             <constraint firstItem="H3J-VC-ziS" firstAttribute="bottom" secondItem="wb4-Tb-5XG" secondAttribute="bottom" constant="100" id="QxY-UD-hRx"/>
                             <constraint firstItem="mfX-p9-YVW" firstAttribute="leading" secondItem="H3J-VC-ziS" secondAttribute="leading" id="W36-ar-zVv"/>
-                            <constraint firstItem="rR9-b3-GfU" firstAttribute="centerX" secondItem="H3J-VC-ziS" secondAttribute="centerX" id="X77-pb-ubM"/>
                             <constraint firstItem="BhH-3P-jY7" firstAttribute="top" secondItem="H3J-VC-ziS" secondAttribute="top" id="X9z-ek-Zo8"/>
                             <constraint firstItem="wb4-Tb-5XG" firstAttribute="top" secondItem="H3J-VC-ziS" secondAttribute="top" id="ZPT-vk-rQL"/>
                             <constraint firstItem="H3J-VC-ziS" firstAttribute="trailing" secondItem="BhH-3P-jY7" secondAttribute="trailing" id="c3a-ox-xTX"/>
                             <constraint firstItem="wb4-Tb-5XG" firstAttribute="leading" secondItem="H3J-VC-ziS" secondAttribute="leading" id="hZq-gc-drc"/>
-                            <constraint firstItem="xFB-n0-Jdh" firstAttribute="top" secondItem="rR9-b3-GfU" secondAttribute="top" constant="20" id="jVC-6t-evU"/>
                             <constraint firstItem="H3J-VC-ziS" firstAttribute="trailing" secondItem="mfX-p9-YVW" secondAttribute="trailing" id="r3M-hC-hie"/>
-                            <constraint firstItem="rR9-b3-GfU" firstAttribute="top" secondItem="wb4-Tb-5XG" secondAttribute="bottom" id="u3Z-Ge-Xsk"/>
-                            <constraint firstItem="xFB-n0-Jdh" firstAttribute="trailing" secondItem="rR9-b3-GfU" secondAttribute="trailing" constant="24" id="vAn-ov-7Rm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="blurView" destination="mfX-p9-YVW" id="0A5-mI-vd3"/>
-                        <outlet property="emptyLogoutButton" destination="rR9-b3-GfU" id="LI4-Dg-09u"/>
                         <outlet property="emptyView" destination="BhH-3P-jY7" id="9Y8-nJ-Gdg"/>
-                        <outlet property="emptyViewOnlineView" destination="6Yg-3l-Nh1" id="3X6-3m-ki5"/>
-                        <outlet property="logoutButton" destination="Qh6-op-NuA" id="S5S-bA-XSu"/>
-                        <outlet property="onlineView" destination="xFB-n0-Jdh" id="18C-hB-Eif"/>
                         <outlet property="subTitle" destination="bHD-94-Zes" id="MND-9R-At5"/>
                         <outlet property="tableView" destination="wb4-Tb-5XG" id="Rbi-df-k9Y"/>
                         <outlet property="titleLabel" destination="SRh-Io-5qS" id="edd-HK-Pdh"/>
@@ -174,17 +118,8 @@
     </scenes>
     <resources>
         <image name="Face" width="160" height="160"/>
-        <namedColor name="AppIndigoColor">
-            <color red="0.5490196078431373" green="0.50588235294117645" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
