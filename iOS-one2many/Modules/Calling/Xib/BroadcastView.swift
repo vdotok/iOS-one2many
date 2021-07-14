@@ -30,6 +30,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
+    @IBOutlet weak var copyUrlBtn: UIButton!
     
     var publicURL: String?
     var session: VTokBaseSession?
@@ -97,13 +98,23 @@ class BroadcastView: UIView {
     
     func updateView(with session: VTokBaseSession) {
         self.session = session
-       
         switch session.sessionDirection {
         case .incoming:
             setIncomingView(for: session)
         case .outgoing:
-            guard let options = session.broadcastOption else {return}
+            guard let options = session.broadcastOption,
+                  let broadCastType = session.broadcastType
+            else {return}
+            
+            switch broadCastType {
+            case .group:
+                copyUrlBtn.isHidden = true
+            case .publicURL:
+                copyUrlBtn.isHidden = false
+            }
+            
             setOutGoingView(for: options)
+            
         }
     }
     
@@ -119,6 +130,7 @@ class BroadcastView: UIView {
     }
     
     private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
+        
         switch session.sessionType {
         case .call:
             if session.associatedSessionUUID != nil {
@@ -134,9 +146,6 @@ class BroadcastView: UIView {
                 userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
                 userStream.renderer.fixInSuperView()
             }
-         
-            
-            
         case .screenshare:
             localView.isHidden = false
             smallLocalView.isHidden = false
@@ -156,7 +165,7 @@ class BroadcastView: UIView {
     }
 
     private func setIncomingView(for session: VTokBaseSession) {
-        
+        copyUrlBtn.isHidden = true
         if let _ = session.associatedSessionUUID {
             screenShareBtn.isHidden = true
             screenShareAudio.isHidden = true
@@ -172,7 +181,7 @@ class BroadcastView: UIView {
             smallLocalView.isHidden = true
             muteButton.isHidden = true
         }
-     
+        
     }
     
     private func setOutGoingView(for options: BroadcastOptions) {
