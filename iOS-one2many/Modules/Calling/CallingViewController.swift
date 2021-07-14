@@ -53,10 +53,18 @@ public class CallingViewController: UIViewController {
                 self.handleHangup(status: status)
             case .loadBroadcastView(let session):
                 self.loadBroadcastView(session: session)
+            case .updateURL(let url):
+                self.updateWith(URL: url)
+                break
             default:
                 break
             }
         }
+    }
+    
+    private func updateWith(URL: String) {
+        guard let broadCastView = broadcastView else {return}
+        broadCastView.updateURL(with: URL)
     }
     
     private func updateVideoView(session: VTokBaseSession) {

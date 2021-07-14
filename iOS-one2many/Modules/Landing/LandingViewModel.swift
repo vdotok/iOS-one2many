@@ -7,7 +7,7 @@
 
 import Foundation
 import iOSSDKStreaming
-
+import MMWormhole
 typealias LandingViewModelOutput = (LandingViewModelImpl.Output) -> Void
 
 protocol LandingViewModelInput {
@@ -19,7 +19,10 @@ protocol LandingViewModel: LandingViewModelInput {
     var broadCastData: BroadcastData {get set}
     func viewModelDidLoad()
     func viewModelWillAppear()
+    func viewModelWillDisappear()
+    
     func moveToChat(with broadCastData: BroadcastData)
+    func moveToCalling(with broadcastData: BroadcastData)
 }
 
 class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
@@ -29,6 +32,7 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     var vtokSdk: VideoTalkSDK?
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
     var contacts: [User] = []
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     
@@ -39,10 +43,15 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     func viewModelDidLoad() {
         configureVdotTok()
         fetchUsers()
+        
     }
     
     func viewModelWillAppear() {
-        
+        registerForCommand()
+    }
+    
+    func viewModelWillDisappear() {
+        unRegisterForCommand()
     }
     
     func fetchUsers() {
@@ -62,6 +71,7 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     enum Output {
         case connected
         case disconnected
+        case dismissView
         
     }
 }
@@ -110,6 +120,31 @@ extension LandingViewModelImpl: SDKConnectionDelegate {
             router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
         }
     }
+
+}
+
+extension LandingViewModelImpl {
     
+    func unRegisterForCommand(){
+        wormhole.stopListeningForMessage(withIdentifier: "Command")
+    }
     
+    func registerForCommand() {
+        
+        wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
+            
+            if let message = messageObject as? String, message == "StartScreenSharing"  {
+                self?.output?(.dismissView)
+                
+                guard let sdk = self?.vtokSdk, let broadcastData = self?.broadCastData else {return }
+                self?.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+                print("screen share start")
+            }
+        })
+    }
+    
+    func moveToCalling(with broadcastData: BroadcastData) {
+        guard let sdk = self.vtokSdk else {return }
+        self.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+    }
 }

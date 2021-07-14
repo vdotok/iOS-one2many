@@ -71,6 +71,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         }
         
         loadViews()
+        listenForPublicURL()
         
 
     }
@@ -116,6 +117,15 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         wormhole.listenForMessage(withIdentifier: "screenShareSessionDidInitiated", listener: { [weak self] (messageObject) -> Void in
             if let message = messageObject as? String {
                 self?.setScreenShareSession(with: message)
+            }
+         
+        })
+    }
+    
+    private func listenForPublicURL() {
+        wormhole.listenForMessage(withIdentifier: "didGetPublicURL", listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String {
+                self?.output?(.updateURL(url: message))
             }
          
         })
@@ -191,6 +201,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case updateView(session: VTokBaseSession)
         case updateHangupButton(status: Bool)
         case loadBroadcastView(session: VTokBaseSession)
+        case updateURL(url: String)
     }
     
     @discardableResult
@@ -198,17 +209,18 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let refID = user.refID
         else {return nil}
-        guard let participents = participants else {return nil}
+        guard let participents = participants, let broadcast = broadcastData else {return nil}
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        
         let requestId = sessionUUID
         let baseSession = VTokBaseSessionInit(from: refID,
-                                              to: participantsRefIds,
+                                              to: broadcast.broadcastType == .group ? participantsRefIds : [],
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
                                               sessionType: .call,
-                                              associatedSessionUUID: associatedSessionUUID,broadcastOption: broadcastData?.broadcastOptions)
+                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions)
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
 //            output?(.loadView(mediaType: sessionMediaType))
@@ -330,12 +342,10 @@ extension CallingViewModelImpl {
         vtokSdk?.disableVideo(session: session, State: state)
     }
     
-    
-    
-    
 }
 
 extension CallingViewModelImpl: SessionDelegate {
+  
     func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
         output?(.configureLocal(view: renderer, session: session))
     }
@@ -364,7 +374,9 @@ extension CallingViewModelImpl: SessionDelegate {
         }
     }
     
-    
+    func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+        output?(.updateURL(url: url))
+    }
 }
 
 extension CallingViewModelImpl {

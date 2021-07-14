@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MMWormhole
 
 public class LandingViewController: UIViewController {
     
@@ -17,6 +18,9 @@ public class LandingViewController: UIViewController {
     var viewModel: LandingViewModel!
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+    
+    @IBOutlet weak var blurView: UIView!
     
     let radioController: RadioButtonController = RadioButtonController()
     
@@ -26,6 +30,17 @@ public class LandingViewController: UIViewController {
         bindViewModel()
         viewModel.viewModelDidLoad()
     }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewModelWillAppear()
+    }
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewModelWillDisappear()
+    }
+    
     
     @IBAction func didTapBroadCast(_ sender: UIButton) {
     
@@ -37,7 +52,7 @@ public class LandingViewController: UIViewController {
         case 101:
             // public braodcast
             radioController.buttonArrayUpdated(buttonSelected: sender)
-            broadCastData.broadcastType = .group
+            broadCastData.broadcastType = .publicURL
         default:
             break
         }
@@ -69,13 +84,22 @@ public class LandingViewController: UIViewController {
     
     @IBAction func didTapContinue(_ sender: UIButton) {
         broadCastButtonHandling()
-        viewModel.moveToChat(with: broadCastData)
+        switch broadCastData.broadcastType {
+        case .group:
+            viewModel.moveToChat(with: broadCastData)
+        case .publicURL:
+            if broadCastData.broadcastOptions != .videoCall {
+                self.viewModel.broadCastData = broadCastData
+                moveToPublicView()
+            } else {
+                
+                self.viewModel.moveToCalling(with: broadCastData)
+            }
+        }
+        
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.viewModelWillAppear()
-    }
+   
     
     private func broadCastButtonHandling() {
         
@@ -101,6 +125,8 @@ public class LandingViewController: UIViewController {
         viewModel.output = { [unowned self] output in
             //handle all your bindings here
             switch output {
+            case .dismissView:
+                self.dismiss(animated: true, completion: nil)
             default:
                 break
             }
@@ -113,4 +139,27 @@ extension LandingViewController {
         radioController.buttonsArray = [publicBroadcastButton,groupBroadcastButton]
         radioController.defaultButton = publicBroadcastButton
     }
+    
+    private func moveToPublicView() {
+        let vc = ScreenSharePopup()
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.delegate = self
+        vc.broadcastData = broadCastData
+//        blurView.isHidden = false
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+  
 }
+
+extension LandingViewController: ScreenShareDelegate {
+    func didTapDismiss() {
+//        blurView.isHidden = true
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+

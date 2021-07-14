@@ -109,6 +109,8 @@
 		5DE4B3A126970899009DAE5B /* BroadcastSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4B3A026970899009DAE5B /* BroadcastSetupViewController.swift */; };
 		5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39B26970899009DAE5B /* ScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39026970899009DAE5B /* ScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE5836A269D7B7000985CFA /* ScreenSharePopup.xib */; };
+		5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */; };
 		A81C25452699BD6400FB1C95 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; };
 		A81C25462699BD6400FB1C95 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A81C25472699BD6C00FB1C95 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A81C25422699BD0E00FB1C95 /* iOSSDKStreaming.framework */; };
@@ -285,6 +287,8 @@
 		5DE4B3B0269708B8009DAE5B /* iOS-one2many.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "iOS-one2many.entitlements"; sourceTree = "<group>"; };
 		5DE4B3B126970933009DAE5B /* ScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		5DE4B3B226970944009DAE5B /* ScreenShareSetupUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ScreenShareSetupUI.entitlements; sourceTree = "<group>"; };
+		5DE5836A269D7B7000985CFA /* ScreenSharePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScreenSharePopup.xib; sourceTree = "<group>"; };
+		5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSharePopup.swift; sourceTree = "<group>"; };
 		83760D116C1BC4A19462694B /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		A81C253D2699BD0E00FB1C95 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 		B921BCAF3EDBDC4DE2701389 /* Pods-iOS-one2many.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS-one2many.release.xcconfig"; path = "Target Support Files/Pods-iOS-one2many/Pods-iOS-one2many.release.xcconfig"; sourceTree = "<group>"; };
@@ -406,6 +410,8 @@
 			children = (
 				5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */,
 				5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */,
+				5DE5836A269D7B7000985CFA /* ScreenSharePopup.xib */,
+				5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				5DA7BC472675FE8300A3E292 /* Channel.storyboard in Resources */,
 				5DA7BC2C2675FE0900A3E292 /* Login.storyboard in Resources */,
 				5D0A25702698B34E00231087 /* BroadcastView.xib in Resources */,
+				5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */,
 				5DA7BBF3267562AA00A3E292 /* LaunchScreen.storyboard in Resources */,
 				5D0A255C2698420700231087 /* Landing.storyboard in Resources */,
 				5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */,
@@ -935,6 +942,7 @@
 				5DA7BC072675FCCD00A3E292 /* AuthenticationService.swift in Sources */,
 				5D20D785268C56E500B78BFE /* DeleteGroupRequest.swift in Sources */,
 				5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */,
+				5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */,
 				5DA2C29A2677A98100B6F36C /* CreateGroupCell.swift in Sources */,
 				5DA7BC4A2675FE8300A3E292 /* ChannelBuilder.swift in Sources */,
 				5DA2C2802677A61000B6F36C /* CreateGroupService.swift in Sources */,

@@ -49,6 +49,7 @@ protocol ChannelViewModel: ChannelViewModelInput {
     
     func viewModelDidLoad()
     func viewModelWillAppear()
+    func viewModelWillDisappear()
 }
 
 class ChannelViewModelImpl: ChannelViewModel, ChannelViewModelInput {
@@ -81,11 +82,15 @@ class ChannelViewModelImpl: ChannelViewModel, ChannelViewModelInput {
     
     func viewModelDidLoad() {
         fetchGroups()
-        registerForCommand()
+        
     }
     
     func viewModelWillAppear() {
-        
+        registerForCommand()
+    }
+    
+    func viewModelWillDisappear() {
+        unRegisterForCommand()
     }
     
     //For all of your viewBindings
@@ -255,6 +260,12 @@ extension ChannelViewModelImpl: SDKConnectionDelegate {
 
 
 extension ChannelViewModelImpl {
+    
+    func unRegisterForCommand(){
+        wormhole.stopListeningForMessage(withIdentifier: "Command")
+    }
+    
+    
     func registerForCommand() {
         
         wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in

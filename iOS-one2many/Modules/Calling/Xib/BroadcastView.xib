@@ -19,18 +19,25 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" name="AppLightGrey"/>
                 </view>
-                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-Do-L7m">
-                    <rect key="frame" x="78.5" y="382.5" width="257.5" height="141"/>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-Do-L7m">
+                    <rect key="frame" x="78.5" y="350.5" width="257.5" height="205"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="5yH-Mg-GVA">
-                            <rect key="frame" x="85" y="0.0" width="87" height="109"/>
-                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are sharing your screen..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEZ-BS-ELW">
-                            <rect key="frame" x="0.0" y="117" width="257.5" height="24"/>
+                            <rect key="frame" x="0.0" y="0.0" width="257.5" height="24"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="broadcast" translatesAutoresizingMaskIntoConstraints="NO" id="5yH-Mg-GVA">
+                            <rect key="frame" x="85" y="45" width="87" height="109"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaq-nb-Ige">
+                            <rect key="frame" x="94" y="175" width="69" height="30"/>
+                            <state key="normal" title="Copy URL"/>
+                            <connections>
+                                <action selector="didTapCopyURL:" destination="iN0-l3-epB" eventType="touchUpInside" id="QSx-UY-yjb"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzh-oz-lq2">

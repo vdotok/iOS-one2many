@@ -29,4 +29,10 @@ extension LandingRouter {
         navigationController?.present(builder, animated: true, completion: nil)
     }
     
+    func moveToCalling(sdk: VideoTalkSDK, particinats: [Participant] = [], users: [User] = [], screenType: ScreenType, broadcastData: BroadcastData ) {
+        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadcastData: broadcastData)
+        builder.modalPresentationStyle = .fullScreen
+        navigationController?.present(builder, animated: true, completion: nil)
+    }
+    
 }

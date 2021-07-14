@@ -150,6 +150,7 @@ extension SampleHandler: SDKConnectionDelegate {
 
 
 extension SampleHandler: SessionDelegate {
+    
     func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
         
     }
@@ -160,9 +161,7 @@ extension SampleHandler: SessionDelegate {
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
-    
-            
-       
+
         case .calling:
             break
         case .ringing:
@@ -190,6 +189,11 @@ extension SampleHandler: SessionDelegate {
         case .tryingToConnect:
             break
         }
+    }
+    
+    func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
+        let message : NSString =  url as NSString
+        wormhole.passMessageObject(message, identifier: "didGetPublicURL")
     }
     
 }

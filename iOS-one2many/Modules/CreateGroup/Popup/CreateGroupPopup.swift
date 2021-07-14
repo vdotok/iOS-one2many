@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PopupDelegate: class {
+protocol PopupDelegate: AnyObject {
     func didTapDismiss(groupName: String?)
 }
 

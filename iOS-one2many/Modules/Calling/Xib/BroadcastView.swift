@@ -31,6 +31,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
     
+    var publicURL: String?
     var session: VTokBaseSession?
     weak var delegate: BroadcastDelegate?
     
@@ -73,6 +74,13 @@ class BroadcastView: UIView {
         
     }
     
+    @IBAction func didTapCopyURL(_ sender: UIButton) {
+        guard let url = publicURL else { return }
+        print("<<<<<public url \(url)")
+        let pastBoard = UIPasteboard.general
+        pastBoard.string = url
+    }
+    
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
         let data = ScreenShareScreenState(screenShareScreen: state)
         let jsonData = try! JSONEncoder().encode(data)
@@ -99,6 +107,10 @@ class BroadcastView: UIView {
         }
     }
     
+    func updateURL(with url: String) {
+        publicURL = url
+    }
+    
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
         self.session = session
@@ -110,6 +122,7 @@ class BroadcastView: UIView {
         switch session.sessionType {
         case .call:
             if session.associatedSessionUUID != nil {
+                smallLocalView.isHidden = false
                 smallLocalView.removeAllSubViews()
                 smallLocalView.addSubview(userStream.renderer)
                 userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
@@ -133,6 +146,7 @@ class BroadcastView: UIView {
     }
     
     func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
+        localView.isHidden = false
         localView.removeAllSubViews()
         localView.addSubview(renderer)
         renderer.translatesAutoresizingMaskIntoConstraints = false

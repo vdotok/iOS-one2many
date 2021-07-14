@@ -9,6 +9,7 @@ target 'iOS-one2many' do
   pod 'KRProgressHUD'
   pod 'IQKeyboardManagerSwift'
   pod 'InternalStrategy', :path => '../internal_strategy'
+  pod "VisualEffectView"
 
 end
 target 'ScreenShare' do

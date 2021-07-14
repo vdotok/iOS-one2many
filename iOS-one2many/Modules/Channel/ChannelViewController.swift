@@ -50,6 +50,11 @@ public class ChannelViewController: UIViewController {
         viewModel.viewModelWillAppear()
     }
     
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewModelWillDisappear()
+    }
+    
     @IBAction func didTapReferesh(_ sender: UIButton) {
         viewModel.fetchGroups()
     }

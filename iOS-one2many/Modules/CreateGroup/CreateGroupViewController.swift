@@ -94,8 +94,6 @@ extension CreateGroupViewController {
     }
     
     @objc func didTappedAdd() {
-       
-          
             let vc = CreateGroupPopup()
             vc.modalPresentationStyle = .custom
             vc.modalTransitionStyle = .crossDissolve
@@ -103,9 +101,6 @@ extension CreateGroupViewController {
             vc.delegate = self
             blurView.isHidden = false
 
-    
-        
-       
     }
     
     @objc func didTapBackButton() {
