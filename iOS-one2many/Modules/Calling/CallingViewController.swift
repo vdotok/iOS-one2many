@@ -214,6 +214,10 @@ extension CallingViewController: BroadcastDelegate {
         viewModel.flipCamera(session: session, state: type)
     }
     
+    func didTapAppAudio(for session: VTokBaseSession, videoState: ScreenShareBytes) {
+        
+    }
+    
     
 }
 

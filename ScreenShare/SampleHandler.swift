@@ -46,7 +46,11 @@ class SampleHandler: RPBroadcastSampleHandler {
             guard let self = self else {return }
             if let message = messageObject as? String {
                print(message)
+                guard let sdk = self.vtokSdk,
+                      let session = self.screenShareData
+                else { return }
                 self.setScreenShareScreen(with: message)
+                sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
             }
         })
         
@@ -136,6 +140,7 @@ extension SampleHandler: SDKConnectionDelegate {
         case .registered:
             print("==== screeen share registerd ====")
             guard let sdk = vtokSdk, let session = screenShareData else {return}
+            self.screenShareData = session
             sdk.initiate(session: session.baseSession, sessionDelegate: self)
         case .disconnected(_):
             print("==== screeen failed to registerd ====")

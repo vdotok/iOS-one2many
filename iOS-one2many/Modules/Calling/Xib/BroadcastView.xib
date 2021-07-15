@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2If-LL-xGi">
+                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2If-LL-xGi">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <color key="backgroundColor" name="AppLightGrey"/>
                 </view>
@@ -40,32 +40,29 @@
                         </button>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzh-oz-lq2">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rzh-oz-lq2" customClass="DraggableView" customModule="iOS_one2many" customModuleProvider="target">
                     <rect key="frame" x="24" y="542" width="150" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="150" id="FhN-Zw-vfA"/>
-                        <constraint firstAttribute="height" constant="200" id="GVc-F8-32d"/>
-                    </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="SCZ-GJ-v4t">
-                    <rect key="frame" x="369.5" y="74" width="32.5" height="162.5"/>
+                    <rect key="frame" x="352" y="74" width="50" height="192"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBQ-uD-zZp">
-                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBQ-uD-zZp">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz5-hH-koa">
-                            <rect key="frame" x="0.5" y="38.5" width="32" height="32"/>
+                            <rect key="frame" x="9" y="68" width="32" height="32"/>
                             <state key="normal" image="noun_Switch"/>
                             <connections>
                                 <action selector="didTapFlip:" destination="iN0-l3-epB" eventType="touchUpInside" id="zlt-IJ-Ikx"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-0z-VbI">
-                            <rect key="frame" x="0.5" y="88.5" width="32" height="32"/>
+                            <rect key="frame" x="9" y="118" width="32" height="32"/>
                             <state key="normal" image="Volumn On"/>
                             <state key="selected" image="Volume Off"/>
                             <connections>
@@ -73,15 +70,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-hI-L0h">
-                            <rect key="frame" x="4.5" y="138.5" width="24" height="24"/>
+                            <rect key="frame" x="13" y="168" width="24" height="24"/>
                             <state key="normal" image="User"/>
                         </button>
                     </subviews>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Public Braodcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-o0-X1e">
-                    <rect key="frame" x="34" y="74" width="182" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Braodcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-o0-X1e">
+                    <rect key="frame" x="34" y="74" width="148" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -106,7 +102,7 @@
                             <rect key="frame" x="157.5" y="0.0" width="51" height="60"/>
                             <state key="normal" image="appaudio"/>
                             <connections>
-                                <action selector="didTapAppAudio:" destination="iN0-l3-epB" eventType="touchUpInside" id="qg6-8d-dI8"/>
+                                <action selector="didTapAppAudio:" destination="iN0-l3-epB" eventType="touchUpInside" id="OsJ-2S-4wI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
@@ -114,7 +110,6 @@
                             <state key="normal" image="mute"/>
                             <state key="selected" image="unMute"/>
                             <connections>
-                                <action selector="didTapAppAudio:" destination="iN0-l3-epB" eventType="touchUpInside" id="0wR-JQ-NtS"/>
                                 <action selector="didTapMute:" destination="iN0-l3-epB" eventType="touchUpInside" id="2ft-pQ-g9u"/>
                             </connections>
                         </button>
@@ -129,16 +124,17 @@
                 <constraint firstAttribute="bottom" secondItem="2If-LL-xGi" secondAttribute="bottom" id="KOj-dR-6QD"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="UUr-cc-dHg"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X33-FW-lvI"/>
+                <constraint firstItem="aTf-o0-X1e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="dUI-5u-HtF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cfb-cM-Yho" secondAttribute="bottom" constant="28" id="et0-PZ-zh4"/>
                 <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
+                <constraint firstItem="aTf-o0-X1e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="m1w-2P-hpY"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rzh-oz-lq2" secondAttribute="bottom" constant="120" id="wQz-c6-aOe"/>
                 <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
-                <constraint firstItem="rzh-oz-lq2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="zXj-Yq-DNu"/>
             </constraints>
             <connections>
                 <outlet property="broadCastDummyView" destination="4Qi-Do-L7m" id="AsY-FW-FvT"/>
+                <outlet property="broadCastTitle" destination="aTf-o0-X1e" id="ZjM-IH-kyg"/>
                 <outlet property="cameraSwitchIcon" destination="yz5-hH-koa" id="a04-to-KSr"/>
                 <outlet property="copyUrlBtn" destination="eaq-nb-Ige" id="Yqa-y0-ULZ"/>
                 <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
@@ -149,6 +145,7 @@
                 <outlet property="smallLocalView" destination="rzh-oz-lq2" id="0Lf-an-r0k"/>
                 <outlet property="speakerIcon" destination="eAU-0z-VbI" id="pUz-S2-Tzz"/>
                 <outlet property="timerLabel" destination="FBQ-uD-zZp" id="WQl-Pk-Gdb"/>
+                <outlet property="titlelabel" destination="VEZ-BS-ELW" id="XaV-Ob-Sb5"/>
             </connections>
             <point key="canvasLocation" x="-17" y="65"/>
         </view>

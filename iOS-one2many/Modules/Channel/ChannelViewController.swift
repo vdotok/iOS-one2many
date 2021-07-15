@@ -19,6 +19,7 @@ public class ChannelViewController: UIViewController {
     
     lazy var refreshControl = UIRefreshControl()
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+
     var viewModel: ChannelViewModel!
     private var selectedGroupId: Int? = nil
     let navigationTitle = UILabel()

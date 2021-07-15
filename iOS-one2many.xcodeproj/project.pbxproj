@@ -104,6 +104,7 @@
 		5DA7BC8726775AB900A3E292 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8626775AB900A3E292 /* Color+Extension.swift */; };
 		5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8A26775C9E00A3E292 /* Colors.xcassets */; };
 		5DD9727526775D05007919AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD9727426775D05007919AC /* Assets.xcassets */; };
+		5DDEC0DF269F290000DF859F /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDEC0DE269F290000DF859F /* DraggableView.swift */; };
 		5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
 		5DE4B39526970899009DAE5B /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4B39426970899009DAE5B /* SampleHandler.swift */; };
 		5DE4B39C26970899009DAE5B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
@@ -278,6 +279,7 @@
 		5DA7BC8626775AB900A3E292 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		5DA7BC8A26775C9E00A3E292 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5DD9727426775D05007919AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5DDEC0DE269F290000DF859F /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DraggableView.swift; path = ../../../../../Downloads/DraggableView.swift; sourceTree = "<group>"; };
 		5DE4B39026970899009DAE5B /* ScreenShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE4B39126970899009DAE5B /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		5DE4B39426970899009DAE5B /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		5DA7BC182675FD5B00A3E292 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				5DDEC0DE269F290000DF859F /* DraggableView.swift */,
 				5D0A25752698BE0D00231087 /* Extensions */,
 				5D7CD5342677FC71004799EA /* Buttons */,
 				5DA7BC192675FD6400A3E292 /* UserDefaults */,
@@ -902,6 +905,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DDEC0DF269F290000DF859F /* DraggableView.swift in Sources */,
 				5D0A25742698B37C00231087 /* BroadcastView.swift in Sources */,
 				5DA7BC5F2677553900A3E292 /* LoginRequest.swift in Sources */,
 				5DA7BBEB267562A800A3E292 /* ViewController.swift in Sources */,
@@ -1168,6 +1172,7 @@
 					"$(SRCROOT)/frameworks",
 				);
 				INFOPLIST_FILE = "iOS-one2many/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1196,6 +1201,7 @@
 					"$(SRCROOT)/frameworks",
 				);
 				INFOPLIST_FILE = "iOS-one2many/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1215,7 +1221,7 @@
 				DEVELOPMENT_TEAM = 85W3A63R3P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ScreenShareSetupUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1237,7 +1243,7 @@
 				DEVELOPMENT_TEAM = 85W3A63R3P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ScreenShareSetupUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1260,7 +1266,7 @@
 				DEVELOPMENT_TEAM = 85W3A63R3P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ScreenShare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1283,7 +1289,7 @@
 				DEVELOPMENT_TEAM = 85W3A63R3P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ScreenShare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

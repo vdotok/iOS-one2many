@@ -182,7 +182,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
                 self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
             })
         

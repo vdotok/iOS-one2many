@@ -5,6 +5,16 @@
 //  Created by usama farooq on 09/07/2021.
 //
 
+
+//MARKTags
+
+// 0 -> call renderer
+// 1 -> paused call view
+// 2 -> screenshare renderer
+// 3 -> paused screenshare view
+
+
+
 import UIKit
 import iOSSDKStreaming
 import MMWormhole
@@ -19,9 +29,14 @@ protocol BroadcastDelegate: AnyObject {
 }
 
 class BroadcastView: UIView {
-    
+   
     @IBOutlet weak var localView: UIView!
-    @IBOutlet weak var smallLocalView: UIView!
+    @IBOutlet weak var smallLocalView: DraggableView! {
+        didSet {
+            smallLocalView.clipsToBounds = true
+            smallLocalView.layer.cornerRadius = 8
+        }
+    }
     @IBOutlet weak var screenShareBtn: UIButton!
     @IBOutlet weak var hangupBtn: UIButton!
     @IBOutlet weak var screenShareAudio: UIButton!
@@ -31,13 +46,81 @@ class BroadcastView: UIView {
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
     @IBOutlet weak var copyUrlBtn: UIButton!
+    @IBOutlet weak var titlelabel: UILabel!
+    @IBOutlet weak var broadCastTitle: UILabel!
+    
+    
+    
+    var screenSharePausedView: UIView {
+        
+        let screenSharePausedView = UIView()
+        screenSharePausedView.backgroundColor = .white
+        let broadCastView = UIImageView(image: UIImage(named: "broadcast"))
+        broadCastView.addConstraintsFor(width: 80, and: 80)
+        let message = UILabel()
+        message.numberOfLines = 0
+        message.text = "Stream paused"
+        message.setContentCompressionResistancePriority(.required, for: .vertical)
+        let stackView = UIStackView(arrangedSubviews: [message, broadCastView])
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        
+        screenSharePausedView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.fixInMiddleOfSuperView()
+        
+        screenSharePausedView.tag = 1
+        
+        return screenSharePausedView
+    }
+    
+    
+    var videoPausedView: UIView {
+        
+        let videoPausedView = UIView()
+        videoPausedView.backgroundColor = .white
+        let broadCastView = UIImageView(image: UIImage(named: "broadcast"))
+        broadCastView.addConstraintsFor(width: 80, and: 80)
+        broadCastView.contentMode = .scaleAspectFit
+        let message = UILabel()
+        message.numberOfLines = 0
+        message.text = "Stream paused"
+        message.setContentCompressionResistancePriority(.required, for: .vertical)
+        let stackView = UIStackView(arrangedSubviews: [message, broadCastView])
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 8
+        stackView.alignment = .center
+        
+        videoPausedView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.fixInMiddleOfSuperView()
+        
+        videoPausedView.tag = 0
+        
+        return videoPausedView
+    }
+    
+    
+    
     
     var publicURL: String?
     var session: VTokBaseSession?
     weak var delegate: BroadcastDelegate?
-    
+    private var counter: Int = 0
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group,
                               optionalDirectory: "wormhole")
+    private weak var timer: Timer?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
+        tap.numberOfTapsRequired = 2
+        smallLocalView.addGestureRecognizer(tap)
+        smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+    }
     
     @IBAction func didTapAppAudio(_ sender: UIButton) {
         screenShareAudio.isSelected = !sender.isSelected
@@ -82,6 +165,33 @@ class BroadcastView: UIView {
         pastBoard.string = url
     }
     
+    @objc func didTapLocalView()  {
+        guard let session = session else {return}
+        
+        switch session.sessionDirection {
+        case .incoming:
+            guard let smallView = smallLocalView, let largeView = localView else {return}
+            let smallSubView = smallView.subviews.first!
+            let largeSubView = largeView.subviews.first!
+            smallView.removeAllSubViews()
+            largeView.removeAllSubViews()
+            smallView.addSubview(largeSubView)
+            largeSubView.fixInSuperView()
+            largeView.addSubview(smallSubView)
+            smallSubView.fixInSuperView()
+            
+            let callTag = smallView.tag
+            let ssTag = largeView.tag
+            
+            
+            smallView.tag = ssTag
+            largeView.tag = callTag
+            
+        default:
+            break
+        }
+    }
+    
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
         let data = ScreenShareScreenState(screenShareScreen: state)
         let jsonData = try! JSONEncoder().encode(data)
@@ -98,18 +208,24 @@ class BroadcastView: UIView {
     
     func updateView(with session: VTokBaseSession) {
         self.session = session
+        
+        
+        
         switch session.sessionDirection {
         case .incoming:
+            broadCastTitle.isHidden = true
             setIncomingView(for: session)
         case .outgoing:
             guard let options = session.broadcastOption,
                   let broadCastType = session.broadcastType
             else {return}
-            
+            configureTimer()
             switch broadCastType {
             case .group:
+                broadCastTitle.text = "Group BroadCast"
                 copyUrlBtn.isHidden = true
             case .publicURL:
+                broadCastTitle.text = "Public BroadCast"
                 copyUrlBtn.isHidden = false
             }
             
@@ -124,36 +240,101 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
+        configureTimer()
         self.session = session
         setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
     }
+    
+    
+    func handleStateView(session: VTokBaseSession, with userStream: UserStream){
+        
+        guard let stateInfo = userStream.stateInformation else {
+            return
+        }
+   
+        if stateInfo.videoInformation == 0 {
+            switch session.sessionType {
+            case .call:
+                let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                callContainerView.removeAllSubViews()
+                let videoPausedView = self.videoPausedView
+                callContainerView.addSubview(videoPausedView)
+                videoPausedView.fixInSuperView()
+                
+            case .screenshare:
+                let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                ssContainerView.removeAllSubViews()
+                let ssPausedView = self.screenSharePausedView
+                ssContainerView.addSubview(ssPausedView)
+                ssPausedView.fixInSuperView()
+        }
+        
+        }
+        else {
+            
+                switch session.sessionType {
+                case .call:
+                    let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                    callContainerView.removeAllSubViews()
+                    callContainerView.addSubview(userStream.renderer)
+                    userStream.renderer.fixInSuperView()
+                    
+                case .screenshare:
+                    let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                    ssContainerView.removeAllSubViews()
+                    ssContainerView.addSubview(userStream.renderer)
+                    userStream.renderer.fixInSuperView()
+            }
+        }
+        
+    }
+    
     
     private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
         
         switch session.sessionType {
         case .call:
             if session.associatedSessionUUID != nil {
-                smallLocalView.isHidden = false
-                smallLocalView.removeAllSubViews()
-                smallLocalView.addSubview(userStream.renderer)
-                userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+                callView.isHidden = false
+                callView.removeAllSubViews()
+                callView.addSubview(userStream.renderer)
                 userStream.renderer.fixInSuperView()
+                callView.tag = callView.tag
             } else {
+                
                 localView.removeAllSubViews()
                 localView.addSubview(userStream.renderer)
                 smallLocalView.isHidden = true
                 userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
                 userStream.renderer.fixInSuperView()
+                localView.tag = 0
             }
         case .screenshare:
-            localView.isHidden = false
-            smallLocalView.isHidden = false
-            localView.removeAllSubViews()
-            localView.addSubview(userStream.renderer)
-            userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
+            
+            let ssView: UIView! = localView.tag == 1 ? localView : smallLocalView
+            let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+            
+            titlelabel.isHidden = true
+            broadCastDummyView.isHidden = true
+            ssView.removeAllSubViews()
+            ssView.addSubview(userStream.renderer)
             userStream.renderer.fixInSuperView()
+            ssView.tag = ssView.tag
+            if session.associatedSessionUUID != nil {
+                ssView.isHidden = false
+                callView.isHidden = false
+            } else {
+                ssView.isHidden = false
+                callView.isHidden = true
+            }
         }
+        
+        handleStateView(session: session, with: userStream)
+        
+       
+        
     }
     
     func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
@@ -256,3 +437,35 @@ extension BroadcastView {
     }
 }
 
+
+extension BroadcastView {
+    private func configureTimer() {
+        timer?.invalidate()
+        timer = nil
+        counter = 0
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func timerAction() {
+        counter += 1
+        let (h, m, s) = secondsToHoursMinutesSeconds(seconds: counter)
+        var timeString = ""
+        if h > 0 {
+            timeString += intervalFormatter(interval: h) + ":"
+        }
+        timeString += intervalFormatter(interval: m) + ":" +
+                        intervalFormatter(interval: s)
+        timerLabel.text = timeString
+    }
+    
+    private func intervalFormatter(interval: Int) -> String {
+        if interval < 10 {
+            return "0\(interval)"
+        }
+        return "\(interval)"
+    }
+    
+    private func secondsToHoursMinutesSeconds (seconds :Int) -> (hours: Int, minutes: Int, seconds: Int) {
+      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+}
