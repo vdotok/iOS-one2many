@@ -25,6 +25,7 @@ protocol BroadcastDelegate: AnyObject {
     func didTapHangUp(for session: VTokBaseSession)
     func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState)
     func didTapFlipCamera(for session: VTokBaseSession, type: CameraType)
+    func didTapVideo(for session: VTokBaseSession, type: VideoState)
     
 }
 
@@ -45,9 +46,14 @@ class BroadcastView: UIView {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
-    @IBOutlet weak var copyUrlBtn: UIButton!
+    @IBOutlet weak var copyUrlBtn: UIButton! {
+        didSet {
+            copyUrlBtn.layer.cornerRadius = 8
+        }
+    }
     @IBOutlet weak var titlelabel: UILabel!
     @IBOutlet weak var broadCastTitle: UILabel!
+    @IBOutlet weak var broadCastIcon: UIImageView!
     
     
     
@@ -165,6 +171,12 @@ class BroadcastView: UIView {
         pastBoard.string = url
     }
     
+    @IBAction func didTapVideo(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
+    }
+    
     @objc func didTapLocalView()  {
         guard let session = session else {return}
         
@@ -208,16 +220,12 @@ class BroadcastView: UIView {
     
     func updateView(with session: VTokBaseSession) {
         self.session = session
-        
-        
-        
         switch session.sessionDirection {
         case .incoming:
             broadCastTitle.isHidden = true
             setIncomingView(for: session)
         case .outgoing:
-            guard let options = session.broadcastOption,
-                  let broadCastType = session.broadcastType
+            guard let broadCastType = session.broadcastType
             else {return}
             configureTimer()
             switch broadCastType {
@@ -229,13 +237,15 @@ class BroadcastView: UIView {
                 copyUrlBtn.isHidden = false
             }
             
-            setOutGoingView(for: options)
+            setOutGoingView(for: session)
             
         }
     }
     
     func updateURL(with url: String) {
         publicURL = url
+        copyUrlBtn.isEnabled = true
+        copyUrlBtn.backgroundColor = .appDarkGreenColor
     }
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
@@ -365,8 +375,9 @@ class BroadcastView: UIView {
         
     }
     
-    private func setOutGoingView(for options: BroadcastOptions) {
+    private func setOutGoingView(for session: VTokBaseSession) {
         
+        guard let options = session.broadcastOption else {return}
         switch options {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             screenShareBtn.isHidden = false
@@ -384,7 +395,12 @@ class BroadcastView: UIView {
             speakerIcon.isHidden = true
             smallLocalView.isHidden = true
             muteButton.isHidden = false
-            broadCastDummyView.isHidden = true
+            titlelabel.isHidden = true
+            broadCastIcon.isHidden = true
+            if session.broadcastType == .publicURL {
+                copyUrlBtn.isHidden = false
+                broadCastDummyView.isHidden = false
+            }
         case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
             screenShareBtn.isHidden = false
             screenShareAudio.isHidden = false
