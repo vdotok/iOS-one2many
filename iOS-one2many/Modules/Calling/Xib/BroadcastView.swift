@@ -54,6 +54,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var titlelabel: UILabel!
     @IBOutlet weak var broadCastTitle: UILabel!
     @IBOutlet weak var broadCastIcon: UIImageView!
+    @IBOutlet weak var cameraButton: UIButton!
     
     
     
@@ -191,11 +192,8 @@ class BroadcastView: UIView {
             largeSubView.fixInSuperView()
             largeView.addSubview(smallSubView)
             smallSubView.fixInSuperView()
-            
             let callTag = smallView.tag
             let ssTag = largeView.tag
-            
-            
             smallView.tag = ssTag
             largeView.tag = callTag
             
@@ -223,8 +221,12 @@ class BroadcastView: UIView {
         switch session.sessionDirection {
         case .incoming:
             broadCastTitle.isHidden = true
+            cameraButton.isHidden = true
             setIncomingView(for: session)
         case .outgoing:
+            if session.sessionType == .call {
+                cameraButton.isHidden = false
+            }
             guard let broadCastType = session.broadcastType
             else {return}
             configureTimer()

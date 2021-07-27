@@ -89,7 +89,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
-                    <rect key="frame" x="23" y="774" width="368.5" height="60"/>
+                    <rect key="frame" x="63" y="774" width="288.5" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxb-br-vlQ">
                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="60"/>
@@ -99,8 +99,8 @@
                                 <action selector="didTapScreenShare:" destination="iN0-l3-epB" eventType="touchUpInside" id="qzo-43-VRg"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
-                            <rect key="frame" x="77.5" y="0.0" width="60" height="60"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
+                            <rect key="frame" x="67.5" y="0.0" width="0.0" height="60"/>
                             <state key="normal" image="StopVideo"/>
                             <state key="selected" image="StopVideo"/>
                             <connections>
@@ -108,14 +108,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-GM-m0J">
-                            <rect key="frame" x="157.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="77.5" y="0.0" width="60" height="60"/>
                             <state key="normal" image="end"/>
                             <connections>
                                 <action selector="didTapHangup:" destination="iN0-l3-epB" eventType="touchUpInside" id="GsU-q0-7ur"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z81-QJ-C5D">
-                            <rect key="frame" x="237.5" y="0.0" width="51" height="60"/>
+                            <rect key="frame" x="157.5" y="0.0" width="51" height="60"/>
                             <state key="normal" image="appaudioon"/>
                             <state key="selected" image="appaudio"/>
                             <connections>
@@ -123,7 +123,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
-                            <rect key="frame" x="308.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="228.5" y="0.0" width="60" height="60"/>
                             <state key="normal" image="mute"/>
                             <state key="selected" image="unMute"/>
                             <connections>
@@ -153,6 +153,7 @@
                 <outlet property="broadCastDummyView" destination="4Qi-Do-L7m" id="AsY-FW-FvT"/>
                 <outlet property="broadCastIcon" destination="5yH-Mg-GVA" id="NfQ-Jj-B0h"/>
                 <outlet property="broadCastTitle" destination="aTf-o0-X1e" id="ZjM-IH-kyg"/>
+                <outlet property="cameraButton" destination="uNx-We-R0D" id="xNq-Ko-il5"/>
                 <outlet property="cameraSwitchIcon" destination="yz5-hH-koa" id="a04-to-KSr"/>
                 <outlet property="copyUrlBtn" destination="eaq-nb-Ige" id="Yqa-y0-ULZ"/>
                 <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
