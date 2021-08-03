@@ -67,8 +67,6 @@ public class LandingViewController: UIViewController {
     }
     
     @IBAction func didTapBroadCastOption(_ sender: UIButton) {
-        
-       
     
         switch sender.tag {
         case 102:
@@ -119,7 +117,13 @@ public class LandingViewController: UIViewController {
         
     }
     
-   
+    @IBAction func didTapLogout(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "UserResponse")
+        viewModel.logout()
+        let viewController = LoginBuilder().build(with: self.navigationController)
+        viewController.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(viewController, animated: true, completion: nil)
+    }
     
     private func broadCastButtonHandling() {
         

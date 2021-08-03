@@ -103,6 +103,10 @@
 		5DA7BC8326775A3900A3E292 /* GroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8126775A3900A3E292 /* GroupCell.xib */; };
 		5DA7BC8726775AB900A3E292 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8626775AB900A3E292 /* Color+Extension.swift */; };
 		5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8A26775C9E00A3E292 /* Colors.xcassets */; };
+		5DB70B5D26B1A24100F0F986 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */; };
+		5DB70B5E26B1A24100F0F986 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5DB70B5F26B1A25900F0F986 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */; };
+		5DB70B6026B1A25900F0F986 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5DBB9F3426A1A859000F51E6 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBB9F3326A1A859000F51E6 /* DraggableView.swift */; };
 		5DD9727526775D05007919AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD9727426775D05007919AC /* Assets.xcassets */; };
 		5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
@@ -117,6 +121,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5DB70B5B26B1A23700F0F986 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DB70B5726B1A23600F0F986 /* iOSSDKStreaming.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D146FA225DE4823000852FB;
+			remoteInfo = iOSSDKStreaming;
+		};
 		5DE4B3A326970899009DAE5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DA7BBDB267562A800A3E292 /* Project object */;
@@ -140,6 +151,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5DB70B6026B1A25900F0F986 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +162,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5DB70B5E26B1A24100F0F986 /* iOSSDKStreaming.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +278,7 @@
 		5DA7BC8126775A3900A3E292 /* GroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupCell.xib; sourceTree = "<group>"; };
 		5DA7BC8626775AB900A3E292 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		5DA7BC8A26775C9E00A3E292 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		5DB70B5726B1A23600F0F986 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 		5DBB9F3326A1A859000F51E6 /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		5DD9727426775D05007919AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DE4B39026970899009DAE5B /* ScreenShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +304,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DB70B5D26B1A24100F0F986 /* iOSSDKStreaming.framework in Frameworks */,
 				5C32CEF2CB649AA8A4F8EE1F /* Pods_iOS_one2many.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +315,7 @@
 			files = (
 				5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */,
 				20B7F0749A48A2AC51B63B14 /* Pods_ScreenShare.framework in Frameworks */,
+				5DB70B5F26B1A25900F0F986 /* iOSSDKStreaming.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +618,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5DB70B5826B1A23600F0F986 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5DE4B39326970899009DAE5B /* ScreenShare */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +660,7 @@
 		A81C253C2699BCFC00FB1C95 /* Streaming */ = {
 			isa = PBXGroup;
 			children = (
+				5DB70B5726B1A23600F0F986 /* iOSSDKStreaming.xcodeproj */,
 			);
 			path = Streaming;
 			sourceTree = "<group>";
@@ -744,6 +769,12 @@
 			mainGroup = 5DA7BBDA267562A800A3E292;
 			productRefGroup = 5DA7BBE4267562A800A3E292 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5DB70B5826B1A23600F0F986 /* Products */;
+					ProjectRef = 5DB70B5726B1A23600F0F986 /* iOSSDKStreaming.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5DA7BBE2267562A800A3E292 /* iOS-one2many */,
@@ -752,6 +783,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5DB70B5C26B1A23700F0F986 /* iOSSDKStreaming.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = iOSSDKStreaming.framework;
+			remoteRef = 5DB70B5B26B1A23700F0F986 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5DA7BBE1267562A800A3E292 /* Resources */ = {

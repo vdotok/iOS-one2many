@@ -8,7 +8,7 @@ target 'iOS-one2many' do
   # Pods for IOS-one2many
   pod 'KRProgressHUD'
   pod 'IQKeyboardManagerSwift'
-  pod 'VdoTokStreaming'
+  pod 'InternalStrategy', :path => '../internal_strategy'
   pod "VisualEffectView"
 
 end
@@ -16,5 +16,5 @@ target 'ScreenShare' do
   # Pods for screen share
     use_frameworks!
     pod 'MMWormhole'
-    pod 'VdoTokStreaming'
+    pod 'InternalStrategy', :path => '../internal_strategy'
 end

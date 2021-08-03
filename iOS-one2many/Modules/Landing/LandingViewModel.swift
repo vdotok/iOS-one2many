@@ -20,6 +20,7 @@ protocol LandingViewModel: LandingViewModelInput {
     func viewModelDidLoad()
     func viewModelWillAppear()
     func viewModelWillDisappear()
+    func logout()
     
     func moveToChat(with broadCastData: BroadcastData)
     func moveToCalling(with broadcastData: BroadcastData)
@@ -52,6 +53,9 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     
     func viewModelWillDisappear() {
         unRegisterForCommand()
+    }
+    func logout() {
+        vtokSdk?.closeConnection()
     }
     
     func fetchUsers() {
