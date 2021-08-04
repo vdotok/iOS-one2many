@@ -23,7 +23,7 @@ public class LandingViewController: UIViewController {
     @IBOutlet weak var logoutBtn: UIButton!
     
     var viewModel: LandingViewModel!
-    var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
+    var broadCastData: BroadcastData = BroadcastData(broadcastType: .none,
                                                      broadcastOptions: .screenShareWithAppAudio)
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
     
@@ -64,6 +64,7 @@ public class LandingViewController: UIViewController {
         default:
             break
         }
+        continueStatsHandling ()
     }
     
     @IBAction func didTapBroadCastOption(_ sender: UIButton) {
@@ -89,11 +90,15 @@ public class LandingViewController: UIViewController {
             break
         }
         
+        continueStatsHandling ()
+    }
+    
+    private func continueStatsHandling () {
         if screenShareAppAudioBtn.isSelected == true ||
            screenShareMicAudioBtn.isSelected == true ||
            camera.isSelected == true  {
-            continueBtn.backgroundColor = .appDarkGreenColor
-            continueBtn.isEnabled = true
+            continueBtn.backgroundColor = broadCastData.broadcastType == .none ? .appDarkGray :  .appDarkGreenColor
+            continueBtn.isEnabled =  broadCastData.broadcastType == .none ? false :  true
         } else {
             continueBtn.backgroundColor = .appDarkGray
             continueBtn.isEnabled = false
@@ -113,6 +118,8 @@ public class LandingViewController: UIViewController {
                 
                 self.viewModel.moveToCalling(with: broadCastData)
             }
+        default:
+            break
         }
         
     }
@@ -173,7 +180,6 @@ public class LandingViewController: UIViewController {
 extension LandingViewController {
     func configureAppearance() {
         radioController.buttonsArray = [publicBroadcastButton,groupBroadcastButton]
-        radioController.defaultButton = publicBroadcastButton
         guard let data = VDOTOKObject<UserResponse>().getData() else {return}
         let title = "LOG OUT AS \(data.fullName!)"
         logoutBtn.backgroundColor = .clear
@@ -188,7 +194,6 @@ extension LandingViewController {
         vc.modalTransitionStyle = .crossDissolve
         vc.delegate = self
         vc.broadcastData = broadCastData
-//        blurView.isHidden = false
         present(vc, animated: true, completion: nil)
         
     }

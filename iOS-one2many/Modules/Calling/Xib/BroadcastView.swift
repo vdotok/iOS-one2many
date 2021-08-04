@@ -243,7 +243,11 @@ class BroadcastView: UIView {
             case .publicURL:
                 broadCastTitle.text = "Public BroadCast"
                 copyUrlBtn.isHidden = false
+                
+            default:
+                break
             }
+            
             
             setOutGoingView(for: session)
             
