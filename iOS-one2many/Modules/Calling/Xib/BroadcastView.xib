@@ -88,6 +88,12 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pg-G8-hkv">
+                    <rect key="frame" x="392" y="238" width="8" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" name="AppDarkGreenColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
                     <rect key="frame" x="63" y="774" width="288.5" height="60"/>
                     <subviews>
@@ -141,7 +147,9 @@
                 <constraint firstAttribute="bottom" secondItem="2If-LL-xGi" secondAttribute="bottom" id="KOj-dR-6QD"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="UUr-cc-dHg"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X33-FW-lvI"/>
+                <constraint firstItem="4Pg-G8-hkv" firstAttribute="leading" secondItem="EAD-hI-L0h" secondAttribute="trailing" constant="3" id="XJp-eu-SVg"/>
                 <constraint firstItem="aTf-o0-X1e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="dUI-5u-HtF"/>
+                <constraint firstItem="4Pg-G8-hkv" firstAttribute="top" secondItem="EAD-hI-L0h" secondAttribute="top" constant="-4" id="djQ-fe-sev"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cfb-cM-Yho" secondAttribute="bottom" constant="28" id="et0-PZ-zh4"/>
                 <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
@@ -155,6 +163,7 @@
                 <outlet property="broadCastTitle" destination="aTf-o0-X1e" id="ZjM-IH-kyg"/>
                 <outlet property="cameraButton" destination="uNx-We-R0D" id="xNq-Ko-il5"/>
                 <outlet property="cameraSwitchIcon" destination="yz5-hH-koa" id="a04-to-KSr"/>
+                <outlet property="connectedUser" destination="4Pg-G8-hkv" id="1Ot-F5-jW6"/>
                 <outlet property="copyUrlBtn" destination="eaq-nb-Ige" id="Yqa-y0-ULZ"/>
                 <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
                 <outlet property="localView" destination="2If-LL-xGi" id="Ka7-Rx-D8s"/>
@@ -183,6 +192,9 @@
         <image name="screenshare" width="57.5" height="52"/>
         <image name="ssoff" width="57.5" height="52"/>
         <image name="unMute" width="60" height="60"/>
+        <namedColor name="AppDarkGreenColor">
+            <color red="0.396078431372549" green="0.60784313725490191" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="AppLightGrey">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

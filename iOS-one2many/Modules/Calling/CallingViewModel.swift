@@ -72,6 +72,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         
         loadViews()
         listenForPublicURL()
+        listenForParticipantAdd()
         
 
     }
@@ -131,11 +132,21 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         })
     }
     
+    private func listenForParticipantAdd() {
+        wormhole.listenForMessage(withIdentifier: "participantAdded") { [weak self] message -> Void  in
+            if let count = message as? String {
+                guard let userCount = Int(count) else {return}
+                self?.output?(.updateUsers(userCount))
+                
+        }
+    }
+    }
+    
     private func setScreenShareSession(with message: String) {
         guard let data = message.data(using: .utf8) else {return }
         session = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
         guard let from = session?.from, let to = session?.to, let sessionUUID = session?.sessionUUID else{return}
-        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany)
+        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, connectedUsers: [])
         output?(.loadBroadcastView(session: baseSession))
         
     }
@@ -202,6 +213,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case updateHangupButton(status: Bool)
         case loadBroadcastView(session: VTokBaseSession)
         case updateURL(url: String)
+        case updateUsers(Int)
     }
     
     @discardableResult
@@ -220,7 +232,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
                                               sessionType: .call,
-                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions)
+                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions, connectedUsers: [])
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
 //            output?(.loadView(mediaType: sessionMediaType))
@@ -273,7 +285,7 @@ extension CallingViewModelImpl {
                                           sessionType: .screenshare,
                                           associatedSessionUUID: associatedSessionUUID,
                                           broadcastType: broadcastData.broadcastType,
-                                          broadcastOption: broadcastData.broadcastOptions)
+                                          broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
 
         let data = ScreenShareAppData(url: authResponse.mediaServerMap.completeAddress,
                                       authenticationToken: token,
@@ -361,18 +373,27 @@ extension CallingViewModelImpl: SessionDelegate {
             output?(.updateView(session: session))
         case .connected:
           didConnect()
+            output?(.updateUsers(session.connectedUsers.count))
         case .rejected:
           sessionReject()
         case .missedCall:
             sessionMissed()
         case .hangup:
-            sessionHangup()
+            guard session.connectedUsers.count != 0 else {
+                sessionHangup()
+                return
+            }
+            output?(.updateUsers(session.connectedUsers.count))
+         
         case .tryingToConnect:
             output?(.updateView(session: session))
         default:
             break
         }
+        
     }
+    
+ 
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
         output?(.updateURL(url: url))

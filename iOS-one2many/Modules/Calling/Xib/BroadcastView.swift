@@ -55,6 +55,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var broadCastTitle: UILabel!
     @IBOutlet weak var broadCastIcon: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var connectedUser: UILabel!
     
     
     
@@ -200,6 +201,11 @@ class BroadcastView: UIView {
         default:
             break
         }
+    }
+    
+    func updateUser(count: Int) {
+            connectedUser.text = "+\(count + 1)"
+            connectedUser.isHidden = false
     }
     
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {

@@ -163,6 +163,7 @@ extension SampleHandler: SessionDelegate {
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         
     }
+
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
@@ -194,6 +195,9 @@ extension SampleHandler: SessionDelegate {
         case .tryingToConnect:
             break
         }
+        
+        let message = String(session.connectedUsers.count) as NSString
+        wormhole.passMessageObject(message, identifier: "participantAdded")
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
