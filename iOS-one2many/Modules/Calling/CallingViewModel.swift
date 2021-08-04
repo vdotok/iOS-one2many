@@ -73,7 +73,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         loadViews()
         listenForPublicURL()
         listenForParticipantAdd()
-        
+        listenForSessionTerminate()
 
     }
     
@@ -140,6 +140,20 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
                 
         }
     }
+        
+       
+    }
+    
+    private func listenForSessionTerminate() {
+        wormhole.listenForMessage(withIdentifier: "sessionTerminated") { [weak self] message -> Void in
+            if let sessionString = message as? String {
+                guard let data = sessionString.data(using: .utf8) else {return }
+                let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+                guard let callSession = self?.session else { return }
+                self?.vtokSdk?.hangup(session: callSession)
+                
+            }
+        }
     }
     
     private func setScreenShareSession(with message: String) {

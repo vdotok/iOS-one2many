@@ -107,8 +107,15 @@ class SampleHandler: RPBroadcastSampleHandler {
     
     override func broadcastFinished() {
         // User has requested to finish the broadcast.
+        
+        let message: String = "sessionTerminated"
         guard let vtokSdk = vtokSdk, let session = screenShareData?.baseSession else {return}
+        let jsonData = try! JSONEncoder().encode(session)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        wormhole.passMessageObject(jsonString, identifier: message)
         vtokSdk.hangup(session: session)
+        
+        
     }
     
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
