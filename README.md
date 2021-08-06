@@ -1,5 +1,5 @@
 # IOS-m2m
-iOSSDKStreaming-m2m
+iOSSDKStreaming-one2many
 
 ## Installation
 
@@ -33,17 +33,7 @@ Download **iOSSDKStreaming** file from [VdoTok SDK](https://sdk.vdotok.com/IOS-S
 *	After cloning is complete, go to demo project’s root directory by typing `cd path_to_ cloned_project` and hit enter
 *	Once inside the project’s root directory type `ls` (LS in small letters) and hit enter and you should see a file named **Podfile**
 *	Type command `pod install` hit enter and wait until the process is complete
-*	Copy the downloaded **iOSSDKStreaming** to frameworks folder present in the root directory of the cloned project. See attached screenshots
-<img width="618" alt="m2m-2" src="https://user-images.githubusercontent.com/2145411/123794648-820a3f80-d8fc-11eb-9c22-bd2355a45584.png">
-
 *	open .xcworkspace file by double clicking it
-*	In the opened xcworkspace file, drag and drop the SDK present in the framework folder of the cloned project to the Frameworks folder of the main project, make sure to uncheck copy if needed option, see the attached screen shot.
-<img width="618" alt="m2m-3" src="https://user-images.githubusercontent.com/2145411/123794859-c7c70800-d8fc-11eb-9bbc-3c54b4d2bab1.png">
-<img width="618" alt="m2m-4" src="https://user-images.githubusercontent.com/2145411/123794903-d1e90680-d8fc-11eb-875b-90712ce336db.png">
-
-
-* Select the main project in xcworkspace file and in the general tab scroll to Frameworks, Libraries, and Embedded Content Section, make sure Embed & Sign is selected in Embed column next to our added SDK (.framework) 
-<img width="618" alt="m2m-7" src="https://user-images.githubusercontent.com/2145411/123795079-0c52a380-d8fd-11eb-9a3c-8ed576e6149b.png">
 
 ### Updating  Project ID and Authentication Token
 Get Project ID and Authentication Token from [Admin Panel](https://vdotok.com)
