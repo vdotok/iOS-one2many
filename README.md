@@ -1,5 +1,5 @@
 # IOS-m2m
-iOSSDKStreaming-m2m
+iOSSDKStreaming-one2many
 
 ## Installation
 
