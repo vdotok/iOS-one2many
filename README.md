@@ -1,9 +1,11 @@
 # IOS-m2m
 iOSSDKStreaming-one2many
 
-## Installation
 
+## Prerequisite
+* Before starting you must have knowledge of [Broadcast Extensions](https://developer.apple.com/app-extensions), [AppGroupIDs](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups?language=objc), and [ReplayKit](https://developer.apple.com/documentation/replaykit).
 ### Requirements
+
 ##### System Requirements
 * OS X 11.0 or later
 * 8GB of ram memory
@@ -12,6 +14,7 @@ iOSSDKStreaming-one2many
 * Xcode 12+
 * [How to Install Xcode](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) Follow the guidelines in the link to install Xcode - we recommend to install Xcode from App Store 
 
+## Installation
 ### Installing Cocoapods
 Open terminal and type command `pod --version` and hit enter. If command is not found then you don’t have cocoapods installed on your system.
 #### Installing Cocoapods
