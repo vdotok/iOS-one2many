@@ -4,7 +4,7 @@ iOSSDKStreaming-one2many
 
 ## Prerequisite
 * Before starting you must have knowledge of [Broadcast Extensions](https://developer.apple.com/app-extensions), [AppGroupIDs](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups?language=objc), and [ReplayKit](https://developer.apple.com/documentation/replaykit).
-### Requirements
+## Requirements
 
 ##### System Requirements
 * OS X 11.0 or later
@@ -39,6 +39,15 @@ Register at [VdoTok HomePage](https://vdotok.com) to get Authentication Token an
 Get Project ID and Authentication Token from [Admin Panel](https://vdotok.com)
 
 Open .xcworkspace file in Xcode. In struct AuthenticationConstants Replace the values for PROJECTID  and AUTHTOKEN with your values
+
+### Set up App groups
+* To establish connection between your main target and extension target you have to add appgoups in your all targets 
+* Go to your main target tap singing and capabilities select apps group
+* Tap on app group `+` icon write your group id 
+* Next, enable the group id by selecting checkmark and tap on refresh icon
+* App group id must be same for all targets
+* Repeat the above action to your screen share and screen share utility target
+* Then go to AppsGroup struct replace the values for APP_GROUP and SCREEN_SHARE_PREFERED_EXTENSION with your app group identifier and screen share target's bundle identifier respectively
 
 ### Building On Device
 *iOSSDKStreaming does not work for simulator*
