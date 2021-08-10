@@ -33,7 +33,7 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     var vtokSdk: VideoTalkSDK?
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
     var contacts: [User] = []
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     

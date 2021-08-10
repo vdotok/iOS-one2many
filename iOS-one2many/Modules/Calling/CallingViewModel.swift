@@ -45,7 +45,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var counter = 0
     var timer = Timer()
     var broadcastData: BroadcastData?
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group,
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     
     init(router: CallingRouter,

@@ -118,7 +118,7 @@ class BroadcastView: UIView {
     var session: VTokBaseSession?
     weak var delegate: BroadcastDelegate?
     private var counter: Int = 0
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group,
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     private weak var timer: Timer?
     

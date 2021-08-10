@@ -25,7 +25,7 @@ public class LandingViewController: UIViewController {
     var viewModel: LandingViewModel!
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .none,
                                                      broadcastOptions: .screenShareWithAppAudio)
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
     
     @IBOutlet weak var blurView: UIView!
     
