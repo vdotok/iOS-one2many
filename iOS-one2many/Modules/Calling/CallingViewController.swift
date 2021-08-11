@@ -55,12 +55,15 @@ public class CallingViewController: UIViewController {
                 self.loadBroadcastView(session: session)
             case .updateURL(let url):
                 self.updateWith(URL: url)
-                break
+            case .updateUsers(let count):
+                self.broadcastView?.updateUser(count: count)
             default:
                 break
             }
         }
     }
+    
+    
     
     private func updateWith(URL: String) {
         guard let broadCastView = broadcastView else {return}

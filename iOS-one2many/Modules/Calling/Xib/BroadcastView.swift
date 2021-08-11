@@ -55,6 +55,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var broadCastTitle: UILabel!
     @IBOutlet weak var broadCastIcon: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var connectedUser: UILabel!
     
     
     
@@ -117,7 +118,7 @@ class BroadcastView: UIView {
     var session: VTokBaseSession?
     weak var delegate: BroadcastDelegate?
     private var counter: Int = 0
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group,
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
     private weak var timer: Timer?
     
@@ -202,6 +203,11 @@ class BroadcastView: UIView {
         }
     }
     
+    func updateUser(count: Int) {
+            connectedUser.text = "+\(count + 1)"
+            connectedUser.isHidden = false
+    }
+    
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
         let data = ScreenShareScreenState(screenShareScreen: state)
         let jsonData = try! JSONEncoder().encode(data)
@@ -237,7 +243,11 @@ class BroadcastView: UIView {
             case .publicURL:
                 broadCastTitle.text = "Public BroadCast"
                 copyUrlBtn.isHidden = false
+                
+            default:
+                break
             }
+            
             
             setOutGoingView(for: session)
             

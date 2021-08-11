@@ -20,6 +20,7 @@ protocol LandingViewModel: LandingViewModelInput {
     func viewModelDidLoad()
     func viewModelWillAppear()
     func viewModelWillDisappear()
+    func logout()
     
     func moveToChat(with broadCastData: BroadcastData)
     func moveToCalling(with broadcastData: BroadcastData)
@@ -32,7 +33,7 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     var vtokSdk: VideoTalkSDK?
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
     var contacts: [User] = []
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     
@@ -52,6 +53,9 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     
     func viewModelWillDisappear() {
         unRegisterForCommand()
+    }
+    func logout() {
+        vtokSdk?.closeConnection()
     }
     
     func fetchUsers() {

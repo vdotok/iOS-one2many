@@ -66,7 +66,7 @@ class ChannelViewModelImpl: ChannelViewModel, ChannelViewModelInput {
     var selectedItems = [Int]()
     var broadCastData: BroadcastData
     var selectedGroup: Group?
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
     
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     

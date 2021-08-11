@@ -107,8 +107,15 @@ class SampleHandler: RPBroadcastSampleHandler {
     
     override func broadcastFinished() {
         // User has requested to finish the broadcast.
+        
+        let message: String = "sessionTerminated"
         guard let vtokSdk = vtokSdk, let session = screenShareData?.baseSession else {return}
+        let jsonData = try! JSONEncoder().encode(session)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        wormhole.passMessageObject(jsonString, identifier: message)
         vtokSdk.hangup(session: session)
+        
+        
     }
     
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
@@ -163,6 +170,7 @@ extension SampleHandler: SessionDelegate {
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         
     }
+
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
@@ -194,6 +202,9 @@ extension SampleHandler: SessionDelegate {
         case .tryingToConnect:
             break
         }
+        
+        let message = String(session.connectedUsers.count) as NSString
+        wormhole.passMessageObject(message, identifier: "participantAdded")
     }
     
     func didGetPublicUrl(for session: VTokBaseSession, with url: String) {
