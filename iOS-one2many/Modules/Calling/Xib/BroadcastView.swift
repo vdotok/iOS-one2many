@@ -162,7 +162,17 @@ class BroadcastView: UIView {
     @IBAction func didTapMute(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
-        delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+        
+        switch session.broadcastOption {
+        case .screenShareWithMicAudio:
+            screenShareAudio.isSelected = sender.isSelected
+            let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
+            wormhole.passMessageObject(message, identifier: "updateAudioState")
+        default:
+            delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+        }
+        
+        
         
     }
     
@@ -204,8 +214,13 @@ class BroadcastView: UIView {
     }
     
     func updateUser(count: Int) {
-            connectedUser.text = "+\(count + 1)"
+        if count != 0 {
+            connectedUser.text = "+ \(count)"
             connectedUser.isHidden = false
+        } else {
+            connectedUser.isHidden = true
+        }
+       
     }
     
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
@@ -230,8 +245,11 @@ class BroadcastView: UIView {
             cameraButton.isHidden = true
             setIncomingView(for: session)
         case .outgoing:
-            if session.sessionType == .call {
+            switch session.broadcastOption {
+            case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
                 cameraButton.isHidden = false
+            default:
+                cameraButton.isHidden = true
             }
             guard let broadCastType = session.broadcastType
             else {return}
@@ -391,7 +409,7 @@ class BroadcastView: UIView {
         
         guard let options = session.broadcastOption else {return}
         switch options {
-        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+        case .screenShareWithAppAudio:
             screenShareBtn.isHidden = false
             screenShareAudio.isHidden = false
             cameraSwitchIcon.isHidden = true
@@ -400,6 +418,17 @@ class BroadcastView: UIView {
             muteButton.isHidden = true
             broadCastDummyView.isHidden = false
             addRPViewToSSButton()
+            
+        case .screenShareWithMicAudio:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
+            
         case .videoCall:
             screenShareBtn.isHidden = true
             screenShareAudio.isHidden = true

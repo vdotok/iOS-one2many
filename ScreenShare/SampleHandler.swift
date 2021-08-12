@@ -16,7 +16,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
 
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: Constants.Wormhole)
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
