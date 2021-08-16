@@ -11,7 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     let navigationController = UINavigationController()
-    let authenticateSerivce: AuthenticateService = AuthenticateService(service: NetworkService())
+    var sceneBackgroudTime: TimeInterval? = nil
+    var sceneActiveTime: TimeInterval? = nil
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,7 +22,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
-        authenticate(with: AuthenticationConstants.AUTHTOKEN, projectId: AuthenticationConstants.PROJECTID)
+        
+        guard let _ =  VDOTOKObject<UserResponse>().getData() else  {
+            let viewController = LoginBuilder().build(with: self.navigationController)
+            viewController.modalPresentationStyle = .fullScreen
+            self.window?.rootViewController = viewController
+            return
+        }
+        let navigationControlr = UINavigationController()
+        navigationControlr.modalPresentationStyle = .fullScreen
+        let viewController = LandingBuilder().build(with: navigationControlr)
+        viewController.modalPresentationStyle = .fullScreen
+        navigationControlr.setViewControllers([viewController], animated: true)
+        self.window?.rootViewController = navigationControlr
+    
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -34,6 +48,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        sceneActiveTime = Date().timeIntervalSince1970
+        guard let newTime = sceneActiveTime, let oldTime = sceneBackgroudTime else {return}
+        let interval = newTime - oldTime
+        NotificationCenter.default.post(name: Notification.Name("sceneActive"), object: self, userInfo: ["interval": interval])
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -50,35 +68,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }
-
-    func authenticate(with authToken: String, projectId: String) {
-      
-        let request = AuthenticateRequest(auth_token: authToken, project_id: projectId)
-        authenticateSerivce.fetch(with: request) { (result) in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let response):
-                DispatchQueue.main.async {[weak self] in
-                    guard let self = self else {return}
-                    guard let _ =  VDOTOKObject<UserResponse>().getData() else  {
-                        let viewController = LoginBuilder().build(with: self.navigationController)
-                        viewController.modalPresentationStyle = .fullScreen
-                        self.window?.rootViewController = viewController
-                        return
-                    }
-                    let navigationControlr = UINavigationController()
-                    navigationControlr.modalPresentationStyle = .fullScreen
-                    let viewController = LandingBuilder().build(with: navigationControlr)
-                    viewController.modalPresentationStyle = .fullScreen
-                    navigationControlr.setViewControllers([viewController], animated: true)
-                    self.window?.rootViewController = navigationControlr
-                }
-                
-                print(response)
-            }
-        }
+        sceneBackgroudTime = Date().timeIntervalSince1970
     }
 
 }

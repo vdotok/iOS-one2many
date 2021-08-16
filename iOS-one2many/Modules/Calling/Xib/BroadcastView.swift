@@ -253,7 +253,10 @@ class BroadcastView: UIView {
             }
             guard let broadCastType = session.broadcastType
             else {return}
-            configureTimer()
+            if timer == nil {
+                configureTimer()
+            }
+         
             switch broadCastType {
             case .group:
                 broadCastTitle.text = "Group BroadCast"
@@ -497,10 +500,17 @@ extension BroadcastView {
 
 extension BroadcastView {
     private func configureTimer() {
+        switch session?.broadcastOption {
+        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+            listenForScene()
+        default:
+            break
+        }
         timer?.invalidate()
         timer = nil
         counter = 0
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
     }
     
     @objc private func timerAction() {
@@ -524,5 +534,18 @@ extension BroadcastView {
     
     private func secondsToHoursMinutesSeconds (seconds :Int) -> (hours: Int, minutes: Int, seconds: Int) {
       return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+}
+
+extension BroadcastView {
+    func listenForScene() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveActive(notification:)), name: Notification.Name("sceneActive"), object: nil)
+    }
+    
+    @objc  func didRecieveActive(notification: Notification) {
+        print(notification.object ?? "")
+        guard let time = notification.userInfo?["interval"] as? TimeInterval else {return}
+        counter += Int(time)
+        
     }
 }
