@@ -94,11 +94,11 @@
                     <color key="textColor" name="AppDarkGreenColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
-                    <rect key="frame" x="23" y="774" width="368.5" height="60"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
+                    <rect key="frame" x="22" y="774" width="370" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxb-br-vlQ">
-                            <rect key="frame" x="0.0" y="0.0" width="57.5" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="58" height="60"/>
                             <state key="normal" image="screenshare"/>
                             <state key="selected" image="ssoff"/>
                             <connections>
@@ -106,7 +106,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
-                            <rect key="frame" x="77.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="78" y="0.0" width="58" height="60"/>
                             <state key="normal" image="StopVideo"/>
                             <state key="selected" image="pause-video"/>
                             <connections>
@@ -114,14 +114,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-GM-m0J">
-                            <rect key="frame" x="157.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="156" y="0.0" width="58" height="60"/>
                             <state key="normal" image="end"/>
                             <connections>
                                 <action selector="didTapHangup:" destination="iN0-l3-epB" eventType="touchUpInside" id="GsU-q0-7ur"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z81-QJ-C5D">
-                            <rect key="frame" x="237.5" y="0.0" width="51" height="60"/>
+                            <rect key="frame" x="234" y="0.0" width="58" height="60"/>
                             <state key="normal" image="appaudioon"/>
                             <state key="selected" image="appaudio"/>
                             <connections>
@@ -129,7 +129,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
-                            <rect key="frame" x="308.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="312" y="0.0" width="58" height="60"/>
                             <state key="normal" image="mute"/>
                             <state key="selected" image="unMute"/>
                             <connections>
@@ -154,6 +154,7 @@
                 <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
                 <constraint firstItem="aTf-o0-X1e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="m1w-2P-hpY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cfb-cM-Yho" secondAttribute="trailing" constant="22" id="pFD-13-Stj"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
                 <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
             </constraints>

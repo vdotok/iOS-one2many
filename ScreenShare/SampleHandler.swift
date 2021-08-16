@@ -86,7 +86,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                       authorizationToken: screenShareData.authenticationToken,
                                       socketType: .screenShare,
                                       requestID: getRequestId(),
-                                      tenantID: AuthenticationConstants.PROJECTID)
+                                      projectID: AuthenticationConstants.PROJECTID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }

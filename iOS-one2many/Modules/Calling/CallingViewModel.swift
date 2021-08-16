@@ -284,7 +284,6 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
 extension CallingViewModelImpl {
     func getScreenShareDataString(for sessionUUID: String, with associatedSessionUUID: String?) -> NSString? {
         
-        guard let authResponse = VDOTOKObject<AuthenticateResponse>().getData() else { return nil }
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let token = user.authorizationToken,
               let refID = user.refID,
@@ -302,7 +301,7 @@ extension CallingViewModelImpl {
                                           broadcastType: broadcastData.broadcastType,
                                           broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
 
-        let data = ScreenShareAppData(url: authResponse.mediaServerMap.completeAddress,
+        let data = ScreenShareAppData(url: user.mediaServerMap.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
         self.ssSession = session
