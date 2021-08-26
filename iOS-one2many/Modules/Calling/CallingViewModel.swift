@@ -293,6 +293,7 @@ extension CallingViewModelImpl {
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
+                                          requestID: sessionUUID,
                                           sessionUUID: sessionUUID,
                                           sessionMediaType: .videoCall,
                                           callType: .onetomany,
@@ -401,6 +402,8 @@ extension CallingViewModelImpl: SessionDelegate {
          
         case .tryingToConnect:
             output?(.updateView(session: session))
+        case .busy:
+          break
         default:
             break
         }
