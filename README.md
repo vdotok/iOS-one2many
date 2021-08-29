@@ -42,7 +42,7 @@ Open .xcworkspace file in Xcode. In struct AuthenticationConstants Replace the v
 
 ### Set up App groups
 * To establish connection between your main target and extension target you have to add appgoups in your all targets 
-* Go to your main target tap singing and capabilities select apps group
+* Go to your main target tap signing and capabilities select apps group
 * Tap on app group `+` icon write your group id 
 * Next, enable the group id by selecting checkmark and tap on refresh icon
 * App group id must be same for all targets
