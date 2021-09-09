@@ -19,6 +19,7 @@ import UIKit
 import iOSSDKStreaming
 import MMWormhole
 import ReplayKit
+import AVKit
 
 protocol BroadcastDelegate: AnyObject {
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
@@ -56,6 +57,8 @@ class BroadcastView: UIView {
     @IBOutlet weak var broadCastIcon: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var connectedUser: UILabel!
+    
+    @IBOutlet weak var routePickerViewContainer: UIView!
     
     
     
@@ -124,10 +127,18 @@ class BroadcastView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+         addRoutePicker()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+    }
+    
+    
+    @IBAction func didTapPlay(_ sender: UIButton) {
+        
+//        NotificationCenter.default.post(name: .startPlaying, object: nil)
+        
     }
     
     @IBAction func didTapAppAudio(_ sender: UIButton) {
@@ -548,4 +559,21 @@ extension BroadcastView {
         counter += Int(time)
         
     }
+}
+
+
+extension BroadcastView{
+    
+    func addRoutePicker(){
+        let routePickerView = AVRoutePickerView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        routePickerView.backgroundColor = UIColor.clear
+        routePickerViewContainer.addSubview(routePickerView)
+        routePickerView.prioritizesVideoDevices = true
+        routePickerView.fixInSuperView()
+    }
+    
+    
+    
+    
+    
 }

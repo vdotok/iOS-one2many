@@ -32,6 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationControlr = UINavigationController()
         navigationControlr.modalPresentationStyle = .fullScreen
         let viewController = LandingBuilder().build(with: navigationControlr)
+        
+        //ControlsViewBuilder().build(with: navigationControlr)
         viewController.modalPresentationStyle = .fullScreen
         navigationControlr.setViewControllers([viewController], animated: true)
         self.window?.rootViewController = navigationControlr
