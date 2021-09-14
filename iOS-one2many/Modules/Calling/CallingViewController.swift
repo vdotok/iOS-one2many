@@ -198,6 +198,10 @@ extension CallingViewController: IncomingCallDelegate {
 }
 
 extension CallingViewController: BroadcastDelegate {
+    func didTapRoute() {
+        AVAudioSession().ChangeAudioOutput(presenterViewController: self)
+    }
+    
    
     
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState) {
