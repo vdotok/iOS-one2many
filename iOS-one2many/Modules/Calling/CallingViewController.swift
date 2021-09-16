@@ -29,6 +29,11 @@ public class CallingViewController: UIViewController {
         viewModel.viewModelWillAppear()
     }
     
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("view will disapper")
+    }
+    
     fileprivate func bindViewModel() {
 
         viewModel.output = { [weak self] output in
@@ -62,8 +67,6 @@ public class CallingViewController: UIViewController {
             }
         }
     }
-    
-    
     
     private func updateWith(URL: String) {
         guard let broadCastView = broadcastView else {return}
@@ -127,6 +130,10 @@ public class CallingViewController: UIViewController {
             broadcastView.configureView(with: streams, and: session)
         }
        
+    }
+    
+    deinit {
+        
     }
 }
 

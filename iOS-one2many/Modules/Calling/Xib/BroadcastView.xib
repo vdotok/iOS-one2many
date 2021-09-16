@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.5"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -53,23 +53,23 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="SCZ-GJ-v4t">
-                    <rect key="frame" x="352" y="74" width="50" height="284"/>
+                    <rect key="frame" x="345.5" y="74" width="56.5" height="336.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBQ-uD-zZp">
-                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="3.5" y="0.0" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz5-hH-koa">
-                            <rect key="frame" x="9" y="68" width="32" height="32"/>
+                            <rect key="frame" x="12.5" y="68" width="32" height="32"/>
                             <state key="normal" image="noun_Switch"/>
                             <connections>
                                 <action selector="didTapFlip:" destination="iN0-l3-epB" eventType="touchUpInside" id="zlt-IJ-Ikx"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-0z-VbI">
-                            <rect key="frame" x="9" y="118" width="32" height="32"/>
+                            <rect key="frame" x="12.5" y="118" width="32" height="32"/>
                             <state key="normal" image="Volumn On"/>
                             <state key="selected" image="Volume Off"/>
                             <connections>
@@ -77,19 +77,27 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-hI-L0h">
-                            <rect key="frame" x="13" y="168" width="24" height="24"/>
+                            <rect key="frame" x="16.5" y="168" width="24" height="24"/>
                             <state key="normal" image="User"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ6-0a-GoL">
+                            <rect key="frame" x="0.0" y="210" width="56.5" height="34.5"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="cast"/>
+                            <connections>
+                                <action selector="didTapAppleTV:" destination="iN0-l3-epB" eventType="touchUpInside" id="d7m-uF-kKq"/>
+                            </connections>
+                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-we-vJ2">
-                            <rect key="frame" x="9" y="210" width="32" height="32"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="12.5" y="262.5" width="32" height="32"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="g7D-85-XDS"/>
                                 <constraint firstAttribute="width" constant="32" id="uvP-d2-10c"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-RL-zRs">
-                            <rect key="frame" x="13" y="260" width="24" height="24"/>
+                            <rect key="frame" x="16.5" y="312.5" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="0ce-Df-deE"/>
                                 <constraint firstAttribute="width" constant="24" id="QBb-Lf-rcM"/>
@@ -108,7 +116,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pg-G8-hkv">
-                    <rect key="frame" x="392" y="238" width="8" height="14.5"/>
+                    <rect key="frame" x="389" y="238" width="8" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" name="AppDarkGreenColor"/>
                     <nil key="highlightedColor"/>

@@ -61,7 +61,10 @@ class BroadcastView: UIView {
     
     @IBOutlet weak var routePickerViewContainer: UIView!
     
-    
+    var externalWindow: UIWindow!
+    var secondScreenView : UIView?
+    var testScreen: UIScreen = UIScreen()
+    var selectedStreams: [UserStream] = []
     
     var screenSharePausedView: UIView {
         
@@ -128,11 +131,13 @@ class BroadcastView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addNotificationObserver()
          addRoutePicker()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+       
     }
     
     @IBAction func didTapRoute(_ sender: UIButton) {
@@ -168,6 +173,10 @@ class BroadcastView: UIView {
         delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
     }
     
+    @IBAction func didTapAppleTV(_ sender: UIButton) {
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+    }
+    
     @IBAction func didTapMute(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
@@ -196,6 +205,32 @@ class BroadcastView: UIView {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
         delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
+    }
+    
+    func addNotificationObserver(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidDisconnect(_:)), name: UIScreen.didDisconnectNotification , object: nil)
+        
+    }
+    
+    @objc  func handleScreenDidConnect(_ notification: Notification) {
+        guard let newScreen = notification.object as? UIScreen else {
+            return
+        }
+        self.testScreen = newScreen
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+            
+    }
+    
+    @objc   func handleScreenDidDisconnect(_ notification: Notification){
+        guard externalWindow != nil else {
+            return
+        }
+        externalWindow.isHidden = true
+        externalWindow = nil
+        
     }
     
     @objc func didTapLocalView()  {
@@ -292,10 +327,13 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
+        self.selectedStreams = [stream]
         configureTimer()
         self.session = session
         setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
+     
+        
     }
     
     
@@ -560,7 +598,7 @@ extension BroadcastView {
 }
 
 
-extension BroadcastView{
+extension BroadcastView {
     
     func addRoutePicker(){
         let routePickerView = AVRoutePickerView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
@@ -579,6 +617,7 @@ extension BroadcastView{
 extension AVAudioSession {
 
 func ChangeAudioOutput(presenterViewController : UIViewController) {
+    
     let CHECKED_KEY = "checked"
     let IPHONE_TITLE = "iPhone"
     let HEADPHONES_TITLE = "Headphones"
@@ -619,7 +658,7 @@ func ChangeAudioOutput(presenterViewController : UIViewController) {
                 do {
                     // remove speaker if needed
                     try self.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
-                    try self.setCategory(.playAndRecord, mode: .voiceChat, policy: .longFormAudio, options: [])
+//                    try self.setCategory(.playAndRecord, mode: .voiceChat, policy: .default, options: options)
                     // set new input
                     try self.setPreferredInput(input)
                 } catch let error as NSError {
@@ -680,10 +719,36 @@ func ChangeAudioOutput(presenterViewController : UIViewController) {
     
     let cancelAction = UIAlertAction(title: HIDE_TITLE, style: .cancel, handler: {
         (alert: UIAlertAction!) -> Void in
-        
+      //  try! self.setCategory(.playback, mode: .default, policy: .longFormAudio, options: [])
     })
     optionMenu.addAction(cancelAction)
     presenterViewController.present(optionMenu, animated: true, completion: nil)
     
  }
+}
+
+
+extension BroadcastView {
+    func setUpExternal(screen: UIScreen, streams: [UserStream]) {
+        self.externalWindow = UIWindow(frame: screen.bounds)
+        
+        //windows require a root view controller
+           // let viewcontroller = TVBroadCastBuilder().build(with: nil, userStreams: streams)
+        self.externalWindow.rootViewController = UIViewController()
+        
+        
+        
+        
+        //tell the window which screen to use
+        self.externalWindow?.screen = screen
+        
+        let stream = streams.first!
+        let renderer = stream.renderer
+        self.externalWindow.addSubview(renderer)
+        renderer.fixInSuperView()
+        
+        
+        self.externalWindow?.isHidden = false
+
+    }
 }

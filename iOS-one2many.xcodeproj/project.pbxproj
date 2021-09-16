@@ -26,6 +26,13 @@
 		5D20D785268C56E500B78BFE /* DeleteGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D784268C56E500B78BFE /* DeleteGroupRequest.swift */; };
 		5D20D787268C570900B78BFE /* DeleteGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D786268C570900B78BFE /* DeleteGroupService.swift */; };
 		5D20D789268C585500B78BFE /* EditGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D788268C585500B78BFE /* EditGroupService.swift */; };
+		5D4738DF26F1FF3300C67F6E /* TVBroadcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4738D826F1FF3300C67F6E /* TVBroadcastCell.xib */; };
+		5D4738E026F1FF3300C67F6E /* TVBroadcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738D926F1FF3300C67F6E /* TVBroadcastCell.swift */; };
+		5D4738E126F1FF3300C67F6E /* TVBroadCastBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DA26F1FF3300C67F6E /* TVBroadCastBuilder.swift */; };
+		5D4738E226F1FF3300C67F6E /* TVBroadCastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DB26F1FF3300C67F6E /* TVBroadCastViewController.swift */; };
+		5D4738E326F1FF3300C67F6E /* TVBroadCast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */; };
+		5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */; };
+		5D4738E526F1FF3300C67F6E /* TVBroadCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */; };
 		5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */; };
 		5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */; };
 		5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD5352677FC7C004799EA /* YellowButton.swift */; };
@@ -58,7 +65,6 @@
 		5DA2C29A2677A98100B6F36C /* CreateGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA2C2982677A98100B6F36C /* CreateGroupCell.swift */; };
 		5DA2C29B2677A98100B6F36C /* CreateGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DA2C2992677A98100B6F36C /* CreateGroupCell.xib */; };
 		5DA7BBE7267562A800A3E292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BBE6267562A800A3E292 /* AppDelegate.swift */; };
-		5DA7BBE9267562A800A3E292 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BBE8267562A800A3E292 /* SceneDelegate.swift */; };
 		5DA7BBEB267562A800A3E292 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BBEA267562A800A3E292 /* ViewController.swift */; };
 		5DA7BBEE267562A800A3E292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BBEC267562A800A3E292 /* Main.storyboard */; };
 		5DA7BBF3267562AA00A3E292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BBF1267562AA00A3E292 /* LaunchScreen.storyboard */; };
@@ -201,6 +207,13 @@
 		5D20D784268C56E500B78BFE /* DeleteGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupRequest.swift; sourceTree = "<group>"; };
 		5D20D786268C570900B78BFE /* DeleteGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupService.swift; sourceTree = "<group>"; };
 		5D20D788268C585500B78BFE /* EditGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupService.swift; sourceTree = "<group>"; };
+		5D4738D826F1FF3300C67F6E /* TVBroadcastCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVBroadcastCell.xib; sourceTree = "<group>"; };
+		5D4738D926F1FF3300C67F6E /* TVBroadcastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadcastCell.swift; sourceTree = "<group>"; };
+		5D4738DA26F1FF3300C67F6E /* TVBroadCastBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastBuilder.swift; sourceTree = "<group>"; };
+		5D4738DB26F1FF3300C67F6E /* TVBroadCastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastViewController.swift; sourceTree = "<group>"; };
+		5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TVBroadCast.storyboard; sourceTree = "<group>"; };
+		5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastRouter.swift; sourceTree = "<group>"; };
+		5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastViewModel.swift; sourceTree = "<group>"; };
 		5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPopup.swift; sourceTree = "<group>"; };
 		5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupPopup.xib; sourceTree = "<group>"; };
 		5D7CD5352677FC7C004799EA /* YellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowButton.swift; sourceTree = "<group>"; };
@@ -235,7 +248,6 @@
 		5DA2C2992677A98100B6F36C /* CreateGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupCell.xib; sourceTree = "<group>"; };
 		5DA7BBE3267562A800A3E292 /* iOS-one2many.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-one2many.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DA7BBE6267562A800A3E292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5DA7BBE8267562A800A3E292 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5DA7BBEA267562A800A3E292 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5DA7BBED267562A800A3E292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5DA7BBF2267562AA00A3E292 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -352,6 +364,28 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5D4738D526F1FEF200C67F6E /* AppleTV */ = {
+			isa = PBXGroup;
+			children = (
+				5D4738D726F1FF3300C67F6E /* Cells */,
+				5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */,
+				5D4738DA26F1FF3300C67F6E /* TVBroadCastBuilder.swift */,
+				5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */,
+				5D4738DB26F1FF3300C67F6E /* TVBroadCastViewController.swift */,
+				5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */,
+			);
+			path = AppleTV;
+			sourceTree = "<group>";
+		};
+		5D4738D726F1FF3300C67F6E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5D4738D826F1FF3300C67F6E /* TVBroadcastCell.xib */,
+				5D4738D926F1FF3300C67F6E /* TVBroadcastCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		5D7CD5342677FC71004799EA /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +402,7 @@
 		5D7CD5672678A955004799EA /* Calling */ = {
 			isa = PBXGroup;
 			children = (
+				5D4738D526F1FEF200C67F6E /* AppleTV */,
 				5D7CD5692678ADCA004799EA /* Xib */,
 				5D7CD55C2678A950004799EA /* Calling.storyboard */,
 				5D7CD55D2678A950004799EA /* CallingRouter.swift */,
@@ -468,7 +503,6 @@
 				5DA7BC0D2675FD0C00A3E292 /* Service */,
 				5DA7BC032675FC7300A3E292 /* DataStore */,
 				5DA7BBE6267562A800A3E292 /* AppDelegate.swift */,
-				5DA7BBE8267562A800A3E292 /* SceneDelegate.swift */,
 				5DA7BBEA267562A800A3E292 /* ViewController.swift */,
 				5DA7BBEC267562A800A3E292 /* Main.storyboard */,
 				5DD9727426775D05007919AC /* Assets.xcassets */,
@@ -801,6 +835,7 @@
 			files = (
 				5D8BC0522678DB6E001F1B9B /* IncomingCall.xib in Resources */,
 				5DA2C2722677922E00B6F36C /* CreateGroup.storyboard in Resources */,
+				5D4738E326F1FF3300C67F6E /* TVBroadCast.storyboard in Resources */,
 				5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */,
 				5DA7BC472675FE8300A3E292 /* Channel.storyboard in Resources */,
 				5DA7BC2C2675FE0900A3E292 /* Login.storyboard in Resources */,
@@ -810,6 +845,7 @@
 				5D0A255C2698420700231087 /* Landing.storyboard in Resources */,
 				5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */,
 				5D7CD56F2678AE29004799EA /* GroupCallingView.xib in Resources */,
+				5D4738DF26F1FF3300C67F6E /* TVBroadcastCell.xib in Resources */,
 				5DA7BBEE267562A800A3E292 /* Main.storyboard in Resources */,
 				5D7CD5612678A950004799EA /* Calling.storyboard in Resources */,
 				5D7CD57B2678B1E2004799EA /* VideoCell.xib in Resources */,
@@ -911,6 +947,7 @@
 				5DA7BBEB267562A800A3E292 /* ViewController.swift in Sources */,
 				5D0A256426984B4C00231087 /* RadioButton.swift in Sources */,
 				5DA7BC5C2677552500A3E292 /* LoginService.swift in Sources */,
+				5D4738E226F1FF3300C67F6E /* TVBroadCastViewController.swift in Sources */,
 				5DA7BC0B2675FCF300A3E292 /* AuthenticateRequest.swift in Sources */,
 				5D0A255E2698420700231087 /* LandingViewController.swift in Sources */,
 				5D7CD5632678A950004799EA /* CallingViewController.swift in Sources */,
@@ -924,11 +961,13 @@
 				5D0A253C26981F0100231087 /* BroadcastData.swift in Sources */,
 				5D7CD53D2677FE34004799EA /* IndigoButton.swift in Sources */,
 				5DA7BC712677589700A3E292 /* GroupResponse.swift in Sources */,
+				5D4738E026F1FF3300C67F6E /* TVBroadcastCell.swift in Sources */,
 				5DA2C2742677922E00B6F36C /* CreateGroupViewController.swift in Sources */,
 				5DA7BC59267754CD00A3E292 /* ProgresHud.swift in Sources */,
 				5DA7BC682677562300A3E292 /* CheckUserNameResponse.swift in Sources */,
 				5DA2C2862677A64E00B6F36C /* CreateGroupRequest.swift in Sources */,
 				5D7CD5652678A950004799EA /* CallingViewModel.swift in Sources */,
+				5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */,
 				5D0A252C2697098D00231087 /* AppsGroup.swift in Sources */,
 				5DA2C27D2677A5A100B6F36C /* AllUsersReponse.swift in Sources */,
 				5DA7BC3B2675FE6400A3E292 /* SignUpRouter.swift in Sources */,
@@ -942,7 +981,6 @@
 				5DA2C2832677A62A00B6F36C /* CreateGroupResponse.swift in Sources */,
 				5DA7BC6E2677567000A3E292 /* SignupRequest.swift in Sources */,
 				5DA7BC742677594300A3E292 /* AllGroupService.swift in Sources */,
-				5DA7BBE9267562A800A3E292 /* SceneDelegate.swift in Sources */,
 				5DA7BC072675FCCD00A3E292 /* AuthenticationService.swift in Sources */,
 				5D20D785268C56E500B78BFE /* DeleteGroupRequest.swift in Sources */,
 				5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */,
@@ -956,6 +994,7 @@
 				5D83A8EC2678B68000F001DE /* Constants.swift in Sources */,
 				5DA7BC302675FE0900A3E292 /* LoginViewModel.swift in Sources */,
 				5D0A25772698BE2800231087 /* UIView+Extension.swift in Sources */,
+				5D4738E126F1FF3300C67F6E /* TVBroadCastBuilder.swift in Sources */,
 				5DA7BC56267754A000A3E292 /* Reachability.swift in Sources */,
 				5D0A25622698469000231087 /* BorderButton.swift in Sources */,
 				5D0A25602698420700231087 /* LandingViewModel.swift in Sources */,
@@ -971,6 +1010,7 @@
 				5DA2C27A2677A58B00B6F36C /* AllUsersService.swift in Sources */,
 				5D7CD56B2678AE1D004799EA /* GroupCallingView.swift in Sources */,
 				5DA7BC8226775A3900A3E292 /* GroupCell.swift in Sources */,
+				5D4738E526F1FF3300C67F6E /* TVBroadCastViewModel.swift in Sources */,
 				5DA7BC4B2675FE8300A3E292 /* ChannelViewModel.swift in Sources */,
 				5DA7BC1B2675FD7600A3E292 /* VDOTOKObject.swift in Sources */,
 				5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */,
