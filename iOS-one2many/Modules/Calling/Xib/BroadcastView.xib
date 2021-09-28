@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -53,23 +53,23 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="SCZ-GJ-v4t">
-                    <rect key="frame" x="346" y="74" width="56" height="294.5"/>
+                    <rect key="frame" x="331.5" y="74" width="70.5" height="340"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBQ-uD-zZp">
-                            <rect key="frame" x="3" y="0.0" width="50" height="50"/>
+                            <rect key="frame" x="10.5" y="0.0" width="50" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz5-hH-koa">
-                            <rect key="frame" x="12" y="68" width="32" height="32"/>
+                            <rect key="frame" x="19.5" y="68" width="32" height="32"/>
                             <state key="normal" image="noun_Switch"/>
                             <connections>
                                 <action selector="didTapFlip:" destination="iN0-l3-epB" eventType="touchUpInside" id="zlt-IJ-Ikx"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAU-0z-VbI">
-                            <rect key="frame" x="12" y="118" width="32" height="32"/>
+                            <rect key="frame" x="19.5" y="118" width="32" height="32"/>
                             <state key="normal" image="Volumn On"/>
                             <state key="selected" image="Volume Off"/>
                             <connections>
@@ -77,11 +77,11 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-hI-L0h">
-                            <rect key="frame" x="16" y="168" width="24" height="24"/>
+                            <rect key="frame" x="23.5" y="168" width="24" height="24"/>
                             <state key="normal" image="User"/>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-we-vJ2">
-                            <rect key="frame" x="12" y="210" width="32" height="32"/>
+                            <rect key="frame" x="19.5" y="210" width="32" height="32"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="g7D-85-XDS"/>
@@ -89,11 +89,19 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-RL-zRs">
-                            <rect key="frame" x="0.0" y="260" width="56" height="34.5"/>
+                            <rect key="frame" x="10" y="260" width="51" height="31"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Play"/>
                             <connections>
                                 <action selector="didTapPlay:" destination="iN0-l3-epB" eventType="touchUpInside" id="MRZ-Tu-dey"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LS-QI-cBK">
+                            <rect key="frame" x="0.0" y="309" width="70.5" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Stream"/>
+                            <connections>
+                                <action selector="didTapStream:" destination="iN0-l3-epB" eventType="touchUpInside" id="T7s-8v-Uy6"/>
                             </connections>
                         </button>
                     </subviews>
@@ -105,7 +113,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Pg-G8-hkv">
-                    <rect key="frame" x="389" y="238" width="8" height="14.5"/>
+                    <rect key="frame" x="382" y="238" width="8" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" name="AppDarkGreenColor"/>
                     <nil key="highlightedColor"/>
@@ -154,13 +162,43 @@
                         </button>
                     </subviews>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="B6i-35-Ydp">
+                    <rect key="frame" x="100" y="718" width="214" height="31"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62k-MT-Ary">
+                            <rect key="frame" x="0.0" y="0.5" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="vvR-Xe-bak"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Play"/>
+                            <state key="highlighted" title="Pause"/>
+                            <connections>
+                                <action selector="didTapStreamPlay:" destination="iN0-l3-epB" eventType="touchUpInside" id="Q2d-as-h6O"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFz-3R-Z7P">
+                            <rect key="frame" x="159.5" y="0.0" width="54.5" height="31"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="54.5" id="6EK-Kx-tVo"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Stop"/>
+                            <connections>
+                                <action selector="didTapStreamStop:" destination="iN0-l3-epB" eventType="touchUpInside" id="mSZ-tt-t0c"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="cfb-cM-Yho" firstAttribute="top" secondItem="B6i-35-Ydp" secondAttribute="bottom" constant="25" id="7mU-8Q-mff"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SCZ-GJ-v4t" secondAttribute="trailing" constant="12" id="AMW-ft-Dja"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="H5u-fC-dzM"/>
                 <constraint firstAttribute="bottom" secondItem="2If-LL-xGi" secondAttribute="bottom" id="KOj-dR-6QD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="B6i-35-Ydp" secondAttribute="trailing" constant="100" id="PMK-G8-iGg"/>
                 <constraint firstItem="4Qi-Do-L7m" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="UUr-cc-dHg"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="X33-FW-lvI"/>
                 <constraint firstItem="4Pg-G8-hkv" firstAttribute="leading" secondItem="EAD-hI-L0h" secondAttribute="trailing" constant="3" id="XJp-eu-SVg"/>
@@ -170,6 +208,7 @@
                 <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
                 <constraint firstItem="aTf-o0-X1e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="m1w-2P-hpY"/>
+                <constraint firstItem="B6i-35-Ydp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="100" id="nWO-0t-w6P"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cfb-cM-Yho" secondAttribute="trailing" constant="22" id="pFD-13-Stj"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
                 <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
@@ -190,10 +229,11 @@
                 <outlet property="screenShareBtn" destination="gxb-br-vlQ" id="nGT-Eq-PaT"/>
                 <outlet property="smallLocalView" destination="rzh-oz-lq2" id="0Lf-an-r0k"/>
                 <outlet property="speakerIcon" destination="eAU-0z-VbI" id="pUz-S2-Tzz"/>
+                <outlet property="streamcontrolView" destination="B6i-35-Ydp" id="eev-nq-qEo"/>
                 <outlet property="timerLabel" destination="FBQ-uD-zZp" id="WQl-Pk-Gdb"/>
                 <outlet property="titlelabel" destination="VEZ-BS-ELW" id="XaV-Ob-Sb5"/>
             </connections>
-            <point key="canvasLocation" x="-17" y="65"/>
+            <point key="canvasLocation" x="-17.39130434782609" y="64.955357142857139"/>
         </view>
     </objects>
     <resources>

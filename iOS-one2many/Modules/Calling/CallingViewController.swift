@@ -198,6 +198,10 @@ extension CallingViewController: IncomingCallDelegate {
 }
 
 extension CallingViewController: BroadcastDelegate {
+    func didTapStream(with state: StreamStatus) {
+        viewModel.didTapStream(with: state)
+    }
+    
    
     
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState) {

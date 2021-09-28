@@ -27,6 +27,7 @@ protocol BroadcastDelegate: AnyObject {
     func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState)
     func didTapFlipCamera(for session: VTokBaseSession, type: CameraType)
     func didTapVideo(for session: VTokBaseSession, type: VideoState)
+    func didTapStream( with state: StreamStatus )
     
 }
 
@@ -47,6 +48,11 @@ class BroadcastView: UIView {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
+    @IBOutlet weak var streamcontrolView: UIStackView!{
+        didSet{
+            streamcontrolView.isHidden = true
+        }
+    }
     @IBOutlet weak var copyUrlBtn: UIButton! {
         didSet {
             copyUrlBtn.layer.cornerRadius = 8
@@ -89,7 +95,6 @@ class BroadcastView: UIView {
     
     
     var videoPausedView: UIView {
-        
         let videoPausedView = UIView()
         videoPausedView.backgroundColor = .white
         let broadCastView = UIImageView(image: UIImage(named: "broadcast"))
@@ -104,21 +109,21 @@ class BroadcastView: UIView {
         stackView.distribution = .equalSpacing
         stackView.spacing = 8
         stackView.alignment = .center
-        
         videoPausedView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.fixInMiddleOfSuperView()
-        
         videoPausedView.tag = 0
-        
         return videoPausedView
     }
     
-    
-    
-    
     var publicURL: String?
-    var session: VTokBaseSession?
+    var session: VTokBaseSession? {
+        didSet{
+            if session?.sessionDirection == .incoming{
+                streamcontrolView?.isHidden = false
+            }
+        }
+    }
     weak var delegate: BroadcastDelegate?
     private var counter: Int = 0
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
@@ -132,6 +137,22 @@ class BroadcastView: UIView {
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+    }
+    
+    
+    @IBAction func didTapStream(_ sender: UIButton) {
+        delegate?.didTapStream(with: .initiate)
+    }
+    
+    
+    @IBAction func didTapStreamPlay(_ sender: UIButton) {
+//        sender.isHighlighted = !sender.isHighlighted
+        delegate?.didTapStream(with: sender.isHighlighted == true ? .Play : .Pause)
+    }
+    
+    @IBAction func didTapStreamStop(_ sender: UIButton) {
+        sender.isHighlighted = !sender.isHighlighted
+        delegate?.didTapStream(with: .Stop)
     }
     
     
