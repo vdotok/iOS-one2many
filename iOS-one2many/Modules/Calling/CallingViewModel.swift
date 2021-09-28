@@ -51,6 +51,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var broadcastData: BroadcastData?
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
+    var sessionDirection: SessionDirection
     
     init(router: CallingRouter,
          vtokSdk: VideoTalkSDK,
@@ -58,7 +59,8 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
          screenType: ScreenType,
          session: VTokBaseSession? = nil,
          users: [User]? = nil,
-         broadcastData: BroadcastData?) {
+         broadcastData: BroadcastData?,
+         sessionDirection: SessionDirection) {
         self.router = router
         self.vtokSdk = vtokSdk
         self.participants = participants
@@ -66,6 +68,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         self.session = session
         self.users = users
         self.broadcastData = broadcastData
+        self.sessionDirection = sessionDirection
     }
     
     func viewModelDidLoad() {
@@ -95,7 +98,8 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             if !UIScreen.main.isCaptured {
               //    UIApplication.shared.isIdleTimerDisabled = false
                 guard let options = broadcastData?.broadcastOptions,
-                      let sdk = vtokSdk
+                      let sdk = vtokSdk,
+                      sessionDirection == .outgoing
                 else {return}
                 switch options {
                 case .screenShareWithAppAudioAndVideoCall:

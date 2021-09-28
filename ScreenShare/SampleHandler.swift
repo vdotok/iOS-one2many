@@ -201,6 +201,8 @@ extension SampleHandler: SessionDelegate {
             break
         case .tryingToConnect:
             break
+        case .reconnect:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString
