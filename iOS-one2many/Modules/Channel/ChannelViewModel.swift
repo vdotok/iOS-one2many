@@ -124,7 +124,10 @@ extension ChannelViewModelImpl {
         self.output?(.showProgress)
         store.fetchGroups(with: request) { [weak self] (response) in
             guard let self = self else {return}
-            self.output?(.hideProgress)
+            DispatchQueue.main.async {
+                self.output?(.hideProgress)
+            }
+            
             switch response {
             case .success(let response):
                 switch response.status {
@@ -251,7 +254,6 @@ extension ChannelViewModelImpl: SDKConnectionDelegate {
         case .registered:
             self.output?(.connected)
         case .sessionRequest(let sessionRequest):
-            
             router.moveToIncomingCall(sdk: vtokSdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
         }
     }

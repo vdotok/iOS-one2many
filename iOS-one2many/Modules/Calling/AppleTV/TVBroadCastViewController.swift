@@ -85,15 +85,20 @@ extension TVBroadCastViewController {
         // For one/two cell(s) width should be equal to width of collectionView
         // For odd numbers of cells width of the last cell will be equal to the width of collectionView and width of all others cells will be equal to the half of the width of collectionView
         // For even number of all cells width will be equal to the half of the width of collectionView
-        if viewModel.userStreams.count == 1 || viewModel.userStreams.count == 2 {
-            cellWidth = width
-        } else if viewModel.userStreams.count % 2 == 0 {
-            cellWidth = width/2
-        } else if viewModel.userStreams.count == index + 1 {
+        if viewModel.userStreams.count == 1 {
             cellWidth = width
         } else {
-            cellWidth = width/2
+            cellWidth = (width - 12) / 2
         }
+//            || viewModel.userStreams.count == 2 {
+//
+//        } else if viewModel.userStreams.count % 2 == 0 {
+//            cellWidth = width/2
+//        } else if viewModel.userStreams.count == index + 1 {
+//            cellWidth = width
+//        } else {
+//            cellWidth = width/2
+//        }
         
         return cellWidth
     }
@@ -109,7 +114,7 @@ extension TVBroadCastViewController {
         if viewModel.userStreams.count == 1 {
             rowHeight = height - extraNumber
         } else {
-            rowHeight = (height - extraNumber) / 2
+            rowHeight = (height - extraNumber)
         }
         
         return rowHeight

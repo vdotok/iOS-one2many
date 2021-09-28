@@ -133,7 +133,7 @@ public class CallingViewController: UIViewController {
     }
     
     deinit {
-        
+        print("deinit")
     }
 }
 

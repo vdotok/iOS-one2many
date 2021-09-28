@@ -220,7 +220,7 @@ class BroadcastView: UIView {
             return
         }
         self.testScreen = newScreen
-        setUpExternal(screen: testScreen, streams: selectedStreams)
+//        setUpExternal(screen: testScreen, streams: selectedStreams)
             
     }
     
@@ -230,6 +230,50 @@ class BroadcastView: UIView {
         }
         externalWindow.isHidden = true
         externalWindow = nil
+        for stream in selectedStreams {
+//            switch stream.userStreamType {
+//            case .call:
+//                if session?.associatedSessionUUID != nil {
+//                    let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+//                    callView.isHidden = false
+//                    callView.removeAllSubViews()
+//                    callView.addSubview(stream.renderer)
+//                    stream.renderer.fixInSuperView()
+//                    callView.tag = callView.tag
+//                   
+//                } else {
+//                    
+//                    localView.removeAllSubViews()
+//                    localView.addSubview(stream.renderer)
+//                    smallLocalView.isHidden = true
+//                    stream.renderer.translatesAutoresizingMaskIntoConstraints = false
+//                    stream.renderer.fixInSuperView()
+//                    localView.tag = 0
+//                    self.selectedStreams.append(stream)
+//                }
+//            case .screenShare:
+//                
+//                let ssView: UIView! = localView.tag == 1 ? localView : smallLocalView
+//                let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+//                
+//                titlelabel.isHidden = true
+//                broadCastDummyView.isHidden = true
+//                ssView.removeAllSubViews()
+//                ssView.addSubview(stream.renderer)
+//                stream.renderer.fixInSuperView()
+//                ssView.tag = ssView.tag
+//                
+//                if session?.associatedSessionUUID != nil {
+//                    ssView.isHidden = false
+//                    callView.isHidden = false
+//                } else {
+//                    ssView.isHidden = false
+//                    callView.isHidden = true
+//                }
+//            }
+        }
+        
+        
         
     }
     
@@ -327,7 +371,6 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
-        self.selectedStreams = [stream]
         configureTimer()
         self.session = session
         setIncomingView(for: session)
@@ -358,6 +401,7 @@ class BroadcastView: UIView {
                 let ssPausedView = self.screenSharePausedView
                 ssContainerView.addSubview(ssPausedView)
                 ssPausedView.fixInSuperView()
+        
         }
         
         }
@@ -392,6 +436,7 @@ class BroadcastView: UIView {
                 callView.addSubview(userStream.renderer)
                 userStream.renderer.fixInSuperView()
                 callView.tag = callView.tag
+                self.selectedStreams.append(userStream)
             } else {
                 
                 localView.removeAllSubViews()
@@ -400,6 +445,7 @@ class BroadcastView: UIView {
                 userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
                 userStream.renderer.fixInSuperView()
                 localView.tag = 0
+                self.selectedStreams.append(userStream)
             }
         case .screenshare:
             
@@ -412,6 +458,7 @@ class BroadcastView: UIView {
             ssView.addSubview(userStream.renderer)
             userStream.renderer.fixInSuperView()
             ssView.tag = ssView.tag
+            self.selectedStreams.append(userStream)
             if session.associatedSessionUUID != nil {
                 ssView.isHidden = false
                 callView.isHidden = false
@@ -733,21 +780,13 @@ extension BroadcastView {
         self.externalWindow = UIWindow(frame: screen.bounds)
         
         //windows require a root view controller
-           // let viewcontroller = TVBroadCastBuilder().build(with: nil, userStreams: streams)
-        self.externalWindow.rootViewController = UIViewController()
         
+        let viewcontroller = TVBroadCastBuilder().build(with: nil, userStreams: streams)
         
-        
+        self.externalWindow.rootViewController = viewcontroller
         
         //tell the window which screen to use
-        self.externalWindow?.screen = screen
-        
-        let stream = streams.first!
-        let renderer = stream.renderer
-        self.externalWindow.addSubview(renderer)
-        renderer.fixInSuperView()
-        
-        
+        self.externalWindow.screen = screen
         self.externalWindow?.isHidden = false
 
     }
