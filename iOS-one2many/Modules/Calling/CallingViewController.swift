@@ -8,6 +8,7 @@
 import UIKit
 import iOSSDKStreaming
 
+
 public class CallingViewController: UIViewController {
 
     var viewModel: CallingViewModel!
@@ -205,6 +206,10 @@ extension CallingViewController: IncomingCallDelegate {
 }
 
 extension CallingViewController: BroadcastDelegate {
+    func didTapStream(with state: StreamStatus) {
+        viewModel.didTapStream(with: state)
+    }
+    
     func didTapRoute() {
         AVAudioSession().ChangeAudioOutput(presenterViewController: self)
     }

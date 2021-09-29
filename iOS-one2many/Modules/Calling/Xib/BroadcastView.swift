@@ -28,7 +28,7 @@ protocol BroadcastDelegate: AnyObject {
     func didTapFlipCamera(for session: VTokBaseSession, type: CameraType)
     func didTapVideo(for session: VTokBaseSession, type: VideoState)
     func didTapRoute()
-    
+    func didTapStream(with state: StreamStatus)
 }
 
 class BroadcastView: UIView {
@@ -58,7 +58,7 @@ class BroadcastView: UIView {
     @IBOutlet weak var broadCastIcon: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var connectedUser: UILabel!
-    
+    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var routePickerViewContainer: UIView!
     
     var externalWindow: UIWindow!
@@ -189,8 +189,7 @@ class BroadcastView: UIView {
         default:
             delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
         }
-        
-        
+    
         
     }
     
@@ -205,6 +204,20 @@ class BroadcastView: UIView {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
         delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
+    }
+    
+    @IBAction func didTapPlay(_ sender: UIButton) {
+        delegate?.didTapStream(with:  sender.isSelected ? .Pause : .Play)
+        sender.isSelected = !sender.isSelected
+    }
+    
+    @IBAction func didStop(_ sender: UIButton) {
+        delegate?.didTapStream(with: .Stop)
+    }
+    
+    @IBAction func didVideoAirPlay(_ sender: UIButton) {
+        stopButton.isSelected = false
+        delegate?.didTapStream(with: .initiate)
     }
     
     func addNotificationObserver(){

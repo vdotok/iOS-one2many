@@ -54,5 +54,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>VideoTalk Stream needs to use your data to discover devices nearby</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_vdotok-stream._tcp</string>
+		<string>_vdotok-stream._udp</string>
+	</array>
 </dict>
 </plist>

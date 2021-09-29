@@ -30,10 +30,12 @@ protocol CallingViewModel: CallingViewModelInput {
     func mute(session: VTokBaseSession, state: AudioState)
     func speaker(session: VTokBaseSession, state: SpeakerState)
     func disableVideo(session: VTokBaseSession, state: VideoState)
+    func didTapStream(with state: StreamStatus)
 }
 
 class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
-
+   
+    
     private let router: CallingRouter
     var output: CallingViewModelOutput?
     var vtokSdk: VideoTalkSDK?
@@ -519,5 +521,10 @@ extension CallingViewModelImpl {
         }
       
         
+    }
+    
+    func didTapStream(with state: StreamStatus) {
+        guard let session = self.session else {return}
+        self.vtokSdk?.playStreamOnTv(for: session, state: state)
     }
 }
