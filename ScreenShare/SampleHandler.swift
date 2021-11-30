@@ -3,6 +3,7 @@
 //  ScreenShare
 //
 //  Created by usama farooq on 08/07/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import ReplayKit
@@ -201,8 +202,8 @@ extension SampleHandler: SessionDelegate {
             break
         case .tryingToConnect:
             break
-     
-       
+        case .reconnect:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString
