@@ -27,5 +27,6 @@ struct LoginRequest: Codable, APIRequest {
     
     let email: String
     let password: String
+    var project_id: String = AuthenticationConstants.PROJECTID
     
 }

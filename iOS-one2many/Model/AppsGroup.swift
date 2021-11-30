@@ -8,6 +8,6 @@
 import Foundation
 
 struct AppsGroup {
-    static let  APP_GROUP = "group.com.vdotok.broadcast"
-    static let SCREEN_SHARE_PREFERED_EXTENSION = "usama.farooq.one-to-many-call.ScreenShare"
+    static let  APP_GROUP = "group.com.norgic.ios.broadcasting"
+    static let SCREEN_SHARE_PREFERED_EXTENSION = "com.norgic.ios.one-to-many-app.ScreenShare"
 }

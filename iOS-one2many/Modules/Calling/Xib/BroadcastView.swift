@@ -36,7 +36,7 @@ protocol BroadcastDelegate: AnyObject {
 }
 
 class BroadcastView: UIView {
-   
+    
     @IBOutlet weak var localView: UIView!
     @IBOutlet weak var smallLocalView: DraggableView! {
         didSet {
@@ -140,15 +140,15 @@ class BroadcastView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         addNotificationObserver()
-         addRoutePicker()
+        addRoutePicker()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
-       
+        
     }
     
-
+    
     
     @IBAction func didTapStream(_ sender: UIButton) {
         delegate?.didTapStream(with: .initiate)
@@ -156,392 +156,387 @@ class BroadcastView: UIView {
     
     
     @IBAction func didTapStreamPlay(_ sender: UIButton) {
-//        sender.isHighlighted = !sender.isHighlighted
-        delegate?.didTapStream(with: sender.isHighlighted == true ? .Play : .Pause)
+        //        sender.isHighlighted = !sender.isHighlighted
+        delegate?.didTapStream(with: sender.isHighlighted == true ? .play : .pause)
     }
     
     @IBAction func didTapStreamStop(_ sender: UIButton) {
         sender.isHighlighted = !sender.isHighlighted
-        delegate?.didTapStream(with: .Stop)
+        delegate?.didTapStream(with: .stop)
     }
     
     
     @IBAction func didTapPlay(_ sender: UIButton) {
         
-
-
-}
-    
-    
-    //        NotificationCenter.default.post(name: .startPlaying, object: nil)
-            
-    
-        @IBAction func didTapRoute(_ sender: UIButton) {
-            delegate?.didTapRoute()
-    
-        }
         
-        @IBAction func didTapAppAudio(_ sender: UIButton) {
-            screenShareAudio.isSelected = !sender.isSelected
+        
+    }
+    //        NotificationCenter.default.post(name: .startPlaying, object: nil)
+    @IBAction func didTapRoute(_ sender: UIButton) {
+        delegate?.didTapRoute()
+        
+    }
+    
+    @IBAction func didTapAppAudio(_ sender: UIButton) {
+        screenShareAudio.isSelected = !sender.isSelected
+        let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
+        wormhole.passMessageObject(message, identifier: "updateAudioState")
+    }
+    
+    @IBAction func didTapScreenShare(_ sender: UIButton) {
+        screenShareBtn.isSelected = !sender.isSelected
+        let message = getScreenShareScreen(state: screenShareBtn.isSelected ? .none : .passAll)
+        wormhole.passMessageObject(message, identifier: "updateScreenState")
+    }
+    
+    @IBAction func didTapHangup(_ sender: UIButton) {
+        guard let session = session else {return}
+        delegate?.didTapHangUp(for: session)
+    }
+    
+    @IBAction func didTapFlip(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapFlipCamera(for: session, type: sender.isSelected ? .front : .rear)
+    }
+    
+    @IBAction func didTapSpeaker(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
+    }
+    
+    @IBAction func didTapAppleTV(_ sender: UIButton) {
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+    }
+    
+    @IBAction func didTapMute(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        
+        switch session.broadcastOption {
+        case .screenShareWithMicAudio:
+            screenShareAudio.isSelected = sender.isSelected
             let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
             wormhole.passMessageObject(message, identifier: "updateAudioState")
+        default:
+            delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
         }
         
-        @IBAction func didTapScreenShare(_ sender: UIButton) {
-            screenShareBtn.isSelected = !sender.isSelected
-            let message = getScreenShareScreen(state: screenShareBtn.isSelected ? .none : .passAll)
-            wormhole.passMessageObject(message, identifier: "updateScreenState")
-        }
         
-        @IBAction func didTapHangup(_ sender: UIButton) {
-            guard let session = session else {return}
-            delegate?.didTapHangUp(for: session)
-        }
         
-        @IBAction func didTapFlip(_ sender: UIButton) {
-            sender.isSelected = !sender.isSelected
-            guard let session = session else {return}
-            delegate?.didTapFlipCamera(for: session, type: sender.isSelected ? .front : .rear)
-        }
+    }
+    
+    @IBAction func didTapCopyURL(_ sender: UIButton) {
+        guard let url = publicURL else { return }
+        print("<<<<<public url \(url)")
+        let pastBoard = UIPasteboard.general
+        pastBoard.string = url
+    }
+    
+    @IBAction func didTapVideo(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard let session = session else {return}
+        delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
+    }
+    
+    func addNotificationObserver(){
         
-        @IBAction func didTapSpeaker(_ sender: UIButton) {
-            sender.isSelected = !sender.isSelected
-            guard let session = session else {return}
-            delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)
         
-        @IBAction func didTapAppleTV(_ sender: UIButton) {
-            setUpExternal(screen: testScreen, streams: selectedStreams)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidDisconnect(_:)), name: UIScreen.didDisconnectNotification , object: nil)
         
-        @IBAction func didTapMute(_ sender: UIButton) {
-            sender.isSelected = !sender.isSelected
-            guard let session = session else {return}
+    }
+    
+    @objc  func handleScreenDidConnect(_ notification: Notification) {
+        guard let newScreen = notification.object as? UIScreen else {
+            return
+        }
+        self.testScreen = newScreen
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+        
+    }
+    
+    @objc   func handleScreenDidDisconnect(_ notification: Notification){
+        guard externalWindow != nil else {
+            return
+        }
+        externalWindow.isHidden = true
+        externalWindow = nil
+        
+    }
+    
+    @objc func didTapLocalView()  {
+        guard let session = session else {return}
+        
+        switch session.sessionDirection {
+        case .incoming:
+            guard let smallView = smallLocalView, let largeView = localView else {return}
+            let smallSubView = smallView.subviews.first!
+            let largeSubView = largeView.subviews.first!
+            smallView.removeAllSubViews()
+            largeView.removeAllSubViews()
+            smallView.addSubview(largeSubView)
+            largeSubView.fixInSuperView()
+            largeView.addSubview(smallSubView)
+            smallSubView.fixInSuperView()
+            let callTag = smallView.tag
+            let ssTag = largeView.tag
+            smallView.tag = ssTag
+            largeView.tag = callTag
             
+        default:
+            break
+        }
+    }
+    
+    func updateUser(count: Int) {
+        if count != 0 {
+            connectedUser.text = "+ \(count)"
+            connectedUser.isHidden = false
+        } else {
+            connectedUser.isHidden = true
+        }
+        
+    }
+    
+    private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
+        let data = ScreenShareScreenState(screenShareScreen: state)
+        let jsonData = try! JSONEncoder().encode(data)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        return jsonString
+    }
+    
+    private func getScreenShareAudio(state: ScreenShareBytes) -> NSString {
+        let data = ScreenShareAudioState(screenShareAudio: state)
+        let jsonData = try! JSONEncoder().encode(data)
+        let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+        return jsonString
+    }
+    
+    func updateView(with session: VTokBaseSession) {
+        self.session = session
+        switch session.sessionDirection {
+        case .incoming:
+            broadCastTitle.isHidden = true
+            cameraButton.isHidden = true
+            setIncomingView(for: session)
+        case .outgoing:
             switch session.broadcastOption {
-            case .screenShareWithMicAudio:
-                screenShareAudio.isSelected = sender.isSelected
-                let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
-                wormhole.passMessageObject(message, identifier: "updateAudioState")
+            case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+                cameraButton.isHidden = false
             default:
-                delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+                cameraButton.isHidden = true
+            }
+            guard let broadCastType = session.broadcastType
+            else {return}
+            if timer == nil {
+                configureTimer()
             }
             
-            
-            
-        }
-        
-        @IBAction func didTapCopyURL(_ sender: UIButton) {
-            guard let url = publicURL else { return }
-            print("<<<<<public url \(url)")
-            let pastBoard = UIPasteboard.general
-            pastBoard.string = url
-        }
-        
-        @IBAction func didTapVideo(_ sender: UIButton) {
-            sender.isSelected = !sender.isSelected
-            guard let session = session else {return}
-            delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
-        }
-        
-        func addNotificationObserver(){
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidDisconnect(_:)), name: UIScreen.didDisconnectNotification , object: nil)
-            
-        }
-        
-        @objc  func handleScreenDidConnect(_ notification: Notification) {
-            guard let newScreen = notification.object as? UIScreen else {
-                return
-            }
-            self.testScreen = newScreen
-            setUpExternal(screen: testScreen, streams: selectedStreams)
-                
-        }
-        
-        @objc   func handleScreenDidDisconnect(_ notification: Notification){
-            guard externalWindow != nil else {
-                return
-            }
-            externalWindow.isHidden = true
-            externalWindow = nil
-            
-        }
-        
-        @objc func didTapLocalView()  {
-            guard let session = session else {return}
-            
-            switch session.sessionDirection {
-            case .incoming:
-                guard let smallView = smallLocalView, let largeView = localView else {return}
-                let smallSubView = smallView.subviews.first!
-                let largeSubView = largeView.subviews.first!
-                smallView.removeAllSubViews()
-                largeView.removeAllSubViews()
-                smallView.addSubview(largeSubView)
-                largeSubView.fixInSuperView()
-                largeView.addSubview(smallSubView)
-                smallSubView.fixInSuperView()
-                let callTag = smallView.tag
-                let ssTag = largeView.tag
-                smallView.tag = ssTag
-                largeView.tag = callTag
+            switch broadCastType {
+            case .group:
+                broadCastTitle.text = "Group BroadCast"
+                copyUrlBtn.isHidden = true
+            case .publicURL:
+                broadCastTitle.text = "Public BroadCast"
+                copyUrlBtn.isHidden = false
                 
             default:
                 break
             }
-        }
-        
-        func updateUser(count: Int) {
-            if count != 0 {
-                connectedUser.text = "+ \(count)"
-                connectedUser.isHidden = false
-            } else {
-                connectedUser.isHidden = true
-            }
-           
-        }
-        
-        private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
-            let data = ScreenShareScreenState(screenShareScreen: state)
-            let jsonData = try! JSONEncoder().encode(data)
-            let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
-            return jsonString
-        }
-        
-        private func getScreenShareAudio(state: ScreenShareBytes) -> NSString {
-            let data = ScreenShareAudioState(screenShareAudio: state)
-            let jsonData = try! JSONEncoder().encode(data)
-            let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
-            return jsonString
-        }
-        
-        func updateView(with session: VTokBaseSession) {
-            self.session = session
-            switch session.sessionDirection {
-            case .incoming:
-                broadCastTitle.isHidden = true
-                cameraButton.isHidden = true
-                setIncomingView(for: session)
-            case .outgoing:
-                switch session.broadcastOption {
-                case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
-                    cameraButton.isHidden = false
-                default:
-                    cameraButton.isHidden = true
-                }
-                guard let broadCastType = session.broadcastType
-                else {return}
-                if timer == nil {
-                    configureTimer()
-                }
-             
-                switch broadCastType {
-                case .group:
-                    broadCastTitle.text = "Group BroadCast"
-                    copyUrlBtn.isHidden = true
-                case .publicURL:
-                    broadCastTitle.text = "Public BroadCast"
-                    copyUrlBtn.isHidden = false
-                    
-                default:
-                    break
-                }
-                
-                
-                setOutGoingView(for: session)
-                
-            }
-        }
-        
-        func updateURL(with url: String) {
-            publicURL = url
-            copyUrlBtn.isEnabled = true
-            copyUrlBtn.backgroundColor = .appDarkGreenColor
-        }
-        
-        func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
-            guard let stream = userStreams.first else {return}
-            self.selectedStreams = [stream]
-            configureTimer()
-            self.session = session
-            setIncomingView(for: session)
-            setViewsForIncoming(session: session, with: stream)
-         
+            
+            
+            setOutGoingView(for: session)
             
         }
+    }
+    
+    func updateURL(with url: String) {
+        publicURL = url
+        copyUrlBtn.isEnabled = true
+        copyUrlBtn.backgroundColor = .appDarkGreenColor
+    }
+    
+    func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
+        guard let stream = userStreams.first else {return}
+        self.selectedStreams = [stream]
+        configureTimer()
+        self.session = session
+        setIncomingView(for: session)
+        setViewsForIncoming(session: session, with: stream)
         
+    }
+    
+    
+    func handleStateView(session: VTokBaseSession, with userStream: UserStream){
         
-        func handleStateView(session: VTokBaseSession, with userStream: UserStream){
-            
-            guard let stateInfo = userStream.stateInformation else {
-                return
-            }
-       
-            if stateInfo.videoInformation == 0 {
-                switch session.sessionType {
-                case .call:
-                    let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
-                    callContainerView.removeAllSubViews()
-                    let videoPausedView = self.videoPausedView
-                    callContainerView.addSubview(videoPausedView)
-                    videoPausedView.fixInSuperView()
-                    
-                case .screenshare:
-                    let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
-                    ssContainerView.removeAllSubViews()
-                    let ssPausedView = self.screenSharePausedView
-                    ssContainerView.addSubview(ssPausedView)
-                    ssPausedView.fixInSuperView()
-            }
-            
-            }
-            else {
+        guard let stateInfo = userStream.stateInformation else {
+            return
+        }
+        
+        if stateInfo.videoInformation == 0 {
+            switch session.sessionType {
+            case .call:
+                let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                callContainerView.removeAllSubViews()
+                let videoPausedView = self.videoPausedView
+                callContainerView.addSubview(videoPausedView)
+                videoPausedView.fixInSuperView()
                 
-                    switch session.sessionType {
-                    case .call:
-                        let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
-                        callContainerView.removeAllSubViews()
-                        callContainerView.addSubview(userStream.renderer)
-                        userStream.renderer.fixInSuperView()
-                        
-                    case .screenshare:
-                        let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
-                        ssContainerView.removeAllSubViews()
-                        ssContainerView.addSubview(userStream.renderer)
-                        userStream.renderer.fixInSuperView()
-                }
+            case .screenshare:
+                let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                ssContainerView.removeAllSubViews()
+                let ssPausedView = self.screenSharePausedView
+                ssContainerView.addSubview(ssPausedView)
+                ssPausedView.fixInSuperView()
             }
             
         }
-        
-        
-        private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
+        else {
             
             switch session.sessionType {
             case .call:
-                if session.associatedSessionUUID != nil {
-                    let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
-                    callView.isHidden = false
-                    callView.removeAllSubViews()
-                    callView.addSubview(userStream.renderer)
-                    userStream.renderer.fixInSuperView()
-                    callView.tag = callView.tag
-                } else {
-                    
-                    localView.removeAllSubViews()
-                    localView.addSubview(userStream.renderer)
-                    smallLocalView.isHidden = true
-                    userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
-                    userStream.renderer.fixInSuperView()
-                    localView.tag = 0
-                }
-            case .screenshare:
-                
-                let ssView: UIView! = localView.tag == 1 ? localView : smallLocalView
-                let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
-                
-                titlelabel.isHidden = true
-                broadCastDummyView.isHidden = true
-                ssView.removeAllSubViews()
-                ssView.addSubview(userStream.renderer)
+                let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                callContainerView.removeAllSubViews()
+                callContainerView.addSubview(userStream.renderer)
                 userStream.renderer.fixInSuperView()
-                ssView.tag = ssView.tag
-                if session.associatedSessionUUID != nil {
-                    ssView.isHidden = false
-                    callView.isHidden = false
-                } else {
-                    ssView.isHidden = false
-                    callView.isHidden = true
-                }
+                
+            case .screenshare:
+                let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                ssContainerView.removeAllSubViews()
+                ssContainerView.addSubview(userStream.renderer)
+                userStream.renderer.fixInSuperView()
             }
-            
-            handleStateView(session: session, with: userStream)
-            
-           
-            
         }
         
-        func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
-            localView.isHidden = false
-            localView.removeAllSubViews()
-            localView.addSubview(renderer)
-            renderer.translatesAutoresizingMaskIntoConstraints = false
-            renderer.fixInSuperView()
-        }
-
-        private func setIncomingView(for session: VTokBaseSession) {
-            copyUrlBtn.isHidden = true
-            if let _ = session.associatedSessionUUID {
-                screenShareBtn.isHidden = true
-                screenShareAudio.isHidden = true
-                cameraSwitchIcon.isHidden = true
-                speakerIcon.isHidden = false
-                smallLocalView.isHidden = false
-                muteButton.isHidden = true
+    }
+    
+    
+    private func setViewsForIncoming(session: VTokBaseSession, with userStream: UserStream) {
+        
+        switch session.sessionType {
+        case .call:
+            if session.associatedSessionUUID != nil {
+                let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+                callView.isHidden = false
+                callView.removeAllSubViews()
+                callView.addSubview(userStream.renderer)
+                userStream.renderer.fixInSuperView()
+                callView.tag = callView.tag
             } else {
-                screenShareBtn.isHidden = true
-                screenShareAudio.isHidden = true
-                cameraSwitchIcon.isHidden = true
-                speakerIcon.isHidden = false
+                
+                localView.removeAllSubViews()
+                localView.addSubview(userStream.renderer)
                 smallLocalView.isHidden = true
-                muteButton.isHidden = true
+                userStream.renderer.translatesAutoresizingMaskIntoConstraints = false
+                userStream.renderer.fixInSuperView()
+                localView.tag = 0
             }
+        case .screenshare:
             
+            let ssView: UIView! = localView.tag == 1 ? localView : smallLocalView
+            let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
+            
+            titlelabel.isHidden = true
+            broadCastDummyView.isHidden = true
+            ssView.removeAllSubViews()
+            ssView.addSubview(userStream.renderer)
+            userStream.renderer.fixInSuperView()
+            ssView.tag = ssView.tag
+            if session.associatedSessionUUID != nil {
+                ssView.isHidden = false
+                callView.isHidden = false
+            } else {
+                ssView.isHidden = false
+                callView.isHidden = true
+            }
         }
         
-        private func setOutGoingView(for session: VTokBaseSession) {
-            
-            guard let options = session.broadcastOption else {return}
-            switch options {
-            case .screenShareWithAppAudio:
-                screenShareBtn.isHidden = false
-                screenShareAudio.isHidden = false
-                cameraSwitchIcon.isHidden = true
-                speakerIcon.isHidden = true
-                smallLocalView.isHidden = true
-                muteButton.isHidden = true
-                broadCastDummyView.isHidden = false
-                addRPViewToSSButton()
-                
-            case .screenShareWithMicAudio:
-                screenShareBtn.isHidden = false
-                screenShareAudio.isHidden = true
-                cameraSwitchIcon.isHidden = true
-                speakerIcon.isHidden = true
-                smallLocalView.isHidden = true
-                muteButton.isHidden = false
-                broadCastDummyView.isHidden = false
-                addRPViewToSSButton()
-                
-            case .videoCall:
-                screenShareBtn.isHidden = true
-                screenShareAudio.isHidden = true
-                cameraSwitchIcon.isHidden = false
-                speakerIcon.isHidden = true
-                smallLocalView.isHidden = true
-                muteButton.isHidden = false
-                titlelabel.isHidden = true
-                broadCastIcon.isHidden = true
-                if session.broadcastType == .publicURL {
-                    copyUrlBtn.isHidden = false
-                    broadCastDummyView.isHidden = false
-                }
-            case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
-                screenShareBtn.isHidden = false
-                screenShareAudio.isHidden = false
-                cameraSwitchIcon.isHidden = false
-                speakerIcon.isHidden = true
-                smallLocalView.isHidden = true
-                muteButton.isHidden = false
-                broadCastDummyView.isHidden = false
-                addRPViewToSSButton()
-            }
-            
+        handleStateView(session: session, with: userStream)
+        
+        
+        
+    }
+    
+    func setViewsForOutGoing(session: VTokBaseSession, renderer: UIView) {
+        localView.isHidden = false
+        localView.removeAllSubViews()
+        localView.addSubview(renderer)
+        renderer.translatesAutoresizingMaskIntoConstraints = false
+        renderer.fixInSuperView()
+    }
+    
+    private func setIncomingView(for session: VTokBaseSession) {
+        copyUrlBtn.isHidden = true
+        if let _ = session.associatedSessionUUID {
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = false
+            smallLocalView.isHidden = false
+            muteButton.isHidden = true
+        } else {
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = false
+            smallLocalView.isHidden = true
+            muteButton.isHidden = true
         }
-
+        
+    }
+    
+    private func setOutGoingView(for session: VTokBaseSession) {
+        
+        guard let options = session.broadcastOption else {return}
+        switch options {
+        case .screenShareWithAppAudio:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = false
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = true
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
+            
+        case .screenShareWithMicAudio:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
+            
+        case .videoCall:
+            screenShareBtn.isHidden = true
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = false
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            titlelabel.isHidden = true
+            broadCastIcon.isHidden = true
+            if session.broadcastType == .publicURL {
+                copyUrlBtn.isHidden = false
+                broadCastDummyView.isHidden = false
+            }
+        case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = false
+            cameraSwitchIcon.isHidden = false
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
+        }
+        
+    }
+    
 }
 
 

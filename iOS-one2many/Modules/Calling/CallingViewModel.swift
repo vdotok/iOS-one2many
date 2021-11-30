@@ -379,6 +379,10 @@ extension CallingViewModelImpl {
 }
 
 extension CallingViewModelImpl: SessionDelegate {
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
+        
+    }
+    
   
     func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
         output?(.configureLocal(view: renderer, session: session))
@@ -411,6 +415,8 @@ extension CallingViewModelImpl: SessionDelegate {
             output?(.updateView(session: session))
         case .busy:
           break
+//        case .updateParticipent:
+//            output?(.updateUsers(session.connectedUsers.count))
         default:
             break
         }

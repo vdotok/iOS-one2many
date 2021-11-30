@@ -20,8 +20,15 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_vdotok-stream._tcp</string>
+		<string>_vdotok-stream._udp</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs your camera</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>VideoTalk Stream needs to use your data to discover devices nearby</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs your micophone</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
@@ -29,9 +36,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
-		<string>fetch</string>
-		<string>processing</string>
-		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -53,13 +57,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>VideoTalk Stream needs to use your data to discover devices nearby</string>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_vdotok-stream._tcp</string>
-		<string>_vdotok-stream._udp</string>
 	</array>
 </dict>
 </plist>
