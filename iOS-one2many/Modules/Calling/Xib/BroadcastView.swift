@@ -207,12 +207,12 @@ class BroadcastView: UIView {
     }
     
     @IBAction func didTapPlay(_ sender: UIButton) {
-        delegate?.didTapStream(with:  sender.isSelected ? .Pause : .Play)
+        delegate?.didTapStream(with:  sender.isSelected ? .pause : .play)
         sender.isSelected = !sender.isSelected
     }
     
     @IBAction func didStop(_ sender: UIButton) {
-        delegate?.didTapStream(with: .Stop)
+        delegate?.didTapStream(with: .stop)
     }
     
     @IBAction func didVideoAirPlay(_ sender: UIButton) {
@@ -233,7 +233,7 @@ class BroadcastView: UIView {
             return
         }
         self.testScreen = newScreen
-//        setUpExternal(screen: testScreen, streams: selectedStreams)
+        setUpExternal(screen: testScreen, streams: selectedStreams)
             
     }
     
