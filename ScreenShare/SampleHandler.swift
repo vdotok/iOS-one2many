@@ -164,8 +164,12 @@ extension SampleHandler: SDKConnectionDelegate {
 
 extension SampleHandler: SessionDelegate {
     
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
         
+    }
+    
+    func sessionTimeDidUpdate(with value: String) {
+
     }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
@@ -203,6 +207,8 @@ extension SampleHandler: SessionDelegate {
         case .tryingToConnect:
             break
         case .reconnect:
+            break
+        case .updateParticipent:
             break
         }
         

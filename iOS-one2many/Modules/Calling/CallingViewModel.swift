@@ -380,14 +380,15 @@ extension CallingViewModelImpl {
 }
 
 extension CallingViewModelImpl: SessionDelegate {
-    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
+    func sessionTimeDidUpdate(with value: String) {
         
     }
     
-  
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-        output?(.configureLocal(view: renderer, session: session))
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
+        guard let localStream = stream.first else {return}
+        output?(.configureLocal(view: localStream.renderer, session: session))
     }
+
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         output?(.configureRemote(streams: streams, session: session))
