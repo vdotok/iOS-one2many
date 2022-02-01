@@ -3,6 +3,7 @@
 //  one-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -30,9 +31,12 @@ protocol CallingViewModel: CallingViewModelInput {
     func mute(session: VTokBaseSession, state: AudioState)
     func speaker(session: VTokBaseSession, state: SpeakerState)
     func disableVideo(session: VTokBaseSession, state: VideoState)
+    func didTapStream(with state: StreamStatus) 
 }
 
 class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
+  
+    
 
     private let router: CallingRouter
     var output: CallingViewModelOutput?
@@ -40,6 +44,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var participants: [Participant]?
     var screenType: ScreenType
     var session: VTokBaseSession?
+    var ssSession: VTokBaseSession?
     var users: [User]?
     var player: AVAudioPlayer?
     var counter = 0
@@ -47,6 +52,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var broadcastData: BroadcastData?
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: "wormhole")
+    var sessionDirection: SessionDirection
     
     init(router: CallingRouter,
          vtokSdk: VideoTalkSDK,
@@ -54,7 +60,8 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
          screenType: ScreenType,
          session: VTokBaseSession? = nil,
          users: [User]? = nil,
-         broadcastData: BroadcastData?) {
+         broadcastData: BroadcastData?,
+         sessionDirection: SessionDirection) {
         self.router = router
         self.vtokSdk = vtokSdk
         self.participants = participants
@@ -62,6 +69,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         self.session = session
         self.users = users
         self.broadcastData = broadcastData
+        self.sessionDirection = sessionDirection
     }
     
     func viewModelDidLoad() {
@@ -92,14 +100,15 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
               //    UIApplication.shared.isIdleTimerDisabled = false
                 guard let options = broadcastData?.broadcastOptions,
                       let sdk = vtokSdk,
-                    let session = session
+                      sessionDirection == .outgoing
                 else {return}
                 switch options {
                 case .screenShareWithAppAudioAndVideoCall:
+                    guard  let session = session else { return }
                     sdk.hangup(session: session)
                 case .screenShareWithVideoCall:
+                    guard  let session = session else {return }
                     sdk.hangup(session: session)
-              
                 case .screenShareWithAppAudio:
                     output?(.dismissCallView)
                 case .screenShareWithMicAudio:
@@ -109,7 +118,6 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
                 }
                 
               }
-
           }
 
       }
@@ -158,8 +166,8 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     
     private func setScreenShareSession(with message: String) {
         guard let data = message.data(using: .utf8) else {return }
-        session = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
-        guard let from = session?.from, let to = session?.to, let sessionUUID = session?.sessionUUID else{return}
+        ssSession = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
+        guard let from = ssSession?.from, let to = ssSession?.to, let sessionUUID = ssSession?.sessionUUID else{return}
         let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, connectedUsers: [])
         output?(.loadBroadcastView(session: baseSession))
         
@@ -247,6 +255,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
                                               callType: .onetomany,
                                               sessionType: .call,
                                               associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions, connectedUsers: [])
+        session = baseSession
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
 //            output?(.loadView(mediaType: sessionMediaType))
@@ -283,7 +292,6 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
 extension CallingViewModelImpl {
     func getScreenShareDataString(for sessionUUID: String, with associatedSessionUUID: String?) -> NSString? {
         
-        guard let authResponse = VDOTOKObject<AuthenticateResponse>().getData() else { return nil }
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let token = user.authorizationToken,
               let refID = user.refID,
@@ -293,6 +301,7 @@ extension CallingViewModelImpl {
         let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
+                                          requestID: sessionUUID,
                                           sessionUUID: sessionUUID,
                                           sessionMediaType: .videoCall,
                                           callType: .onetomany,
@@ -301,10 +310,10 @@ extension CallingViewModelImpl {
                                           broadcastType: broadcastData.broadcastType,
                                           broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
 
-        let data = ScreenShareAppData(url: authResponse.mediaServerMap.completeAddress,
+        let data = ScreenShareAppData(url: user.mediaServerMap.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
-        self.session = session
+        self.ssSession = session
         output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
@@ -371,10 +380,15 @@ extension CallingViewModelImpl {
 }
 
 extension CallingViewModelImpl: SessionDelegate {
-  
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
-        output?(.configureLocal(view: renderer, session: session))
+    func sessionTimeDidUpdate(with value: String) {
+        
     }
+    
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
+        guard let localStream = stream.first else {return}
+        output?(.configureLocal(view: localStream.renderer, session: session))
+    }
+
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         output?(.configureRemote(streams: streams, session: session))
@@ -401,6 +415,10 @@ extension CallingViewModelImpl: SessionDelegate {
          
         case .tryingToConnect:
             output?(.updateView(session: session))
+        case .busy:
+          break
+//        case .updateParticipent:
+//            output?(.updateUsers(session.connectedUsers.count))
         default:
             break
         }
@@ -513,4 +531,12 @@ extension CallingViewModelImpl {
       
         
     }
+}
+
+extension CallingViewModelImpl{
+    func didTapStream(with state: StreamStatus) {
+        guard let session = self.session else {return}
+        self.vtokSdk?.playStreamOnTv(for: session, state: state)
+    }
+ 
 }

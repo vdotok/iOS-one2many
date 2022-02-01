@@ -3,6 +3,7 @@
 //  one-to-many-call
 //
 //  Created by usama farooq on 13/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -17,14 +18,14 @@ class ChannelRouter {
 }
 
 extension ChannelRouter {
-    func moveToCalling(sdk: VideoTalkSDK, particinats: [Participant], users: [User], screenType: ScreenType, broadcastData: BroadcastData ) {
-        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadcastData: broadcastData)
+    func moveToCalling(sdk: VideoTalkSDK, particinats: [Participant], users: [User], screenType: ScreenType, broadcastData: BroadcastData) {
+        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadcastData: broadcastData, sessionDirection: .outgoing)
         builder.modalPresentationStyle = .fullScreen
         navigationController?.present(builder, animated: true, completion: nil)
     }
     
     func moveToIncomingCall(sdk: VideoTalkSDK, baseSession: VTokBaseSession, users: [User], broadcastData: BroadcastData) {
-        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users, broadcastData: broadcastData)
+        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users, broadcastData: broadcastData, sessionDirection: .incoming)
         builder.modalPresentationStyle = .fullScreen
         navigationController?.present(builder, animated: true, completion: nil)
     }

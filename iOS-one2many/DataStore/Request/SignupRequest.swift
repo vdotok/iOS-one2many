@@ -3,6 +3,7 @@
 //  Many-to-many-call
 //
 //  Created by usama farooq on 14/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -19,6 +20,7 @@ struct SignupRequest: Codable, APIRequest {
     
     let fullName: String
     let email, password: String
+    let projectID = AuthenticationConstants.PROJECTID
     let deviceType: String = "ios"
     let deviceModel: String = "iPhone 8"
     let deviceOSVer: String = "13.3"
@@ -27,6 +29,7 @@ struct SignupRequest: Codable, APIRequest {
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
         case email, password
+        case projectID = "project_id"
         case deviceType = "device_type"
         case deviceModel = "device_model"
         case deviceOSVer = "device_os_ver"

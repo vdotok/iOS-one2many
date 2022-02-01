@@ -3,10 +3,12 @@
 //  one-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
 import iOSSDKStreaming
+import AVKit
 
 protocol VideoDelegate: AnyObject {
     func didTapVideo(for baseSession: VTokBaseSession, state: VideoState)
@@ -39,6 +41,7 @@ class GroupCallingView: UIView {
     @IBOutlet weak var speakerButton: UIButton!
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var hangupButton: UIButton!
+    @IBOutlet weak var routePickerViewContainer: UIView!
     var users:[User]?
     weak var delegate: VideoDelegate?
     var session: VTokBaseSession?
@@ -49,6 +52,7 @@ class GroupCallingView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addRoutePicker()
         configureCollectionView()
         connectedView.isHidden = true
         callStatus.isHidden = true
@@ -407,3 +411,20 @@ extension GroupCallingView {
         hangupButton.isEnabled = status
     }
 }
+
+extension GroupCallingView{
+    
+    func addRoutePicker(){
+        let routePickerView = AVRoutePickerView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        routePickerView.backgroundColor = UIColor.clear
+        routePickerViewContainer.addSubview(routePickerView)
+        routePickerView.prioritizesVideoDevices = true
+        routePickerView.fixInSuperView()
+    }
+    
+    
+    
+    
+    
+}
+

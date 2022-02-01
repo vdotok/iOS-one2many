@@ -3,6 +3,7 @@
 //  ScreenShare
 //
 //  Created by usama farooq on 08/07/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import ReplayKit
@@ -16,7 +17,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
 
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.group, optionalDirectory: Constants.Wormhole)
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
@@ -86,7 +87,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                       authorizationToken: screenShareData.authenticationToken,
                                       socketType: .screenShare,
                                       requestID: getRequestId(),
-                                      tenantID: AuthenticationConstants.PROJECTID)
+                                      projectID: AuthenticationConstants.PROJECTID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -163,8 +164,12 @@ extension SampleHandler: SDKConnectionDelegate {
 
 extension SampleHandler: SessionDelegate {
     
-    func configureLocalViewFor(session: VTokBaseSession, renderer: UIView) {
+    func configureLocalViewFor(session: VTokBaseSession, with stream: [UserStream]) {
         
+    }
+    
+    func sessionTimeDidUpdate(with value: String) {
+
     }
     
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
@@ -200,6 +205,10 @@ extension SampleHandler: SessionDelegate {
             print("test")
             break
         case .tryingToConnect:
+            break
+        case .reconnect:
+            break
+        case .updateParticipent:
             break
         }
         

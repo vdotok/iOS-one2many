@@ -3,6 +3,7 @@
 //  iOS-one2many
 //
 //  Created by usama farooq on 09/07/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 
@@ -19,6 +20,7 @@ import UIKit
 import iOSSDKStreaming
 import MMWormhole
 import ReplayKit
+import AVKit
 
 protocol BroadcastDelegate: AnyObject {
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
@@ -26,11 +28,16 @@ protocol BroadcastDelegate: AnyObject {
     func didTapSpeaker(for session: VTokBaseSession, state: SpeakerState)
     func didTapFlipCamera(for session: VTokBaseSession, type: CameraType)
     func didTapVideo(for session: VTokBaseSession, type: VideoState)
+
+    func didTapStream( with state: StreamStatus )
+
+    func didTapRoute()
+
     
 }
 
 class BroadcastView: UIView {
-   
+    
     @IBOutlet weak var localView: UIView!
     @IBOutlet weak var smallLocalView: DraggableView! {
         didSet {
@@ -46,6 +53,11 @@ class BroadcastView: UIView {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var muteButton: UIButton!
     @IBOutlet weak var broadCastDummyView: UIStackView!
+    @IBOutlet weak var streamcontrolView: UIStackView!{
+        didSet{
+            streamcontrolView.isHidden = true
+        }
+    }
     @IBOutlet weak var copyUrlBtn: UIButton! {
         didSet {
             copyUrlBtn.layer.cornerRadius = 8
@@ -57,7 +69,12 @@ class BroadcastView: UIView {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var connectedUser: UILabel!
     
+    @IBOutlet weak var routePickerViewContainer: UIView!
     
+    var externalWindow: UIWindow!
+    var secondScreenView : UIView?
+    var testScreen: UIScreen = UIScreen()
+    var selectedStreams: [UserStream] = []
     
     var screenSharePausedView: UIView {
         
@@ -86,7 +103,6 @@ class BroadcastView: UIView {
     
     
     var videoPausedView: UIView {
-        
         let videoPausedView = UIView()
         videoPausedView.backgroundColor = .white
         let broadCastView = UIImageView(image: UIImage(named: "broadcast"))
@@ -101,21 +117,21 @@ class BroadcastView: UIView {
         stackView.distribution = .equalSpacing
         stackView.spacing = 8
         stackView.alignment = .center
-        
         videoPausedView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.fixInMiddleOfSuperView()
-        
         videoPausedView.tag = 0
-        
         return videoPausedView
     }
     
-    
-    
-    
     var publicURL: String?
-    var session: VTokBaseSession?
+    var session: VTokBaseSession? {
+        didSet{
+            if session?.sessionDirection == .incoming{
+                streamcontrolView?.isHidden = false
+            }
+        }
+    }
     weak var delegate: BroadcastDelegate?
     private var counter: Int = 0
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
@@ -124,10 +140,42 @@ class BroadcastView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addNotificationObserver()
+        addRoutePicker()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
         smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+        
+    }
+    
+    
+    
+    @IBAction func didTapStream(_ sender: UIButton) {
+        delegate?.didTapStream(with: .initiate)
+    }
+    
+    
+    @IBAction func didTapStreamPlay(_ sender: UIButton) {
+        //        sender.isHighlighted = !sender.isHighlighted
+        delegate?.didTapStream(with: sender.isHighlighted == true ? .play : .pause)
+    }
+    
+    @IBAction func didTapStreamStop(_ sender: UIButton) {
+        sender.isHighlighted = !sender.isHighlighted
+        delegate?.didTapStream(with: .stop)
+    }
+    
+    
+    @IBAction func didTapPlay(_ sender: UIButton) {
+        
+        
+        
+    }
+    //        NotificationCenter.default.post(name: .startPlaying, object: nil)
+    @IBAction func didTapRoute(_ sender: UIButton) {
+        delegate?.didTapRoute()
+        
     }
     
     @IBAction func didTapAppAudio(_ sender: UIButton) {
@@ -159,10 +207,24 @@ class BroadcastView: UIView {
         delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
     }
     
+    @IBAction func didTapAppleTV(_ sender: UIButton) {
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+    }
+    
     @IBAction func didTapMute(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
-        delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+        
+        switch session.broadcastOption {
+        case .screenShareWithMicAudio:
+            screenShareAudio.isSelected = sender.isSelected
+            let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
+            wormhole.passMessageObject(message, identifier: "updateAudioState")
+        default:
+            delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
+        }
+        
+        
         
     }
     
@@ -177,6 +239,32 @@ class BroadcastView: UIView {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
         delegate?.didTapVideo(for: session, type: sender.isSelected ? .videoDisabled : .videoEnabled)
+    }
+    
+    func addNotificationObserver(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidConnect(_:)), name: UIScreen.didConnectNotification , object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleScreenDidDisconnect(_:)), name: UIScreen.didDisconnectNotification , object: nil)
+        
+    }
+    
+    @objc  func handleScreenDidConnect(_ notification: Notification) {
+        guard let newScreen = notification.object as? UIScreen else {
+            return
+        }
+        self.testScreen = newScreen
+        setUpExternal(screen: testScreen, streams: selectedStreams)
+        
+    }
+    
+    @objc   func handleScreenDidDisconnect(_ notification: Notification){
+        guard externalWindow != nil else {
+            return
+        }
+        externalWindow.isHidden = true
+        externalWindow = nil
+        
     }
     
     @objc func didTapLocalView()  {
@@ -204,8 +292,13 @@ class BroadcastView: UIView {
     }
     
     func updateUser(count: Int) {
-            connectedUser.text = "+\(count + 1)"
+        if count != 0 {
+            connectedUser.text = "+ \(count)"
             connectedUser.isHidden = false
+        } else {
+            connectedUser.isHidden = true
+        }
+        
     }
     
     private func getScreenShareScreen(state: ScreenShareBytes) -> NSString {
@@ -230,12 +323,18 @@ class BroadcastView: UIView {
             cameraButton.isHidden = true
             setIncomingView(for: session)
         case .outgoing:
-            if session.sessionType == .call {
+            switch session.broadcastOption {
+            case .videoCall, .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
                 cameraButton.isHidden = false
+            default:
+                cameraButton.isHidden = true
             }
             guard let broadCastType = session.broadcastType
             else {return}
-            configureTimer()
+            if timer == nil {
+                configureTimer()
+            }
+            
             switch broadCastType {
             case .group:
                 broadCastTitle.text = "Group BroadCast"
@@ -262,10 +361,12 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
+        self.selectedStreams = [stream]
         configureTimer()
         self.session = session
         setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
+        
     }
     
     
@@ -274,7 +375,7 @@ class BroadcastView: UIView {
         guard let stateInfo = userStream.stateInformation else {
             return
         }
-   
+        
         if stateInfo.videoInformation == 0 {
             switch session.sessionType {
             case .call:
@@ -290,23 +391,23 @@ class BroadcastView: UIView {
                 let ssPausedView = self.screenSharePausedView
                 ssContainerView.addSubview(ssPausedView)
                 ssPausedView.fixInSuperView()
-        }
-        
+            }
+            
         }
         else {
             
-                switch session.sessionType {
-                case .call:
-                    let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
-                    callContainerView.removeAllSubViews()
-                    callContainerView.addSubview(userStream.renderer)
-                    userStream.renderer.fixInSuperView()
-                    
-                case .screenshare:
-                    let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
-                    ssContainerView.removeAllSubViews()
-                    ssContainerView.addSubview(userStream.renderer)
-                    userStream.renderer.fixInSuperView()
+            switch session.sessionType {
+            case .call:
+                let callContainerView : UIView! = localView.tag == 0 ? localView : smallLocalView
+                callContainerView.removeAllSubViews()
+                callContainerView.addSubview(userStream.renderer)
+                userStream.renderer.fixInSuperView()
+                
+            case .screenshare:
+                let ssContainerView : UIView! = localView.tag == 1 ? localView : smallLocalView
+                ssContainerView.removeAllSubViews()
+                ssContainerView.addSubview(userStream.renderer)
+                userStream.renderer.fixInSuperView()
             }
         }
         
@@ -355,7 +456,7 @@ class BroadcastView: UIView {
         
         handleStateView(session: session, with: userStream)
         
-       
+        
         
     }
     
@@ -366,7 +467,7 @@ class BroadcastView: UIView {
         renderer.translatesAutoresizingMaskIntoConstraints = false
         renderer.fixInSuperView()
     }
-
+    
     private func setIncomingView(for session: VTokBaseSession) {
         copyUrlBtn.isHidden = true
         if let _ = session.associatedSessionUUID {
@@ -391,7 +492,7 @@ class BroadcastView: UIView {
         
         guard let options = session.broadcastOption else {return}
         switch options {
-        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+        case .screenShareWithAppAudio:
             screenShareBtn.isHidden = false
             screenShareAudio.isHidden = false
             cameraSwitchIcon.isHidden = true
@@ -400,6 +501,17 @@ class BroadcastView: UIView {
             muteButton.isHidden = true
             broadCastDummyView.isHidden = false
             addRPViewToSSButton()
+            
+        case .screenShareWithMicAudio:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = true
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
+            
         case .videoCall:
             screenShareBtn.isHidden = true
             screenShareAudio.isHidden = true
@@ -425,8 +537,9 @@ class BroadcastView: UIView {
         }
         
     }
-
+    
 }
+
 
 extension BroadcastView {
     static func loadView() -> BroadcastView {
@@ -468,10 +581,17 @@ extension BroadcastView {
 
 extension BroadcastView {
     private func configureTimer() {
+        switch session?.broadcastOption {
+        case .screenShareWithAppAudio, .screenShareWithMicAudio:
+            listenForScene()
+        default:
+            break
+        }
         timer?.invalidate()
         timer = nil
         counter = 0
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
     }
     
     @objc private func timerAction() {
@@ -495,5 +615,174 @@ extension BroadcastView {
     
     private func secondsToHoursMinutesSeconds (seconds :Int) -> (hours: Int, minutes: Int, seconds: Int) {
       return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+}
+
+extension BroadcastView {
+    func listenForScene() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didRecieveActive(notification:)), name: Notification.Name("sceneActive"), object: nil)
+    }
+    
+    @objc  func didRecieveActive(notification: Notification) {
+        print(notification.object ?? "")
+        guard let time = notification.userInfo?["interval"] as? TimeInterval else {return}
+        counter += Int(time)
+        
+    }
+}
+
+
+extension BroadcastView {
+    
+    func addRoutePicker(){
+        let routePickerView = AVRoutePickerView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        routePickerView.backgroundColor = UIColor.clear
+        routePickerViewContainer.addSubview(routePickerView)
+        routePickerView.prioritizesVideoDevices = true
+        routePickerView.fixInSuperView()
+    }
+    
+    
+    
+    
+    
+}
+
+extension AVAudioSession {
+
+func ChangeAudioOutput(presenterViewController : UIViewController) {
+    
+    let CHECKED_KEY = "checked"
+    let IPHONE_TITLE = "iPhone"
+    let HEADPHONES_TITLE = "Headphones"
+    let SPEAKER_TITLE = "Speaker"
+    let HIDE_TITLE = "Hide"
+    
+    var deviceAction = UIAlertAction()
+    var headphonesExist = false
+    
+    let currentRoute = self.currentRoute
+    
+    let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    for input in self.availableInputs!{
+        
+        switch input.portType  {
+        case AVAudioSession.Port.bluetoothA2DP, AVAudioSession.Port.bluetoothHFP, AVAudioSession.Port.bluetoothLE:
+            let action = UIAlertAction(title: input.portName, style: .default) { (action) in
+                do {
+                    // remove speaker if needed
+                    try self.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
+                    
+                    // set new input
+                    try self.setPreferredInput(input)
+                } catch let error as NSError {
+                    print("audioSession error change to input: \(input.portName) with error: \(error.localizedDescription)")
+                }
+            }
+            
+            if currentRoute.outputs.contains(where: {return $0.portType == input.portType}){
+                action.setValue(true, forKey: CHECKED_KEY)
+            }
+            
+            optionMenu.addAction(action)
+            break
+            
+        case AVAudioSession.Port.builtInMic, AVAudioSession.Port.builtInReceiver:
+            deviceAction = UIAlertAction(title: IPHONE_TITLE, style: .default) { (action) in
+                do {
+                    // remove speaker if needed
+                    try self.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
+//                    try self.setCategory(.playAndRecord, mode: .voiceChat, policy: .default, options: options)
+                    // set new input
+                    try self.setPreferredInput(input)
+                } catch let error as NSError {
+                    print("audioSession error change to input: \(input.portName) with error: \(error.localizedDescription)")
+                }
+            }
+            
+            if currentRoute.outputs.contains(where: {return $0.portType == input.portType}){
+                deviceAction.setValue(true, forKey: CHECKED_KEY)
+            }
+            break
+            
+        case AVAudioSession.Port.headphones, AVAudioSession.Port.headsetMic:
+            headphonesExist = true
+            let action = UIAlertAction(title: HEADPHONES_TITLE, style: .default) { (action) in
+                do {
+                    // remove speaker if needed
+                    try self.overrideOutputAudioPort(AVAudioSession.PortOverride.none)
+                    
+                    // set new input
+                    try self.setPreferredInput(input)
+                } catch let error as NSError {
+                    print("audioSession error change to input: \(input.portName) with error: \(error.localizedDescription)")
+                }
+            }
+            
+            if currentRoute.outputs.contains(where: {return $0.portType == input.portType}){
+                action.setValue(true, forKey: CHECKED_KEY)
+            }
+            
+            optionMenu.addAction(action)
+            break
+        default:
+            break
+        }
+    }
+    
+    if !headphonesExist {
+        optionMenu.addAction(deviceAction)
+    }
+    
+    let speakerOutput = UIAlertAction(title: SPEAKER_TITLE, style: .default, handler: {
+        (alert: UIAlertAction!) -> Void in
+        
+        do {
+            try self.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+        } catch let error as NSError {
+            print("audioSession error turning on speaker: \(error.localizedDescription)")
+        }
+    })
+    
+    if currentRoute.outputs.contains(where: {return $0.portType == AVAudioSession.Port.builtInSpeaker}){
+        speakerOutput.setValue(true, forKey: CHECKED_KEY)
+    }
+    
+    optionMenu.addAction(speakerOutput)
+    
+    
+    let cancelAction = UIAlertAction(title: HIDE_TITLE, style: .cancel, handler: {
+        (alert: UIAlertAction!) -> Void in
+      //  try! self.setCategory(.playback, mode: .default, policy: .longFormAudio, options: [])
+    })
+    optionMenu.addAction(cancelAction)
+    presenterViewController.present(optionMenu, animated: true, completion: nil)
+    
+ }
+}
+
+
+extension BroadcastView {
+    func setUpExternal(screen: UIScreen, streams: [UserStream]) {
+        self.externalWindow = UIWindow(frame: screen.bounds)
+        
+        //windows require a root view controller
+           // let viewcontroller = TVBroadCastBuilder().build(with: nil, userStreams: streams)
+        self.externalWindow.rootViewController = UIViewController()
+        
+        
+        
+        
+        //tell the window which screen to use
+        self.externalWindow?.screen = screen
+        
+        let stream = streams.first!
+        let renderer = stream.renderer
+        self.externalWindow.addSubview(renderer)
+        renderer.fixInSuperView()
+        
+        
+        self.externalWindow?.isHidden = false
+
     }
 }

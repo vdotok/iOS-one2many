@@ -3,6 +3,7 @@
 //  one-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -18,12 +19,12 @@ enum ScreenType {
 
 class CallingBuilder {
 
-    func build(with navigationController: UINavigationController?, vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadcastData: BroadcastData?) -> UIViewController {
+    func build(with navigationController: UINavigationController?, vtokSdk: VideoTalkSDK, participants: [Participant]?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadcastData: BroadcastData?, sessionDirection: SessionDirection) -> UIViewController {
         
         let storyboard = UIStoryboard(name: "Calling", bundle: Bundle(for: CallingBuilder.self))
         let viewController = storyboard.instantiateViewController(withIdentifier: "CallingViewController") as! CallingViewController
         let coordinator = CallingRouter(navigationController: navigationController)
-        let viewModel = CallingViewModelImpl(router: coordinator, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact, broadcastData: broadcastData)
+        let viewModel = CallingViewModelImpl(router: coordinator, vtokSdk: vtokSdk, participants: participants, screenType: screenType, session: session, users: contact, broadcastData: broadcastData, sessionDirection: sessionDirection)
 
         viewController.viewModel = viewModel
         

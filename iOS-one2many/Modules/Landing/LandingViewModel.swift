@@ -3,6 +3,7 @@
 //  iOS-one2many
 //
 //  Created by usama farooq on 09/07/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import Foundation
@@ -87,15 +88,14 @@ extension LandingViewModelImpl {
     }
     
     private func configureVdotTok() {
-        guard let authResponse = VDOTOKObject<AuthenticateResponse>().getData() else {return}
         guard let user = VDOTOKObject<UserResponse>().getData() else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
                                       referenceID: user.refID!,
                                       authorizationToken: user.authorizationToken!,
                                       requestID: getRequestId(),
-                                      tenantID: AuthenticationConstants.PROJECTID)
-        self.vtokSdk = VTokSDK(url: authResponse.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
+                                      projectID: AuthenticationConstants.PROJECTID)
+        self.vtokSdk = VTokSDK(url: user.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
         
     }
     

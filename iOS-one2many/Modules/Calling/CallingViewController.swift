@@ -3,6 +3,7 @@
 //  one-to-many-call
 //
 //  Created by usama farooq on 15/06/2021.
+//  Copyright © 2021 VDOTOK. All rights reserved.
 //
 
 import UIKit
@@ -27,6 +28,11 @@ public class CallingViewController: UIViewController {
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.viewModelWillAppear()
+    }
+    
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("view will disapper")
     }
     
     fileprivate func bindViewModel() {
@@ -62,8 +68,6 @@ public class CallingViewController: UIViewController {
             }
         }
     }
-    
-    
     
     private func updateWith(URL: String) {
         guard let broadCastView = broadcastView else {return}
@@ -127,6 +131,10 @@ public class CallingViewController: UIViewController {
             broadcastView.configureView(with: streams, and: session)
         }
        
+    }
+    
+    deinit {
+        
     }
 }
 
@@ -198,6 +206,16 @@ extension CallingViewController: IncomingCallDelegate {
 }
 
 extension CallingViewController: BroadcastDelegate {
+
+    func didTapStream(with state: StreamStatus) {
+        viewModel.didTapStream(with: state)
+}
+    
+    func didTapRoute() {
+        AVAudioSession().ChangeAudioOutput(presenterViewController: self)
+
+    }
+    
    
     
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState) {
@@ -220,8 +238,6 @@ extension CallingViewController: BroadcastDelegate {
     func didTapVideo(for session: VTokBaseSession, type: VideoState) {
         viewModel.disableVideo(session: session, state: type)
     }
-    
-    
+
+
 }
-
-

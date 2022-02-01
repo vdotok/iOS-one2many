@@ -80,6 +80,32 @@
                             <rect key="frame" x="13" y="168" width="24" height="24"/>
                             <state key="normal" image="User"/>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZ6-0a-GoL">
+                            <rect key="frame" x="2" y="192" width="46" height="0.0"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="didTapAppleTV:" destination="iN0-l3-epB" eventType="touchUpInside" id="d7m-uF-kKq"/>
+                            </connections>
+                        </button>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zeC-we-vJ2">
+                            <rect key="frame" x="9" y="192" width="32" height="32"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="g7D-85-XDS"/>
+                                <constraint firstAttribute="width" constant="32" id="uvP-d2-10c"/>
+                            </constraints>
+                        </view>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-RL-zRs">
+                            <rect key="frame" x="13" y="192" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="0ce-Df-deE"/>
+                                <constraint firstAttribute="width" constant="24" id="QBb-Lf-rcM"/>
+                            </constraints>
+                            <state key="normal" image="audioRoute"/>
+                            <connections>
+                                <action selector="didTapRoute:" destination="iN0-l3-epB" eventType="touchUpInside" id="Lcq-M5-zIc"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Braodcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-o0-X1e">
@@ -94,34 +120,34 @@
                     <color key="textColor" name="AppDarkGreenColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
-                    <rect key="frame" x="63" y="774" width="288.5" height="60"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cfb-cM-Yho">
+                    <rect key="frame" x="22" y="774" width="370" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxb-br-vlQ">
-                            <rect key="frame" x="0.0" y="0.0" width="57.5" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="58" height="60"/>
                             <state key="normal" image="screenshare"/>
                             <state key="selected" image="ssoff"/>
                             <connections>
                                 <action selector="didTapScreenShare:" destination="iN0-l3-epB" eventType="touchUpInside" id="qzo-43-VRg"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
-                            <rect key="frame" x="67.5" y="0.0" width="0.0" height="60"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uNx-We-R0D">
+                            <rect key="frame" x="78" y="0.0" width="58" height="60"/>
                             <state key="normal" image="StopVideo"/>
-                            <state key="selected" image="StopVideo"/>
+                            <state key="selected" image="pause-video"/>
                             <connections>
                                 <action selector="didTapVideo:" destination="iN0-l3-epB" eventType="touchUpInside" id="BQi-kL-mBV"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-GM-m0J">
-                            <rect key="frame" x="77.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="156" y="0.0" width="58" height="60"/>
                             <state key="normal" image="end"/>
                             <connections>
                                 <action selector="didTapHangup:" destination="iN0-l3-epB" eventType="touchUpInside" id="GsU-q0-7ur"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z81-QJ-C5D">
-                            <rect key="frame" x="157.5" y="0.0" width="51" height="60"/>
+                            <rect key="frame" x="234" y="0.0" width="58" height="60"/>
                             <state key="normal" image="appaudioon"/>
                             <state key="selected" image="appaudio"/>
                             <connections>
@@ -129,7 +155,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEl-9G-EFc">
-                            <rect key="frame" x="228.5" y="0.0" width="60" height="60"/>
+                            <rect key="frame" x="312" y="0.0" width="58" height="60"/>
                             <state key="normal" image="mute"/>
                             <state key="selected" image="unMute"/>
                             <connections>
@@ -154,6 +180,7 @@
                 <constraint firstItem="cfb-cM-Yho" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="i7B-dR-XxV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2If-LL-xGi" secondAttribute="trailing" id="kGP-xd-c6Z"/>
                 <constraint firstItem="aTf-o0-X1e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="m1w-2P-hpY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cfb-cM-Yho" secondAttribute="trailing" constant="22" id="pFD-13-Stj"/>
                 <constraint firstItem="2If-LL-xGi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="sM9-lp-BaR"/>
                 <constraint firstItem="SCZ-GJ-v4t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="xtA-6Z-hIj"/>
             </constraints>
@@ -168,6 +195,7 @@
                 <outlet property="hangupBtn" destination="e5C-GM-m0J" id="W0F-uL-JJu"/>
                 <outlet property="localView" destination="2If-LL-xGi" id="Ka7-Rx-D8s"/>
                 <outlet property="muteButton" destination="vEl-9G-EFc" id="ERV-qe-dW9"/>
+                <outlet property="routePickerViewContainer" destination="zeC-we-vJ2" id="fZz-B2-7aX"/>
                 <outlet property="screenShareAudio" destination="z81-QJ-C5D" id="8hS-uE-Chd"/>
                 <outlet property="screenShareBtn" destination="gxb-br-vlQ" id="nGT-Eq-PaT"/>
                 <outlet property="smallLocalView" destination="rzh-oz-lq2" id="0Lf-an-r0k"/>
@@ -175,7 +203,7 @@
                 <outlet property="timerLabel" destination="FBQ-uD-zZp" id="WQl-Pk-Gdb"/>
                 <outlet property="titlelabel" destination="VEZ-BS-ELW" id="XaV-Ob-Sb5"/>
             </connections>
-            <point key="canvasLocation" x="-17" y="65"/>
+            <point key="canvasLocation" x="-17.39130434782609" y="64.955357142857139"/>
         </view>
     </objects>
     <resources>
@@ -185,10 +213,12 @@
         <image name="Volumn On" width="32" height="32"/>
         <image name="appaudio" width="51" height="46"/>
         <image name="appaudioon" width="51" height="46"/>
+        <image name="audioRoute" width="512" height="512"/>
         <image name="broadcast" width="87" height="109"/>
         <image name="end" width="60" height="60"/>
         <image name="mute" width="60" height="60"/>
         <image name="noun_Switch" width="32" height="32"/>
+        <image name="pause-video" width="55" height="52"/>
         <image name="screenshare" width="57.5" height="52"/>
         <image name="ssoff" width="57.5" height="52"/>
         <image name="unMute" width="60" height="60"/>
