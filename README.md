@@ -38,6 +38,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **Authentication Token*
 *	Type command `pod install` hit **Enter** and wait until the process is complete
 
 ### Updating  Project ID and Authentication Token
+
 *       Get **Project ID** and **Authentication Token** from [Admin Panel](https://userpanel.vdotok.com/login)
 *       Double-click to open **.xcworkspace file** in Xcode
 *      	In struct AuthenticationConstants, replace the values for **PROJECTID** and **AUTHTOKEN** with 		your values
