@@ -12,7 +12,7 @@ iOSSDKStreaming-one2many Broadcast
    
 ##### Development Requirements
 * Xcode 12+
-* [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) Click here to follow instructions on downloading and installation of Xcode on your device. 
+* [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) to follow instructions on downloading and installation of Xcode on your device. 
 * It’s recommended to install Xcode from **App Store**.   
 
 ## Installation
