@@ -11,7 +11,7 @@ iOSSDKStreaming-one2many Broadcast
 * 8GB of RAM memory
    
 ##### Development Requirements
-* Xcode 12+
+* Xcode 13.2.1
 * [Click here](https://www.freecodecamp.org/news/how-to-download-and-install-xcode/) to follow instructions on downloading and installation of Xcode on your device. 
 * It’s recommended to install Xcode from **App Store**.   
 
@@ -46,7 +46,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **Authentication Token*
 
 ### Set up App groups
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
-* Go to your **Main Target->Signing and Capabilities->App Groups**
+* Go to your **Main Target->Signing and Capabilities->Capabilities->App Groups**
 * Tap on the **App groups Icon** and create your **Group ID**
 * Now checkmark the box to enable **Group ID** and tap on Refresh icon 
 * **App Group ID** must be kept same for all targets
