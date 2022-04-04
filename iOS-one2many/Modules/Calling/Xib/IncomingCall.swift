@@ -9,7 +9,7 @@
 import UIKit
 import iOSSDKStreaming
 
-protocol IncomingCallDelegate: class {
+protocol IncomingCallDelegate: AnyObject {
     func didReject(session: VTokBaseSession)
     func didAccept(session: VTokBaseSession)
 }

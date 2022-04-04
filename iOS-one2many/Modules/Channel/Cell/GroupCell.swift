@@ -12,7 +12,7 @@ import ReplayKit
 
 protocol GroupCallDelegate: AnyObject {
     func didTapScreen(group: Group, broadcastData: BroadcastData)
-    func didTapVideo(participants: [Participant])
+    func didTapVideo(group: Group)
 }
 
 class GroupCell: UITableViewCell {
@@ -41,7 +41,7 @@ class GroupCell: UITableViewCell {
     
     @IBAction func didTapVideo(_ sender: UIButton) {
         guard let group = group else {return}
-        delegate?.didTapVideo(participants: group.participants)
+        delegate?.didTapVideo(group: group)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
