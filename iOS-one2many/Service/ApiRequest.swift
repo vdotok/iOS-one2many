@@ -55,22 +55,17 @@ extension APIRequest {
     
     private func getBaseUrl() -> URL {
         let fakeUrl = URL(fileURLWithPath: "")
-        guard let baseUrl = URL(string: CpassApi.scheme + "://" + CpassApi.host + "/" +  CpassApi.apiVersion),
-              let component = URLComponents(url: baseUrl.appendingPathComponent(getPath()), resolvingAgainstBaseURL: false), var url = component.url else {
+        guard let baseUrl = URL(string: Configurations.scheme + "://" + AuthenticationConstants.HOST + "/" +  Configurations.apiVersion),
+              let component = URLComponents(url: baseUrl.appendingPathComponent(getPath()), resolvingAgainstBaseURL: false), let url = component.url else {
             print("Unable to create URL components")
             return fakeUrl
-        }
-        
-        if getPath() == "AuthenticateSDK" {
-            url = URL(string: "https://vtkapi.vdotok.dev/API/v0/AuthenticateSDK")!
         }
         return url
     }
     
 }
 
-struct CpassApi {
-    static let host = "tenant-api.vdotok.dev"
+struct Configurations {
     static let apiVersion = "API/v0"
     static let scheme = "https"
 }

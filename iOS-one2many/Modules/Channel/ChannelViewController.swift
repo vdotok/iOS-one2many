@@ -224,8 +224,8 @@ extension ChannelViewController: GroupCallDelegate {
         
     }
     
-    func didTapVideo(participants: [Participant]) {
-        viewModel.moveToVideo(users: participants)
+    func didTapVideo(group: Group) {
+        viewModel.moveToVideo(group: group)
     }
   
 }

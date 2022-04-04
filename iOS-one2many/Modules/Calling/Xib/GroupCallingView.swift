@@ -42,6 +42,7 @@ class GroupCallingView: UIView {
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var hangupButton: UIButton!
     @IBOutlet weak var routePickerViewContainer: UIView!
+    @IBOutlet weak var groupTitle: UILabel!
     var users:[User]?
     weak var delegate: VideoDelegate?
     var session: VTokBaseSession?
@@ -123,6 +124,7 @@ class GroupCallingView: UIView {
     
     func updateView(for session: VTokBaseSession) {
       
+        groupTitle.text = session.data?.groupName
         callStatus.isHidden = false
         tryingStack.isHidden = false
         speakerButton.isHidden = true
@@ -144,6 +146,8 @@ class GroupCallingView: UIView {
             connectedState()
         case .rejected:
             callStatus.text = "Rejected"
+        case .insufficientBalance:
+            callStatus.text = "Insufficient fund.."
             
         default:
             break

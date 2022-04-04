@@ -41,7 +41,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     private let router: CallingRouter
     var output: CallingViewModelOutput?
     var vtokSdk: VideoTalkSDK?
-    var participants: [Participant]?
+    var group: Group?
     var screenType: ScreenType
     var session: VTokBaseSession?
     var ssSession: VTokBaseSession?
@@ -56,7 +56,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     
     init(router: CallingRouter,
          vtokSdk: VideoTalkSDK,
-         participants: [Participant]? = nil,
+         group: Group? = nil,
          screenType: ScreenType,
          session: VTokBaseSession? = nil,
          users: [User]? = nil,
@@ -64,7 +64,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
          sessionDirection: SessionDirection) {
         self.router = router
         self.vtokSdk = vtokSdk
-        self.participants = participants
+        self.group = group
         self.screenType = screenType
         self.session = session
         self.users = users
@@ -168,7 +168,10 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         guard let data = message.data(using: .utf8) else {return }
         ssSession = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
         guard let from = ssSession?.from, let to = ssSession?.to, let sessionUUID = ssSession?.sessionUUID else{return}
-        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, connectedUsers: [])
+        guard let user = VDOTOKObject<UserResponse>().getData(), let group = group
+        else {return}
+        let customData = SessionCustomData(calleName: user.fullName, groupName: group.groupTitle, groupAutoCreatedValue: "\(group.autoCreated)")
+        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, data: customData)
         output?(.loadBroadcastView(session: baseSession))
         
     }
@@ -241,24 +244,29 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     @discardableResult
     private func makeSession(with sessionMediaType: SessionMediaType,sessionUUID: String, associatedSessionUUID: String? ) -> String? {
         guard let user = VDOTOKObject<UserResponse>().getData(),
-              let refID = user.refID
+              let refID = user.refID,
+              let broadcast = broadcastData
         else {return nil}
-        guard let participents = participants, let broadcast = broadcastData else {return nil}
-        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        var participantsRefIds: [String] = []
+        if broadcast.broadcastType == .group {
+            guard let group = group else { return nil }
+            participantsRefIds = group.participants.map({$0.refID}).filter({$0 != user.refID })
+        }
         
+        let customData = SessionCustomData(calleName: user.fullName, groupName: group?.groupTitle, groupAutoCreatedValue: "\(group?.autoCreated)")
         let requestId = sessionUUID
         let baseSession = VTokBaseSessionInit(from: refID,
-                                              to: broadcast.broadcastType == .group ? participantsRefIds : [],
+                                              to: participantsRefIds,
                                               requestID: requestId,
                                               sessionUUID: requestId,
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
                                               sessionType: .call,
-                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions, connectedUsers: [])
+                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
+                                              data: customData)
         session = baseSession
         if associatedSessionUUID == nil {
             output?(.loadBroadcastView(session: baseSession))
-//            output?(.loadView(mediaType: sessionMediaType))
         }else {
             output?(.loadBroadcastView(session: baseSession))
         }
@@ -297,8 +305,15 @@ extension CallingViewModelImpl {
               let refID = user.refID,
               let broadcastData = broadcastData
         else {return nil}
-        guard let participents = participants else {return nil}
-        let participantsRefIds = participents.map({$0.refID}).filter({$0 != user.refID })
+        
+        var participantsRefIds: [String] = []
+        
+        if broadcastData.broadcastType == .group {
+            guard let group = group else {return nil}
+            participantsRefIds = group.participants.map({$0.refID}).filter({$0 != user.refID })
+        }
+        
+        let customData = SessionCustomData(calleName: user.fullName, groupName: group?.groupTitle, groupAutoCreatedValue: "\(group?.autoCreated)")
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
                                           requestID: sessionUUID,
@@ -308,8 +323,9 @@ extension CallingViewModelImpl {
                                           sessionType: .screenshare,
                                           associatedSessionUUID: associatedSessionUUID,
                                           broadcastType: broadcastData.broadcastType,
-                                          broadcastOption: broadcastData.broadcastOptions, connectedUsers: [])
-
+                                          broadcastOption: broadcastData.broadcastOptions,
+                                          data: customData)
+        
         let data = ScreenShareAppData(url: user.mediaServerMap.completeAddress,
                                       authenticationToken: token,
                                       baseSession: session)
@@ -417,6 +433,13 @@ extension CallingViewModelImpl: SessionDelegate {
             output?(.updateView(session: session))
         case .busy:
           break
+        case .suspendedByProvider:
+            self.sessionHangup()
+        case .insufficientBalance:
+            output?(.updateView(session: session))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.sessionHangup()
+            }
 //        case .updateParticipent:
 //            output?(.updateUsers(session.connectedUsers.count))
         default:

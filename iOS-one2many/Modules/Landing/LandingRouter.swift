@@ -25,13 +25,13 @@ extension LandingRouter {
     }
     
     func moveToIncomingCall(sdk: VideoTalkSDK, baseSession: VTokBaseSession, users: [User], broadcastData: BroadcastData?) {
-        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: nil, screenType: .incomingCall, session: baseSession, contact: users, broadcastData: broadcastData, sessionDirection: .incoming)
+        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, group: nil, screenType: .incomingCall, session: baseSession, contact: users, broadcastData: broadcastData, sessionDirection: .incoming)
         builder.modalPresentationStyle = .fullScreen
         navigationController?.present(builder, animated: true, completion: nil)
     }
     
-    func moveToCalling(sdk: VideoTalkSDK, particinats: [Participant] = [], users: [User] = [], screenType: ScreenType, broadcastData: BroadcastData ) {
-        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, participants: particinats, screenType: screenType, contact: users, broadcastData: broadcastData, sessionDirection: .outgoing)
+    func moveToCalling(sdk: VideoTalkSDK, group: Group? = nil, users: [User] = [], screenType: ScreenType, broadcastData: BroadcastData ) {
+        let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, group: group, screenType: screenType, contact: users, broadcastData: broadcastData, sessionDirection: .outgoing)
         builder.modalPresentationStyle = .fullScreen
         navigationController?.present(builder, animated: true, completion: nil)
     }

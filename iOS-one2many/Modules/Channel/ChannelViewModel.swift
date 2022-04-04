@@ -36,8 +36,8 @@ protocol ChannelViewModelInput {
     func viewModelWillAppear()
     func fetchGroups()
     func itemAt(row: Int) -> TempGroup
-    func moveToVideo(users: [Participant])
-    func moveToAudio(users: [Participant])
+    func moveToVideo(group: Group)
+    func moveToAudio(group: Group)
     func deleteGroup(with id: Int)
     func editGroup(with title: String, id: Int)
     func groupSelection(group: Group, row: Int)
@@ -109,14 +109,14 @@ class ChannelViewModelImpl: ChannelViewModel, ChannelViewModelInput {
 
 extension ChannelViewModelImpl {
     
-    func moveToVideo(users: [Participant]) {
+    func moveToVideo(group: Group) {
         
-        router.moveToCalling(sdk: vtokSdk, particinats: users, users: contacts, screenType: .videoView, broadcastData: broadCastData)
+        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoView, broadcastData: broadCastData)
     }
     
-    func moveToAudio(users: [Participant]) {
+    func moveToAudio(group: Group) {
         
-        router.moveToCalling(sdk: vtokSdk, particinats: users, users: contacts, screenType: .audioView, broadcastData: broadCastData)
+        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .audioView, broadcastData: broadCastData)
     }
     
     
@@ -283,8 +283,9 @@ extension ChannelViewModelImpl {
     
     func startSessions() {
         guard let myUser = VDOTOKObject<UserResponse>().getData(), let refID = myUser.refID else {return}
-        guard let users = selectedGroup?.participants.filter({$0.refID != refID}) else {return}
-        router.moveToCalling(sdk: vtokSdk, particinats: users, users: contacts, screenType: .videoAndScreenShare, broadcastData: broadCastData)
+//        guard let users = selectedGroup?.participants.filter({$0.refID != refID}) else {return}
+        guard let group = selectedGroup else {return}
+        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoAndScreenShare, broadcastData: broadCastData)
         
     }
 

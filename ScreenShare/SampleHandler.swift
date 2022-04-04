@@ -210,6 +210,10 @@ extension SampleHandler: SessionDelegate {
             break
         case .updateParticipent:
             break
+        case .suspendedByProvider:
+            break
+        case .insufficientBalance:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString
