@@ -34,7 +34,6 @@
 		5D4738E326F1FF3300C67F6E /* TVBroadCast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */; };
 		5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */; };
 		5D4738E526F1FF3300C67F6E /* TVBroadCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */; };
-		5D7B98BC2755FD2800B02969 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B98BB2755FD2800B02969 /* Test.swift */; };
 		5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */; };
 		5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */; };
 		5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD5352677FC7C004799EA /* YellowButton.swift */; };
@@ -200,7 +199,6 @@
 		5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TVBroadCast.storyboard; sourceTree = "<group>"; };
 		5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastRouter.swift; sourceTree = "<group>"; };
 		5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastViewModel.swift; sourceTree = "<group>"; };
-		5D7B98BB2755FD2800B02969 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPopup.swift; sourceTree = "<group>"; };
 		5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupPopup.xib; sourceTree = "<group>"; };
 		5D7CD5352677FC7C004799EA /* YellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowButton.swift; sourceTree = "<group>"; };
@@ -588,7 +586,6 @@
 				5DA7BC412675FE6C00A3E292 /* Channel */,
 				5DA7BC342675FE3A00A3E292 /* SignUp */,
 				5DA7BC332675FE2300A3E292 /* Login */,
-				5D7B98BB2755FD2800B02969 /* Test.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -977,7 +974,6 @@
 				5DA7BC4B2675FE8300A3E292 /* ChannelViewModel.swift in Sources */,
 				5DA7BC1B2675FD7600A3E292 /* VDOTOKObject.swift in Sources */,
 				5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */,
-				5D7B98BC2755FD2800B02969 /* Test.swift in Sources */,
 				5DA7BC2F2675FE0900A3E292 /* LoginBuilder.swift in Sources */,
 				5DA7BC0F2675FD1B00A3E292 /* Service.swift in Sources */,
 				5DA7BC1F2675FD9800A3E292 /* Translation.swift in Sources */,

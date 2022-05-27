@@ -88,14 +88,16 @@ extension LandingViewModelImpl {
     }
     
     private func configureVdotTok() {
-        guard let user = VDOTOKObject<UserResponse>().getData() else {return}
+        guard let user = VDOTOKObject<UserResponse>().getData(),
+              let url = user.mediaServerMap?.completeAddress
+        else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
                                       referenceID: user.refID!,
                                       authorizationToken: user.authorizationToken!,
                                       requestID: getRequestId(),
                                       projectID: AuthenticationConstants.PROJECTID)
-        self.vtokSdk = VTokSDK(url: user.mediaServerMap.completeAddress, registerRequest: request, connectionDelegate: self)
+        self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
         
     }
     

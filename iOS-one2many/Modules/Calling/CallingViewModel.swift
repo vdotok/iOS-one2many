@@ -303,7 +303,8 @@ extension CallingViewModelImpl {
         guard let user = VDOTOKObject<UserResponse>().getData(),
               let token = user.authorizationToken,
               let refID = user.refID,
-              let broadcastData = broadcastData
+              let broadcastData = broadcastData,
+              let url = user.mediaServerMap?.completeAddress
         else {return nil}
         
         var participantsRefIds: [String] = []
@@ -326,7 +327,7 @@ extension CallingViewModelImpl {
                                           broadcastOption: broadcastData.broadcastOptions,
                                           data: customData)
         
-        let data = ScreenShareAppData(url: user.mediaServerMap.completeAddress,
+        let data = ScreenShareAppData(url: url,
                                       authenticationToken: token,
                                       baseSession: session)
         self.ssSession = session

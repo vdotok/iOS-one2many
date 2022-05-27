@@ -10,12 +10,10 @@ import Foundation
 struct Constants {
     static let Request = "request"
     static let Register = "register"
-    static let TenantId = "U6WM5"
     static let Wormhole = "wormhole"
 }
 
 struct AuthenticationConstants {
-    static let PROJECTID = "115G1WZI"
-    static let AUTHTOKEN = ""
     static let HOST = "q-tenant.vdotok.dev"
+    static let PROJECTID = "115G1WZI"
 }
