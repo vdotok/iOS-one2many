@@ -49,8 +49,6 @@ public class CreateGroupViewController: UIViewController {
             case .groupCreated(group: let group):
                 viewModel.delegate?.didGroupCreated(group: group)
                 self.navigationController?.popToRootViewController(animated: true)
-//                moveToChat(group: group, isExist: false)
-//                self.navigationController?.popToRootViewController(animated: true)
             default:
                 break
             }

@@ -152,8 +152,6 @@ extension CreateGroupViewModelImpl {
                 DispatchQueue.main.async {
                     self.output?(.groupCreated(group: group))
                 }
-                
-                
             case .failure(let error):
                 self.output?(.failure(message: error.localizedDescription))
                 print(error)
