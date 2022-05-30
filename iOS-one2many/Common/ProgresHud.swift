@@ -18,10 +18,14 @@ class ProgressHud {
     }
     
     static func show(viewController: UIViewController) {
-        KRProgressHUD.show()
+        DispatchQueue.main.async {
+            KRProgressHUD.show()
+        }
     }
     
     static func hide() {
-        KRProgressHUD.dismiss()
+        DispatchQueue.main.async {
+            KRProgressHUD.dismiss()
+        }
     }
 }
