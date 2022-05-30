@@ -25,7 +25,7 @@ struct SignupRequest: Codable, APIRequest {
     let deviceType: String = UIDevice.current.systemName
     let deviceModel: String = UIDevice.current.model
     let deviceOSVer: String = UIDevice.current.systemVersion
-    let appVersion: String = Bundle.main.buildVersionNumber!
+    let appVersion: String = Bundle.main.buildVersionNumber ?? "0"
     
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
