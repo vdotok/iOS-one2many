@@ -178,6 +178,7 @@ extension SampleHandler: SessionDelegate {
 
     
     func stateDidUpdate(for session: VTokBaseSession) {
+        
         switch session.state {
 
         case .calling:

@@ -27,6 +27,7 @@
 		5D20D785268C56E500B78BFE /* DeleteGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D784268C56E500B78BFE /* DeleteGroupRequest.swift */; };
 		5D20D787268C570900B78BFE /* DeleteGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D786268C570900B78BFE /* DeleteGroupService.swift */; };
 		5D20D789268C585500B78BFE /* EditGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D20D788268C585500B78BFE /* EditGroupService.swift */; };
+		5D2DC2C028410CF900535179 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2DC2BF28410CF900535179 /* Bundle+Extension.swift */; };
 		5D4738DF26F1FF3300C67F6E /* TVBroadcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D4738D826F1FF3300C67F6E /* TVBroadcastCell.xib */; };
 		5D4738E026F1FF3300C67F6E /* TVBroadcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738D926F1FF3300C67F6E /* TVBroadcastCell.swift */; };
 		5D4738E126F1FF3300C67F6E /* TVBroadCastBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DA26F1FF3300C67F6E /* TVBroadCastBuilder.swift */; };
@@ -34,7 +35,6 @@
 		5D4738E326F1FF3300C67F6E /* TVBroadCast.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */; };
 		5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */; };
 		5D4738E526F1FF3300C67F6E /* TVBroadCastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */; };
-		5D7B98BC2755FD2800B02969 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7B98BB2755FD2800B02969 /* Test.swift */; };
 		5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */; };
 		5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */; };
 		5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7CD5352677FC7C004799EA /* YellowButton.swift */; };
@@ -193,6 +193,7 @@
 		5D20D784268C56E500B78BFE /* DeleteGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupRequest.swift; sourceTree = "<group>"; };
 		5D20D786268C570900B78BFE /* DeleteGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupService.swift; sourceTree = "<group>"; };
 		5D20D788268C585500B78BFE /* EditGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupService.swift; sourceTree = "<group>"; };
+		5D2DC2BF28410CF900535179 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		5D4738D826F1FF3300C67F6E /* TVBroadcastCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVBroadcastCell.xib; sourceTree = "<group>"; };
 		5D4738D926F1FF3300C67F6E /* TVBroadcastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadcastCell.swift; sourceTree = "<group>"; };
 		5D4738DA26F1FF3300C67F6E /* TVBroadCastBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastBuilder.swift; sourceTree = "<group>"; };
@@ -200,7 +201,6 @@
 		5D4738DC26F1FF3300C67F6E /* TVBroadCast.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TVBroadCast.storyboard; sourceTree = "<group>"; };
 		5D4738DD26F1FF3300C67F6E /* TVBroadCastRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastRouter.swift; sourceTree = "<group>"; };
 		5D4738DE26F1FF3300C67F6E /* TVBroadCastViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVBroadCastViewModel.swift; sourceTree = "<group>"; };
-		5D7B98BB2755FD2800B02969 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		5D7CD52F2677EC8C004799EA /* CreateGroupPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPopup.swift; sourceTree = "<group>"; };
 		5D7CD5302677EC8C004799EA /* CreateGroupPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupPopup.xib; sourceTree = "<group>"; };
 		5D7CD5352677FC7C004799EA /* YellowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowButton.swift; sourceTree = "<group>"; };
@@ -346,6 +346,7 @@
 			children = (
 				5DA7BC8626775AB900A3E292 /* Color+Extension.swift */,
 				5D0A25762698BE2800231087 /* UIView+Extension.swift */,
+				5D2DC2BF28410CF900535179 /* Bundle+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -588,7 +589,6 @@
 				5DA7BC412675FE6C00A3E292 /* Channel */,
 				5DA7BC342675FE3A00A3E292 /* SignUp */,
 				5DA7BC332675FE2300A3E292 /* Login */,
-				5D7B98BB2755FD2800B02969 /* Test.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -955,6 +955,7 @@
 				5D7CD5642678A950004799EA /* CallingBuilder.swift in Sources */,
 				5DA7BC162675FD4500A3E292 /* ApiRequest.swift in Sources */,
 				5D83A8EC2678B68000F001DE /* Constants.swift in Sources */,
+				5D2DC2C028410CF900535179 /* Bundle+Extension.swift in Sources */,
 				5DA7BC302675FE0900A3E292 /* LoginViewModel.swift in Sources */,
 				5D0A25772698BE2800231087 /* UIView+Extension.swift in Sources */,
 				5D4738E126F1FF3300C67F6E /* TVBroadCastBuilder.swift in Sources */,
@@ -977,7 +978,6 @@
 				5DA7BC4B2675FE8300A3E292 /* ChannelViewModel.swift in Sources */,
 				5DA7BC1B2675FD7600A3E292 /* VDOTOKObject.swift in Sources */,
 				5D7CD5362677FC7C004799EA /* YellowButton.swift in Sources */,
-				5D7B98BC2755FD2800B02969 /* Test.swift in Sources */,
 				5DA7BC2F2675FE0900A3E292 /* LoginBuilder.swift in Sources */,
 				5DA7BC0F2675FD1B00A3E292 /* Service.swift in Sources */,
 				5DA7BC1F2675FD9800A3E292 /* Translation.swift in Sources */,

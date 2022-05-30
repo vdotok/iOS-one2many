@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="pcr-We-rQf">
-                                <rect key="frame" x="27.5" y="94" width="359.5" height="24"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pcr-We-rQf">
+                                <rect key="frame" x="27.5" y="94" width="359" height="24"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WHn-AR-k2V">
-                                        <rect key="frame" x="0.0" y="0.0" width="164.5" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="179.5" height="24"/>
                                         <subviews>
                                             <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exA-10-lk0">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -35,7 +35,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Public Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9p-gM-JNM">
-                                                <rect key="frame" x="36" y="0.0" width="128.5" height="24"/>
+                                                <rect key="frame" x="36" y="0.0" width="143.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="7vU-yw-gEe">
-                                        <rect key="frame" x="194.5" y="0.0" width="165" height="24"/>
+                                        <rect key="frame" x="179.5" y="0.0" width="179.5" height="24"/>
                                         <subviews>
                                             <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-Y2-N0m">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -57,7 +57,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Broadcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTh-0g-s3G">
-                                                <rect key="frame" x="36" y="0.0" width="129" height="24"/>
+                                                <rect key="frame" x="36" y="0.0" width="143.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -127,6 +127,7 @@
                             <constraint firstItem="OTe-AT-BHW" firstAttribute="top" secondItem="XcF-7s-VQe" secondAttribute="top" id="3jQ-Q0-4Mm"/>
                             <constraint firstItem="xxp-KI-QrO" firstAttribute="centerX" secondItem="XcF-7s-VQe" secondAttribute="centerX" id="61x-F2-Og2"/>
                             <constraint firstItem="XcF-7s-VQe" firstAttribute="bottom" secondItem="OTe-AT-BHW" secondAttribute="bottom" id="7kz-vb-uZi"/>
+                            <constraint firstItem="pcr-We-rQf" firstAttribute="leading" secondItem="XcF-7s-VQe" secondAttribute="leading" constant="27.5" id="EDA-gQ-C9u"/>
                             <constraint firstItem="OTe-AT-BHW" firstAttribute="leading" secondItem="XcF-7s-VQe" secondAttribute="leading" id="Ga1-0c-fsN"/>
                             <constraint firstItem="xxp-KI-QrO" firstAttribute="leading" secondItem="XcF-7s-VQe" secondAttribute="leading" constant="24" id="KMM-ZG-FJg"/>
                             <constraint firstItem="pcr-We-rQf" firstAttribute="top" secondItem="XcF-7s-VQe" secondAttribute="top" constant="50" id="P9p-8w-ep2"/>
