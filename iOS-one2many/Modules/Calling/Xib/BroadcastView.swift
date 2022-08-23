@@ -316,6 +316,7 @@ class BroadcastView: UIView {
     }
     
     func updateView(with session: VTokBaseSession) {
+        
         self.session = session
         switch session.sessionDirection {
         case .incoming:
@@ -361,6 +362,7 @@ class BroadcastView: UIView {
     
     func configureView(with userStreams: [UserStream], and session: VTokBaseSession) {
         guard let stream = userStreams.first else {return}
+        hangupBtn.isUserInteractionEnabled = true
         self.selectedStreams = [stream]
         configureTimer()
         self.session = session
@@ -469,6 +471,7 @@ class BroadcastView: UIView {
     }
     
     private func setIncomingView(for session: VTokBaseSession) {
+        hangupBtn.isUserInteractionEnabled = false
         copyUrlBtn.isHidden = true
         if let _ = session.associatedSessionUUID {
             screenShareBtn.isHidden = true

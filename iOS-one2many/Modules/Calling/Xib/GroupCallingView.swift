@@ -123,7 +123,7 @@ class GroupCallingView: UIView {
     }
     
     func updateView(for session: VTokBaseSession) {
-      
+        hangupButton.isUserInteractionEnabled = true
         groupTitle.text = session.data?.groupName
         callStatus.isHidden = false
         tryingStack.isHidden = false
@@ -172,7 +172,7 @@ class GroupCallingView: UIView {
     }
     
     func loadViewFor(mediaType: SessionMediaType) {
-        
+        hangupButton.isUserInteractionEnabled = false
         switch mediaType {
         case .audioCall:
             localView.isHidden = true

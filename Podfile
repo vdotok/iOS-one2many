@@ -8,7 +8,7 @@ target 'iOS-one2many' do
   # Pods for IOS-one2many
   pod 'KRProgressHUD'
   pod 'IQKeyboardManagerSwift'
-  pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
+pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
   pod "VisualEffectView"
 
 end

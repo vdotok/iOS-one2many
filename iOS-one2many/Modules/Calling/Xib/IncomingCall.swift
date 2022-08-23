@@ -42,6 +42,11 @@ class IncomingCall: UIView {
     }
     
     @IBAction func didTapAccept(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        defer {
+            sender.isUserInteractionEnabled = true
+        }
+        
         guard let sessionRequest = session else {return}
         delegate?.didAccept(session: sessionRequest)
     }
