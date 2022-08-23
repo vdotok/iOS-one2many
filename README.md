@@ -53,6 +53,10 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
 * Select your Team and setup your bundle identifier like `com.company.appname` for all the targets
+* Bundle identifier should b unique for all targets for example.
+   `com.company.appname`
+   `com.company.appname.ScreenShare`
+   `com.company.appname.ScreenShareSetupUI`
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
 * Go to your **Main Target->Signing and Capabilities->Capabilities
 * Tap on the **App groups Icon** and create your **Group ID**
