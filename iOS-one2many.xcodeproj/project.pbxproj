@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5D0A252C2697098D00231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
-		5D0A253626970C6100231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
 		5D0A253826970C9800231087 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83A8EB2678B68000F001DE /* Constants.swift */; };
 		5D0A253C26981F0100231087 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A253B26981F0000231087 /* BroadcastData.swift */; };
 		5D0A255C2698420700231087 /* Landing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D0A25572698420700231087 /* Landing.storyboard */; };
@@ -177,7 +175,6 @@
 
 /* Begin PBXFileReference section */
 		053C9DF31072F234685FEDE9 /* Pods_ScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D0A252B2697098D00231087 /* AppsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
 		5D0A253B26981F0000231087 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
 		5D0A25572698420700231087 /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
 		5D0A25582698420700231087 /* LandingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingRouter.swift; sourceTree = "<group>"; };
@@ -574,7 +571,6 @@
 				5DA7BC702677589700A3E292 /* GroupResponse.swift */,
 				5DA2C27C2677A5A100B6F36C /* AllUsersReponse.swift */,
 				5DA2C2822677A62A00B6F36C /* CreateGroupResponse.swift */,
-				5D0A252B2697098D00231087 /* AppsGroup.swift */,
 				5D0A253B26981F0000231087 /* BroadcastData.swift */,
 			);
 			path = Model;
@@ -931,7 +927,6 @@
 				5DA2C2862677A64E00B6F36C /* CreateGroupRequest.swift in Sources */,
 				5D7CD5652678A950004799EA /* CallingViewModel.swift in Sources */,
 				5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */,
-				5D0A252C2697098D00231087 /* AppsGroup.swift in Sources */,
 				5DA2C27D2677A5A100B6F36C /* AllUsersReponse.swift in Sources */,
 				5DA7BC3B2675FE6400A3E292 /* SignUpRouter.swift in Sources */,
 				5DA7BC3E2675FE6400A3E292 /* SignUpViewModel.swift in Sources */,
@@ -994,7 +989,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DE4B39526970899009DAE5B /* SampleHandler.swift in Sources */,
-				5D0A253626970C6100231087 /* AppsGroup.swift in Sources */,
 				5D0A253826970C9800231087 /* Constants.swift in Sources */,
 				5D0A25782699ADFD00231087 /* BroadcastData.swift in Sources */,
 			);

@@ -18,3 +18,8 @@ struct AuthenticationConstants {
     static let PROJECTID = ""
 
 }
+
+struct AppsGroup {
+    static let  APP_GROUP = ""
+    static let SCREEN_SHARE_PREFERED_EXTENSION = ""
+}
