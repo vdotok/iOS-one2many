@@ -58,7 +58,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
    `com.company.appname.ScreenShare`
    `com.company.appname.ScreenShareSetupUI`
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
-* Go to your **Main Target->Signing and Capabilities->Capabilities
+* Go to your **Main Target->Signing and Capabilities->Capabilities**
 * Tap on the **App groups Icon** and create your **Group ID**
 <img width="500" alt="Screenshot 2022-08-16 at 12 12 05 PM" src="https://user-images.githubusercontent.com/111276411/185366612-0cf449f5-b37e-4eab-8ced-c97d77eaf3e7.png">
 
