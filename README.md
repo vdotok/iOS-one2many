@@ -37,8 +37,10 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 	You should be able to see a file named **Podfile**
 *	Type command `pod install` hit **Enter** and wait until the process is complete
 *	Once the process is completed it should look like following
+
 <img width="500" alt="Screenshot 2022-08-16 at 12 12 05 PM" src="https://user-images.githubusercontent.com/111276411/185358370-afe416d0-8885-4c2f-adef-8538d206e075.png">
-*    If you face issue below,execute this command in terminal `gem install --user-install ffi -- --enable-libffi-alloc` ,then run `pod intall` 
+
+*    If you face issue below,execute this command in terminal `gem install --user-install ffi -- --enable-libffi-alloc` ,then run `pod install` 
       
 <img width="500" alt="Screen Shot 2022-08-22 at 5 10 37 PM" src="https://user-images.githubusercontent.com/111276411/186087301-81952093-eabf-4c3a-85f9-21f34dbd9b3f.png">
 
@@ -59,7 +61,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 * Now checkmark the box to enable **Group ID** and tap on Refresh icon 
 * **App Group ID** must be kept same for all targets
 * Repeat the above action to your **Screen Share**, and **Screenshare Utility Target**
-* Now go to AppsGroup struct **(iOS-combine -> common -> constants)**, replace the values for **APP_GROUP** and **SCREEN_SHARE_PREFERED_EXTENSION** with your **App Group Identifier** and **Screenshare Target's Bundle Identifier** respectively
+* Now go to AppsGroup struct **(iOS-one2many -> common -> constants)**, replace the values for **APP_GROUP** and **SCREEN_SHARE_PREFERED_EXTENSION** with your **App Group Identifier** and **Screenshare Target's Bundle Identifier** respectively
 
 ### Building On Device
 *Please be noted that iOSSDKStreaming does not work for iOS Simulator*
