@@ -72,8 +72,9 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 
 To run on a real device:
 
-   *	Connect your device with MacBook pro
-   *	Select your device from the dropdown menu in Xcode, click on play button on xcode toolbar
+   *   Connect your device with MacBook pro
+   *   Select your device from the run destination menu in toolbar
+   *   Click on play button on xcode toolbar
 For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
