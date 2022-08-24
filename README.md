@@ -6,14 +6,14 @@ iOSSDKStreaming-one2many Broadcast
 * To begin, you must possess a good understanding of [Broadcast Extensions](https://developer.apple.com/app-extensions), [AppGroupIDs](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups?language=objc), and [ReplayKit](https://developer.apple.com/documentation/replaykit).
 ## Requirements
 
+##### Development Requirements
+* Xcode 13.4.1 or latest version
+* [Click here](https://developer.apple.com/xcode/resources/) to download Xcode on your Macbook
+
 ##### System Requirements
 * MacOS as compatible with xcode version
 * 8GB of RAM memory
    
-##### Development Requirements
-* Xcode 13.4.1 or latest version
-* [Click here](https://developer.apple.com/xcode/resources/) to download Xcode on your Macbook.
-
 ## Installation
 ### Installing Cocoapods
 Open **Terminal** and type command `pod --version` and hit **Enter**.
@@ -21,6 +21,7 @@ Open **Terminal** and type command `pod --version` and hit **Enter**.
 If command is not found then you don’t have Cocoapods installed on your system. To install Cocoapods, here are the steps to follow:
 #### Installing Cocoapods
 * Type the following command in **Terminal** `sudo gem install cocoapods` and hit **Enter**
+* If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
 
 ### Project Signup and Project ID
@@ -53,7 +54,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
 * Select your Team and setup your bundle identifier like `com.company.appname` for all the targets
-* Bundle identifier should b unique for all targets for example.
+* Bundle identifier should be unique for all targets for example.
    `com.company.appname`
    `com.company.appname.ScreenShare`
    `com.company.appname.ScreenShareSetupUI`
@@ -72,7 +73,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 
 To run on a real device:
 
-   *   Connect your device with MacBook pro
+   *   Connect your device with MacBook
    *   Select your device from the run destination menu in toolbar
    *   Click on play button on xcode toolbar
    *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
