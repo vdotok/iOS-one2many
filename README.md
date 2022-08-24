@@ -46,7 +46,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 
 ### Updating  Project ID and Authentication Token
 
-*  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://userpanel.vdotok.com/login)
+*  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://console.vdotok.com/login)
 *  Double-click to open **.xcworkspace file** in Xcode
 *  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** with your values
 
@@ -58,7 +58,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
    `com.company.appname.ScreenShare`
    `com.company.appname.ScreenShareSetupUI`
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
-* Go to your **Main Target->Signing and Capabilities->Capabilities**
+* Go to your **Main Target->Signing and Capabilities->Capabilities(+ icon)**
 * Tap on the **App groups Icon** and create your **Group ID**
 <img width="500" alt="Screenshot 2022-08-16 at 12 12 05 PM" src="https://user-images.githubusercontent.com/111276411/185366612-0cf449f5-b37e-4eab-8ced-c97d77eaf3e7.png">
 
@@ -75,7 +75,7 @@ To run on a real device:
    *   Connect your device with MacBook pro
    *   Select your device from the run destination menu in toolbar
    *   Click on play button on xcode toolbar
-For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
+   *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
 
