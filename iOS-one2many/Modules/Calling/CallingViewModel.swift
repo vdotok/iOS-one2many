@@ -190,15 +190,22 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             makeSession(with: .videoCall, sessionUUID: sessionUUID, associatedSessionUUID: nil)
         case .incomingCall:
             guard let session = session else {return}
-            guard let selectedUser =  users?.filter({$0.refID == session.to.first}).first else {return}
+            var selectedUser = users?.filter({$0.refID == session.to.first}).first
+            if(selectedUser == nil){
+                selectedUser = getUserFromSession(session)
+            }
             playSound()
-            output?(.loadIncomingCallView(session: session, user: selectedUser))
+            output?(.loadIncomingCallView(session: session, user: selectedUser!))
             self.session = session
             callHangupHandling()
         case .videoAndScreenShare:
             handleBroadcast()
     
         }
+    }
+    
+    private func getUserFromSession(_ session: VTokBaseSession) -> User{
+        return User(email: "", fullName: session.data?.groupName ?? session.data?.calleName ?? "Unknown Group", refID: session.from, userID: 0)
     }
     
     private func handleBroadcast() {
