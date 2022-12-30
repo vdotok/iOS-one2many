@@ -125,6 +125,7 @@ class BroadcastView: UIView {
     }
     
     var publicURL: String?
+    var appDidEnterBackgroundDate :Date?
     var session: VTokBaseSession? {
         didSet{
             if session?.sessionDirection == .incoming{
@@ -172,7 +173,6 @@ class BroadcastView: UIView {
         
         
     }
-    //        NotificationCenter.default.post(name: .startPlaying, object: nil)
     @IBAction func didTapRoute(_ sender: UIButton) {
         delegate?.didTapRoute()
         
@@ -607,6 +607,7 @@ extension BroadcastView {
         timeString += intervalFormatter(interval: m) + ":" +
                         intervalFormatter(interval: s)
         timerLabel.text = timeString
+
     }
     
     private func intervalFormatter(interval: Int) -> String {
@@ -624,6 +625,21 @@ extension BroadcastView {
 extension BroadcastView {
     func listenForScene() {
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveActive(notification:)), name: Notification.Name("sceneActive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+       NotificationCenter.default.addObserver(self,selector:#selector(applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+       }
+    
+    @objc func applicationDidEnterBackground(_ notification: NotificationCenter) {
+        appDidEnterBackgroundDate = Date()
+    }
+
+    @objc func applicationWillEnterForeground(_ notification: NotificationCenter) {
+        guard let previousDate = appDidEnterBackgroundDate else { return }
+        let calendar = Calendar.current
+        let difference = calendar.dateComponents([.second], from: previousDate, to: Date())
+        let seconds = difference.second!
+        counter += seconds
     }
     
     @objc  func didRecieveActive(notification: Notification) {
