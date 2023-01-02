@@ -51,7 +51,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                       let session = self.screenShareData
                 else { return }
                 self.setScreenShareScreen(with: message)
-                sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
+                //sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
             }
         })
         
