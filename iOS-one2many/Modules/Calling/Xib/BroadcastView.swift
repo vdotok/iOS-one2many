@@ -364,7 +364,9 @@ class BroadcastView: UIView {
         guard let stream = userStreams.first else {return}
         hangupBtn.isUserInteractionEnabled = true
         self.selectedStreams = [stream]
-        configureTimer()
+        if timer == nil {
+            configureTimer()
+        }
         self.session = session
         setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
