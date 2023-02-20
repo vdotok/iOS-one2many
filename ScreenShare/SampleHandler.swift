@@ -55,6 +55,15 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+        
+        wormhole.listenForMessage(withIdentifier: "sessionKill", listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String, message == "hangup"  {
+                let userInfo = [NSLocalizedFailureReasonErrorKey : "App is killed"]
+                let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
+                self!.finishBroadcastWithError(error)
+            }
+        })
+        
     }
     
     func setScreenShareAppAudio(with message: String) {
@@ -89,7 +98,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                       requestID: getRequestId(),
                                       projectID: AuthenticationConstants.PROJECTID)
         
-        vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
+        vtokSdk = VTokSDK(data: screenShareData, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
 
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
@@ -107,18 +116,18 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     override func broadcastFinished() {
+
         // User has requested to finish the broadcast.
-        
         let message: String = "sessionTerminated"
-        guard let vtokSdk = vtokSdk, let session = screenShareData?.baseSession else {return}
+        guard let vtokSdk = self.vtokSdk, let session = screenShareData?.baseSession else {return}
         let jsonData = try! JSONEncoder().encode(session)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         wormhole.passMessageObject(jsonString, identifier: message)
+      
         vtokSdk.hangup(session: session)
         
-        
     }
-    
+  
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
         switch sampleBufferType {
         case .video:
@@ -178,7 +187,6 @@ extension SampleHandler: SessionDelegate {
 
     
     func stateDidUpdate(for session: VTokBaseSession) {
-        
         switch session.state {
 
         case .calling:
@@ -203,6 +211,9 @@ extension SampleHandler: SessionDelegate {
         case .invalidTarget:
             break
         case .hangup:
+            let userInfo = [NSLocalizedFailureReasonErrorKey : "User ended the Call"]
+            let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
+            finishBroadcastWithError(error)
             print("test")
             break
         case .tryingToConnect:

@@ -15,6 +15,7 @@ public class CallingViewController: UIViewController {
     var groupCallingView: GroupCallingView?
     var incomingCallingView: IncomingCall?
     var broadcastView: BroadcastView?
+    var session : VTokBaseSession?
     var counter = 0
     var timer = Timer()
     
@@ -32,6 +33,7 @@ public class CallingViewController: UIViewController {
     
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         print("view will disapper")
     }
     
@@ -134,13 +136,14 @@ public class CallingViewController: UIViewController {
     }
     
     deinit {
-        
+
     }
 }
 
 extension CallingViewController {
     
     private func loadBroadcastView(session: VTokBaseSession) {
+        self.session = session
         broadcastView = BroadcastView.loadView()
         guard let broadcastView = self.broadcastView else {return}
         broadcastView.updateView(with: session)
@@ -169,6 +172,7 @@ extension CallingViewController {
     }
     
     private func loadIncomingCallView(session: VTokBaseSession, contact: User) {
+        self.session = session
         let view = IncomingCall.loadView()
         self.incomingCallingView = view
         

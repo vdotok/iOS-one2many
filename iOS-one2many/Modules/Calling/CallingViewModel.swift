@@ -51,7 +51,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var timer = Timer()
     var broadcastData: BroadcastData?
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
-                              optionalDirectory: "wormhole")
+                              optionalDirectory: Constants.Wormhole)
     var sessionDirection: SessionDirection
     
     init(router: CallingRouter,
@@ -74,6 +74,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     
     func viewModelDidLoad() {
         addNotificationObserver()
+    
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
             vtokSdk?.set(sessionDelegate: self, for: baseSession)
         }
@@ -88,7 +89,6 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     func addNotificationObserver(){
           // Add Key-Value observer on isCaptured property of uiscreen.main
         UIScreen.main.addObserver(self, forKeyPath: "captured", options: .new, context: nil)
-
       }
     
     // MARK:- Key-Value Observer callback
@@ -123,7 +123,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
       }
     
     private func listenForScreenShareSession() {
-        wormhole.listenForMessage(withIdentifier: "screenShareSessionDidInitiated", listener: { [weak self] (messageObject) -> Void in
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.screenShareSessionInitiated, listener: { [weak self] (messageObject) -> Void in
             if let message = messageObject as? String {
                 self?.setScreenShareSession(with: message)
             }
@@ -132,7 +132,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     }
     
     private func listenForPublicURL() {
-        wormhole.listenForMessage(withIdentifier: "didGetPublicURL", listener: { [weak self] (messageObject) -> Void in
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.getPublicUrl, listener: { [weak self] (messageObject) -> Void in
             if let message = messageObject as? String {
                 self?.output?(.updateURL(url: message))
             }
@@ -141,7 +141,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     }
     
     private func listenForParticipantAdd() {
-        wormhole.listenForMessage(withIdentifier: "participantAdded") { [weak self] message -> Void  in
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.participantAdded) { [weak self] message -> Void  in
             if let count = message as? String {
                 guard let userCount = Int(count) else {return}
                 self?.output?(.updateUsers(userCount))
@@ -153,7 +153,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     }
     
     private func listenForSessionTerminate() {
-        wormhole.listenForMessage(withIdentifier: "sessionTerminated") { [weak self] message -> Void in
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.sessionTerminated) { [weak self] message -> Void in
             if let sessionString = message as? String {
                 guard let data = sessionString.data(using: .utf8) else {return }
                 let _ = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
@@ -215,7 +215,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let sessionUUID = getRequestId()
             guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+                self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         case .videoCall:
             let sessionUUID = getRequestId()
@@ -226,7 +226,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+                self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         
         }
@@ -296,6 +296,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     }
     
     deinit {
+
         removeObservers()
     }
     
@@ -337,6 +338,7 @@ extension CallingViewModelImpl {
         let data = ScreenShareAppData(url: url,
                                       authenticationToken: token,
                                       baseSession: session)
+        
         self.ssSession = session
         output?(.loadBroadcastView(session: session))
         let jsonData = try! JSONEncoder().encode(data)
@@ -417,7 +419,6 @@ extension CallingViewModelImpl: SessionDelegate {
     func configureRemoteViews(for session: VTokBaseSession, with streams: [UserStream]) {
         guard let remoteStream = streams.filter({$0.streamDirection == .incoming}).first else {return}
         output?(.configureRemote(streams: streams, session: session))
-        
         guard let localStream = streams.filter({$0.streamDirection == .outgoing}).first else {return}
         output?(.configureLocal(view: localStream.renderer, session: session))
     }
@@ -493,7 +494,6 @@ extension CallingViewModelImpl {
     
     private func sessionHangup() {
         DispatchQueue.main.async {[weak self] in
-            
             self?.output?(.dismissCallView)
         }
     }

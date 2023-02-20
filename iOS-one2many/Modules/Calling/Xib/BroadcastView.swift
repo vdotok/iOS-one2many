@@ -136,7 +136,7 @@ class BroadcastView: UIView {
     weak var delegate: BroadcastDelegate?
     private var counter: Int = 0
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
-                              optionalDirectory: "wormhole")
+                              optionalDirectory: Constants.Wormhole)
     private weak var timer: Timer?
     
     override func awakeFromNib() {
@@ -181,13 +181,13 @@ class BroadcastView: UIView {
     @IBAction func didTapAppAudio(_ sender: UIButton) {
         screenShareAudio.isSelected = !sender.isSelected
         let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
-        wormhole.passMessageObject(message, identifier: "updateAudioState")
+        wormhole.passMessageObject(message, identifier: WormHoleConstants.updateAudioState)
     }
     
     @IBAction func didTapScreenShare(_ sender: UIButton) {
         screenShareBtn.isSelected = !sender.isSelected
         let message = getScreenShareScreen(state: screenShareBtn.isSelected ? .none : .passAll)
-        wormhole.passMessageObject(message, identifier: "updateScreenState")
+        wormhole.passMessageObject(message, identifier: WormHoleConstants.updateScreenState)
     }
     
     @IBAction func didTapHangup(_ sender: UIButton) {
@@ -204,7 +204,7 @@ class BroadcastView: UIView {
     @IBAction func didTapSpeaker(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard let session = session else {return}
-        delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onSpeaker : .onEarPiece)
+        delegate?.didTapSpeaker(for: session, state: sender.isSelected ? .onEarPiece: .onSpeaker)
     }
     
     @IBAction func didTapAppleTV(_ sender: UIButton) {
@@ -219,7 +219,7 @@ class BroadcastView: UIView {
         case .screenShareWithMicAudio:
             screenShareAudio.isSelected = sender.isSelected
             let message = getScreenShareAudio(state: screenShareAudio.isSelected ? .none : .passAll)
-            wormhole.passMessageObject(message, identifier: "updateAudioState")
+            wormhole.passMessageObject(message, identifier: WormHoleConstants.updateAudioState)
         default:
             delegate?.didTapMute(for: session, state: sender.isSelected ? .mute : .unMute)
         }
@@ -338,7 +338,7 @@ class BroadcastView: UIView {
             
             switch broadCastType {
             case .group:
-                broadCastTitle.text = "Group BroadCast"
+                broadCastTitle.text = session.data?.groupName
                 copyUrlBtn.isHidden = true
             case .publicURL:
                 broadCastTitle.text = "Public BroadCast"
@@ -347,8 +347,7 @@ class BroadcastView: UIView {
             default:
                 break
             }
-            
-            
+            VdotokShare.shared.setSession(session: session)
             setOutGoingView(for: session)
             
         }
@@ -368,6 +367,7 @@ class BroadcastView: UIView {
             configureTimer()
         }
         self.session = session
+        VdotokShare.shared.setSession(session: session)
         setIncomingView(for: session)
         setViewsForIncoming(session: session, with: stream)
         
@@ -473,7 +473,7 @@ class BroadcastView: UIView {
     }
     
     private func setIncomingView(for session: VTokBaseSession) {
-        hangupBtn.isUserInteractionEnabled = false
+        hangupBtn.isUserInteractionEnabled = true
         copyUrlBtn.isHidden = true
         if let _ = session.associatedSessionUUID {
             screenShareBtn.isHidden = true
@@ -530,7 +530,7 @@ class BroadcastView: UIView {
                 copyUrlBtn.isHidden = false
                 broadCastDummyView.isHidden = false
             }
-        case .screenShareWithAppAudioAndVideoCall, .screenShareWithVideoCall:
+        case .screenShareWithAppAudioAndVideoCall:
             screenShareBtn.isHidden = false
             screenShareAudio.isHidden = false
             cameraSwitchIcon.isHidden = false
@@ -539,7 +539,18 @@ class BroadcastView: UIView {
             muteButton.isHidden = false
             broadCastDummyView.isHidden = false
             addRPViewToSSButton()
+            
+        case .screenShareWithVideoCall:
+            screenShareBtn.isHidden = false
+            screenShareAudio.isHidden = true
+            cameraSwitchIcon.isHidden = false
+            speakerIcon.isHidden = true
+            smallLocalView.isHidden = true
+            muteButton.isHidden = false
+            broadCastDummyView.isHidden = false
+            addRPViewToSSButton()
         }
+        
         
     }
     
@@ -558,7 +569,7 @@ extension BroadcastView {
     }
     
     func addRPViewToSSButton() {
-        
+
         let recordingView = RPSystemBroadcastPickerView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
         recordingView.preferredExtension = AppsGroup.SCREEN_SHARE_PREFERED_EXTENSION
         guard let options = session?.broadcastOption else {return}
@@ -629,8 +640,8 @@ extension BroadcastView {
         NotificationCenter.default.addObserver(self, selector: #selector(didRecieveActive(notification:)), name: Notification.Name("sceneActive"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         
-       NotificationCenter.default.addObserver(self,selector:#selector(applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
-       }
+        NotificationCenter.default.addObserver(self,selector:#selector(applicationWillEnterForeground(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
     
     @objc func applicationDidEnterBackground(_ notification: NotificationCenter) {
         appDidEnterBackgroundDate = Date()
