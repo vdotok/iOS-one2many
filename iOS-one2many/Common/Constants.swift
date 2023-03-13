@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import AVFoundation
+import UIKit
+
 struct Constants {
     static let Request = "request"
     static let Register = "register"
@@ -14,10 +17,6 @@ struct Constants {
 }
 
 struct AuthenticationConstants {
-//    static let HOST = "tenant.vdotok.com"
-//    static let PROJECTID = "552NB0DY"
-
-    
-    static let HOST = ""
-    static let PROJECTID = ""
+    static var HOST = ""
+    static var PROJECTID = ""
 }

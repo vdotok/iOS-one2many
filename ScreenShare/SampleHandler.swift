@@ -55,6 +55,15 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+        wormhole.listenForMessage(withIdentifier: "sessionRegistered", listener: { [weak self] message -> Void in
+            guard let self = self else {return }
+            if let sessionString = message as? String {
+                guard let data = sessionString.data(using: .utf8) else {return }
+                self.request = try! JSONDecoder().decode(RegisterRequest.self, from: data)
+                self.initSdk()
+            }
+        })
+        
         
         wormhole.listenForMessage(withIdentifier: "sessionKill", listener: { [weak self] (messageObject) -> Void in
             if let message = messageObject as? String, message == "hangup"  {
@@ -80,25 +89,18 @@ class SampleHandler: RPBroadcastSampleHandler {
     
     
     func getScreenShareAppData(with message: String) {
-        
         guard let data = message.data(using: .utf8) else {return }
         screenShareData = try? JSONDecoder().decode(ScreenShareAppData.self, from: data)
         guard screenShareData != nil else { return }
-        initSdk()
+        let message : NSString =  "register"
+        wormhole.passMessageObject(message, identifier: "GetRegister")
+       
     }
     
     
     func initSdk(){
         guard let screenShareData = screenShareData else {return }
-        request = RegisterRequest(type: "request",
-                                      requestType: "register",
-                                      referenceID: screenShareData.baseSession.from,
-                                      authorizationToken: screenShareData.authenticationToken,
-                                      socketType: .screenShare,
-                                      requestID: getRequestId(),
-                                      projectID: AuthenticationConstants.PROJECTID)
-        
-        vtokSdk = VTokSDK(data: screenShareData, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
+        vtokSdk = VTokSDK(data: screenShareData, registerRequest: self.request!, connectionDelegate: self, connectionType: .screenShare)
     }
 
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {

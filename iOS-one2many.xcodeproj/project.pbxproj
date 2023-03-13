@@ -3,11 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD4952994CDF400A74579 /* VdotokShare.swift */; };
+		49C6223B29A91DF80095F244 /* QRScannerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6223629A91DF80095F244 /* QRScannerBuilder.swift */; };
+		49C6223C29A91DF80095F244 /* QRScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6223729A91DF80095F244 /* QRScannerRouter.swift */; };
+		49C6223D29A91DF80095F244 /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6223829A91DF80095F244 /* QRScannerViewModel.swift */; };
+		49C6223E29A91DF80095F244 /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6223929A91DF80095F244 /* QRScanner.storyboard */; };
+		49C6223F29A91DF80095F244 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6223A29A91DF80095F244 /* QRScannerViewController.swift */; };
+		49C6224129A91E180095F244 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6224029A91E180095F244 /* AuthenticationModel.swift */; };
+		49C6224629A921520095F244 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
+		49C6224929A922BE0095F244 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6224829A922BE0095F244 /* VdotokShare.swift */; };
 		49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD498299516CF00A74579 /* WormHoleConstants.swift */; };
 		5D0A252C2697098D00231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
 		5D0A253626970C6100231087 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A252B2697098D00231087 /* AppsGroup.swift */; };
@@ -111,13 +118,12 @@
 		5DA7BC8726775AB900A3E292 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8626775AB900A3E292 /* Color+Extension.swift */; };
 		5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DA7BC8A26775C9E00A3E292 /* Colors.xcassets */; };
 		5DBB9F3426A1A859000F51E6 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DBB9F3326A1A859000F51E6 /* DraggableView.swift */; };
-		5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
 		5DE4B39526970899009DAE5B /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4B39426970899009DAE5B /* SampleHandler.swift */; };
 		5DE4B39C26970899009DAE5B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39126970899009DAE5B /* ReplayKit.framework */; };
 		5DE4B39E26970899009DAE5B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE4B39D26970899009DAE5B /* UIKit.framework */; };
 		5DE4B3A126970899009DAE5B /* BroadcastSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE4B3A026970899009DAE5B /* BroadcastSetupViewController.swift */; };
-		5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39B26970899009DAE5B /* ScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39026970899009DAE5B /* ScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39B26970899009DAE5B /* ScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5DE4B39026970899009DAE5B /* ScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DE5836A269D7B7000985CFA /* ScreenSharePopup.xib */; };
 		5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */; };
 		A85D93E22702FE7D003A3375 /* BroadcastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85D93E12702FE7D003A3375 /* BroadcastView.xib */; };
@@ -161,22 +167,28 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5DE4B3AF26970899009DAE5B /* Embed App Extensions */ = {
+		5DE4B3AF26970899009DAE5B /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed App Extensions */,
-				5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed App Extensions */,
+				5DE4B3A826970899009DAE5B /* ScreenShare.appex in Embed Foundation Extensions */,
+				5DE4B3A526970899009DAE5B /* ScreenShareSetupUI.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		49CFD4952994CDF400A74579 /* VdotokShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdotokShare.swift; sourceTree = "<group>"; };
+		49C6223629A91DF80095F244 /* QRScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerBuilder.swift; sourceTree = "<group>"; };
+		49C6223729A91DF80095F244 /* QRScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerRouter.swift; sourceTree = "<group>"; };
+		49C6223829A91DF80095F244 /* QRScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
+		49C6223929A91DF80095F244 /* QRScanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
+		49C6223A29A91DF80095F244 /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		49C6224029A91E180095F244 /* AuthenticationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		49C6224829A922BE0095F244 /* VdotokShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdotokShare.swift; sourceTree = "<group>"; };
 		49CFD498299516CF00A74579 /* WormHoleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WormHoleConstants.swift; sourceTree = "<group>"; };
 		5D0A252B2697098D00231087 /* AppsGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
 		5D0A253B26981F0000231087 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
@@ -307,7 +319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DE4B39226970899009DAE5B /* ReplayKit.framework in Frameworks */,
+				49C6224629A921520095F244 /* ReplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +335,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49C6223529A91DD30095F244 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				49C6223929A91DF80095F244 /* QRScanner.storyboard */,
+				49C6223629A91DF80095F244 /* QRScannerBuilder.swift */,
+				49C6223729A91DF80095F244 /* QRScannerRouter.swift */,
+				49C6223A29A91DF80095F244 /* QRScannerViewController.swift */,
+				49C6223829A91DF80095F244 /* QRScannerViewModel.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		5D0A25552698416500231087 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +572,7 @@
 				5DA7BC58267754CD00A3E292 /* ProgresHud.swift */,
 				5DBB9F3326A1A859000F51E6 /* DraggableView.swift */,
 				5D83A8EB2678B68000F001DE /* Constants.swift */,
+				49C6224829A922BE0095F244 /* VdotokShare.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -556,7 +581,6 @@
 			isa = PBXGroup;
 			children = (
 				5DA7BC1A2675FD7600A3E292 /* VDOTOKObject.swift */,
-				49CFD4952994CDF400A74579 /* VdotokShare.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -564,6 +588,7 @@
 		5DA7BC212675FDCA00A3E292 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49C6224029A91E180095F244 /* AuthenticationModel.swift */,
 				5DA7BC222675FDDC00A3E292 /* UserResponse.swift */,
 				5DA7BC672677562300A3E292 /* CheckUserNameResponse.swift */,
 				5DA7BC702677589700A3E292 /* GroupResponse.swift */,
@@ -578,6 +603,7 @@
 		5DA7BC262675FDF700A3E292 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				49C6223529A91DD30095F244 /* QRCode */,
 				5D0A25552698416500231087 /* Landing */,
 				5D7CD5672678A955004799EA /* Calling */,
 				5DA2C26C2677921600B6F36C /* CreateGroup */,
@@ -680,7 +706,7 @@
 				5DA7BBDF267562A800A3E292 /* Sources */,
 				5DA7BBE0267562A800A3E292 /* Frameworks */,
 				5DA7BBE1267562A800A3E292 /* Resources */,
-				5DE4B3AF26970899009DAE5B /* Embed App Extensions */,
+				5DE4B3AF26970899009DAE5B /* Embed Foundation Extensions */,
 				49E6849E297FA5580039C025 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -736,7 +762,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = VDOTOK;
 				TargetAttributes = {
 					5DA7BBE2267562A800A3E292 = {
@@ -782,6 +808,7 @@
 				5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */,
 				5DA7BC472675FE8300A3E292 /* Channel.storyboard in Resources */,
 				5DA7BC2C2675FE0900A3E292 /* Login.storyboard in Resources */,
+				49C6223E29A91DF80095F244 /* QRScanner.storyboard in Resources */,
 				5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */,
 				5DA7BBF3267562AA00A3E292 /* LaunchScreen.storyboard in Resources */,
 				5D0A255C2698420700231087 /* Landing.storyboard in Resources */,
@@ -823,13 +850,14 @@
 				5D0A25742698B37C00231087 /* BroadcastView.swift in Sources */,
 				5DA7BC5F2677553900A3E292 /* LoginRequest.swift in Sources */,
 				5DA7BBEB267562A800A3E292 /* ViewController.swift in Sources */,
+				49C6223B29A91DF80095F244 /* QRScannerBuilder.swift in Sources */,
 				5D0A256426984B4C00231087 /* RadioButton.swift in Sources */,
 				5DA7BC5C2677552500A3E292 /* LoginService.swift in Sources */,
 				5D4738E226F1FF3300C67F6E /* TVBroadCastViewController.swift in Sources */,
 				5DA7BC0B2675FCF300A3E292 /* AuthenticateRequest.swift in Sources */,
 				5D0A255E2698420700231087 /* LandingViewController.swift in Sources */,
-				49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */,
 				5D7CD5632678A950004799EA /* CallingViewController.swift in Sources */,
+				49C6223F29A91DF80095F244 /* QRScannerViewController.swift in Sources */,
 				5DA2C2732677922E00B6F36C /* CreateGroupRouter.swift in Sources */,
 				5DA7BC2D2675FE0900A3E292 /* LoginRouter.swift in Sources */,
 				5D20D782268C56CF00B78BFE /* EditGroupRequest.swift in Sources */,
@@ -842,8 +870,10 @@
 				5DA7BC712677589700A3E292 /* GroupResponse.swift in Sources */,
 				5D4738E026F1FF3300C67F6E /* TVBroadcastCell.swift in Sources */,
 				5DA2C2742677922E00B6F36C /* CreateGroupViewController.swift in Sources */,
+				49C6224929A922BE0095F244 /* VdotokShare.swift in Sources */,
 				5DA7BC59267754CD00A3E292 /* ProgresHud.swift in Sources */,
 				5DA7BC682677562300A3E292 /* CheckUserNameResponse.swift in Sources */,
+				49C6224129A91E180095F244 /* AuthenticationModel.swift in Sources */,
 				5DA2C2862677A64E00B6F36C /* CreateGroupRequest.swift in Sources */,
 				5D7CD5652678A950004799EA /* CallingViewModel.swift in Sources */,
 				5D4738E426F1FF3300C67F6E /* TVBroadCastRouter.swift in Sources */,
@@ -866,6 +896,7 @@
 				5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */,
 				5DA2C29A2677A98100B6F36C /* CreateGroupCell.swift in Sources */,
 				5DA7BC4A2675FE8300A3E292 /* ChannelBuilder.swift in Sources */,
+				49C6223C29A91DF80095F244 /* QRScannerRouter.swift in Sources */,
 				5DA2C2802677A61000B6F36C /* CreateGroupService.swift in Sources */,
 				5D20D787268C570900B78BFE /* DeleteGroupService.swift in Sources */,
 				5D7CD5642678A950004799EA /* CallingBuilder.swift in Sources */,
@@ -900,6 +931,7 @@
 				5DA7BC1F2675FD9800A3E292 /* Translation.swift in Sources */,
 				5D7CD57A2678B1E2004799EA /* VideoCell.swift in Sources */,
 				5DA7BC2E2675FE0900A3E292 /* LoginViewController.swift in Sources */,
+				49C6223D29A91DF80095F244 /* QRScannerViewModel.swift in Sources */,
 				5DA7BC492675FE8300A3E292 /* ChannelViewController.swift in Sources */,
 				5DA7BC232675FDDC00A3E292 /* UserResponse.swift in Sources */,
 				5D20D789268C585500B78BFE /* EditGroupService.swift in Sources */,
@@ -1085,7 +1117,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-one2many/iOS-one2many.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = 2XMPHHJW2J;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1098,7 +1130,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.norgic.ios.one-to-many-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1114,7 +1145,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-one2many/iOS-one2many.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 20;
-				DEVELOPMENT_TEAM = 2XMPHHJW2J;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1127,7 +1158,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.norgic.ios.one-to-many-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

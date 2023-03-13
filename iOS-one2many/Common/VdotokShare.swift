@@ -2,12 +2,12 @@
 //  VdotokShare.swift
 //  iOS-one2many
 //
-//  Created by Fajar Chishtee on 09/02/2023.
+//  Created by Fajar Chishtee on 24/02/2023.
 //  Copyright © 2023 VDOTOK. All rights reserved.
 //
 
 import Foundation
-import iOSSDKStreaming
+import  iOSSDKStreaming
 
 class VdotokShare{
     

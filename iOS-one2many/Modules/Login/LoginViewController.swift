@@ -26,7 +26,18 @@ public class LoginViewController: UIViewController {
     
     @IBAction func didTapLogin(_ sender: UIButton) {
         guard let userName = email.text, let password = password.text else {return }
-        viewModel.loginUser(with: userName, password)
+        if (AuthenticationConstants.PROJECTID.isEmpty && AuthenticationConstants.HOST.isEmpty) {
+            ProgressHud.showError(message: "kindly scan the qr code", viewController: self)
+        }else{
+            viewModel.loginUser(with: userName, password)
+        }
+    }
+    
+    @IBAction func didTapQRCode(_ sender: Any) {
+        let builder = QRScannerBuilder().build(with: UINavigationController())
+        builder.modalPresentationStyle = .fullScreen
+        builder.modalTransitionStyle = .crossDissolve
+        self.present(builder, animated: true, completion: nil)
     }
     
     @IBAction func didTapRegister(_ sender: UIButton) {
@@ -62,7 +73,7 @@ public class LoginViewController: UIViewController {
                     let viewController = LandingBuilder().build(with: navigationControlr)
                     viewController.modalPresentationStyle = .fullScreen
                     navigationControlr.setViewControllers([viewController], animated: true)
-                    present(navigationControlr, animated: true, completion: nil)
+                    self.present(navigationControlr, animated: true, completion: nil)
                 }
             default:
                 break

@@ -50,6 +50,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     var counter = 0
     var timer = Timer()
     var broadcastData: BroadcastData?
+    var data :ScreenShareAppData?
     let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
                               optionalDirectory: Constants.Wormhole)
     var sessionDirection: SessionDirection
@@ -81,6 +82,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         
         loadViews()
         listenForPublicURL()
+        listenForRegisterScreenShare()
         listenForParticipantAdd()
         listenForSessionTerminate()
 
@@ -129,6 +131,27 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             }
          
         })
+    }
+    
+    private func  listenForRegisterScreenShare(){
+        wormhole.listenForMessage(withIdentifier:"GetRegister", listener: { [weak self] (messageObject) -> Void in
+            
+            if let message = messageObject as? String, message == "register"  {
+                let request = RegisterRequest(type: "request",
+                                              requestType: "register",
+                                              referenceID: (self?.data!.baseSession.from)!,
+                                              authorizationToken:(self?.data!.authenticationToken)!,
+                                              socketType: .screenShare,
+                                              requestID: self!.getRequestId(),
+                                              projectID: AuthenticationConstants.PROJECTID)
+                let message: String = "sessionRegistered"
+                let jsonData = try! JSONEncoder().encode(request)
+                let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
+                self?.wormhole.passMessageObject(jsonString, identifier: message)
+                
+            }
+        })
+        
     }
     
     private func listenForPublicURL() {
@@ -335,7 +358,7 @@ extension CallingViewModelImpl {
                                           broadcastOption: broadcastData.broadcastOptions,
                                           data: customData)
         
-        let data = ScreenShareAppData(url: url,
+        data = ScreenShareAppData(url: url,
                                       authenticationToken: token,
                                       baseSession: session)
         

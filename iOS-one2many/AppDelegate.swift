@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = viewController
             return true
         }
+        AuthenticationConstants.PROJECTID = UserDefaults.projectId
+        AuthenticationConstants.HOST = UserDefaults.baseUrl
         let navigationControlr = UINavigationController()
         navigationControlr.modalPresentationStyle = .fullScreen
         let viewController = LandingBuilder().build(with: navigationControlr)
@@ -51,15 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-       sessionKill()
+        if VdotokShare.shared.getSession() != nil{
+            sessionKill()
+        }
     }
    
     func sessionKill(){
-        if VdotokShare.shared.getSession() != nil{
             VdotokShare.shared.getSdk().hangup(session: VdotokShare.shared.getSession()!)
             let message : NSString =  WormHoleConstants.hangup as NSString
             wormhole.passMessageObject(message, identifier: WormHoleConstants.sessionKill)
-        }
     }
 
 }

@@ -9,6 +9,7 @@
 import Foundation
 fileprivate let userDefaults = UserDefaults.standard
 fileprivate let authToken = "authToken"
+
 struct VDOTOKObject<T: Codable> {
     
     func setData(_ data: T, for key: String? = nil) {
@@ -48,3 +49,30 @@ struct VDOTOKObject<T: Codable> {
     }
 
 }
+extension UserDefaults {
+    
+    private struct keys {
+        static let projectId = "projectId"
+        static let baseUrl = "baseUrl"
+    }
+    
+    static var projectId: String {
+        get {
+            return UserDefaults.standard.string(forKey: keys.projectId) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: keys.projectId)
+        }
+    }
+    
+    static var baseUrl: String {
+        get {
+            UserDefaults.standard.string(forKey: keys.baseUrl) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: keys.baseUrl)
+        }
+    }
+}
+
+
