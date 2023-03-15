@@ -17,5 +17,5 @@ target 'ScreenShare' do
     use_frameworks!
     pod 'MMWormhole'
     pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-   
+ 
 end
