@@ -98,7 +98,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                       requestID: getRequestId(),
                                       projectID: AuthenticationConstants.PROJECTID)
         
-        vtokSdk = VTokSDK(data: screenShareData, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
+        vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
 
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
