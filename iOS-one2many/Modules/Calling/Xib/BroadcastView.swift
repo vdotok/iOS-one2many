@@ -422,7 +422,7 @@ class BroadcastView: UIView {
         
         switch session.sessionType {
         case .call:
-            if session.associatedSessionUUID != nil {
+            if session.associatedSessionUuid != nil {
                 let callView: UIView! = localView.tag == 0 ? localView : smallLocalView
                 callView.isHidden = false
                 callView.removeAllSubViews()
@@ -449,7 +449,7 @@ class BroadcastView: UIView {
             ssView.addSubview(userStream.renderer)
             userStream.renderer.fixInSuperView()
             ssView.tag = ssView.tag
-            if session.associatedSessionUUID != nil {
+            if session.associatedSessionUuid != nil {
                 ssView.isHidden = false
                 callView.isHidden = false
             } else {
@@ -475,7 +475,7 @@ class BroadcastView: UIView {
     private func setIncomingView(for session: VTokBaseSession) {
         hangupBtn.isUserInteractionEnabled = true
         copyUrlBtn.isHidden = true
-        if let _ = session.associatedSessionUUID {
+        if let _ = session.associatedSessionUuid {
             screenShareBtn.isHidden = true
             screenShareAudio.isHidden = true
             cameraSwitchIcon.isHidden = true

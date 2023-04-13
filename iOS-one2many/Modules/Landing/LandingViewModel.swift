@@ -93,10 +93,10 @@ extension LandingViewModelImpl {
         else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
-                                      referenceID: user.refID!,
+                                      referenceId: user.refID!,
                                       authorizationToken: user.authorizationToken!,
-                                      requestID: getRequestId(),
-                                      projectID: AuthenticationConstants.PROJECTID)
+                                      requestId: getRequestId(),
+                                      projectId: AuthenticationConstants.PROJECTID)
         self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
         VdotokShare.shared.setSdk(sdk: self.vtokSdk!)
         

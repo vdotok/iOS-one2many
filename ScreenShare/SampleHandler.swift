@@ -92,11 +92,11 @@ class SampleHandler: RPBroadcastSampleHandler {
         guard let screenShareData = screenShareData else {return }
         request = RegisterRequest(type: "request",
                                       requestType: "register",
-                                      referenceID: screenShareData.baseSession.from,
+                                      referenceId: screenShareData.baseSession.from,
                                       authorizationToken: screenShareData.authenticationToken,
                                       socketType: .screenShare,
-                                      requestID: getRequestId(),
-                                      projectID: AuthenticationConstants.PROJECTID)
+                                      requestId: getRequestId(),
+                                      projectId: AuthenticationConstants.PROJECTID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -218,7 +218,7 @@ extension SampleHandler: SessionDelegate {
             break
         case .tryingToConnect:
             break
-        case .reconnect:
+        case .reConnect:
             break
         case .updateParticipent:
             break
@@ -249,7 +249,7 @@ extension SampleHandler {
         let myTimeInterval = TimeInterval(timestamp)
         let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
         let tenantId = "12345"
-        let requestId = self.request?.referenceID ?? ""
+        let requestId = self.request?.referenceId ?? ""
         let token = generatable.getUUID(string: time + tenantId + requestId)
         return token
         

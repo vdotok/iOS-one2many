@@ -167,11 +167,11 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
     private func setScreenShareSession(with message: String) {
         guard let data = message.data(using: .utf8) else {return }
         ssSession = try! JSONDecoder().decode(VTokBaseSessionInit.self, from: data)
-        guard let from = ssSession?.from, let to = ssSession?.to, let sessionUUID = ssSession?.sessionUUID else{return}
+        guard let from = ssSession?.from, let to = ssSession?.to, let sessionUUID = ssSession?.sessionUuid else{return}
         guard let user = VDOTOKObject<UserResponse>().getData(), let group = group
         else {return}
         let customData = SessionCustomData(calleName: user.fullName, groupName: group.groupTitle, groupAutoCreatedValue: "\(group.autoCreated)")
-        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUUID: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, data: customData)
+        let baseSession = VTokBaseSessionInit(from: from, to: to, sessionUuid: sessionUUID, sessionMediaType: .videoCall, callType: .onetomany, data: customData)
         output?(.loadBroadcastView(session: baseSession))
         
     }
@@ -264,12 +264,12 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         let requestId = sessionUUID
         let baseSession = VTokBaseSessionInit(from: refID,
                                               to: participantsRefIds,
-                                              requestID: requestId,
-                                              sessionUUID: requestId,
+                                              requestId: requestId,
+                                              sessionUuid: requestId,
                                               sessionMediaType: sessionMediaType,
                                               callType: .onetomany,
                                               sessionType: .call,
-                                              associatedSessionUUID: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
+                                              associatedSessionUuid: associatedSessionUUID,broadcastType: broadcast.broadcastType, broadcastOption: broadcast.broadcastOptions,
                                               data: customData)
         session = baseSession
         if associatedSessionUUID == nil {
@@ -325,12 +325,12 @@ extension CallingViewModelImpl {
         let customData = SessionCustomData(calleName: user.fullName, groupName: group?.groupTitle, groupAutoCreatedValue: "\(group?.autoCreated)")
         let session = VTokBaseSessionInit(from: refID,
                                           to: participantsRefIds,
-                                          requestID: sessionUUID,
-                                          sessionUUID: sessionUUID,
+                                          requestId: sessionUUID,
+                                          sessionUuid: sessionUUID,
                                           sessionMediaType: .videoCall,
                                           callType: .onetomany,
                                           sessionType: .screenshare,
-                                          associatedSessionUUID: associatedSessionUUID,
+                                          associatedSessionUuid: associatedSessionUUID,
                                           broadcastType: broadcastData.broadcastType,
                                           broadcastOption: broadcastData.broadcastOptions,
                                           data: customData)
