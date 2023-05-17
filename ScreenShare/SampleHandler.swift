@@ -92,11 +92,11 @@ class SampleHandler: RPBroadcastSampleHandler {
         guard let screenShareData = screenShareData else {return }
         request = RegisterRequest(type: "request",
                                       requestType: "register",
-                                      referenceId: screenShareData.baseSession.from,
-                                      authorizationToken: screenShareData.authenticationToken,
-                                      socketType: .screenShare,
-                                      requestId: getRequestId(),
-                                      projectId: AuthenticationConstants.PROJECTID)
+                                  referenceId: screenShareData.baseSession.from,
+                                  authorizationToken: screenShareData.authenticationToken,
+                                  socketType: .screenShare,
+                                  requestId: getRequestId(),
+                                  projectId: AuthenticationConstants.PROJECTID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -194,7 +194,7 @@ extension SampleHandler: SessionDelegate {
         case .ringing:
             break
         case .connected:
-            break
+              break
         case .failed:
             break
         case .rejected:
@@ -218,14 +218,16 @@ extension SampleHandler: SessionDelegate {
             break
         case .tryingToConnect:
             break
-        case .reConnect:
-            break
         case .updateParticipent:
             break
         case .suspendedByProvider:
             break
         case .insufficientBalance:
             break
+        case .reConnect:
+            break
+        case .temporaryUnAvailable:
+           break
         }
         
         let message = String(session.connectedUsers.count) as NSString
