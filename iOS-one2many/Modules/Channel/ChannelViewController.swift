@@ -19,7 +19,7 @@ public class ChannelViewController: UIViewController {
     @IBOutlet weak var blurView: UIView!
     
     lazy var refreshControl = UIRefreshControl()
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
 
     var viewModel: ChannelViewModel!
     private var selectedGroupId: Int? = nil

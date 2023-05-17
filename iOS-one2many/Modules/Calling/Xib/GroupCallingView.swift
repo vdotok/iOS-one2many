@@ -383,10 +383,11 @@ extension GroupCallingView {
         timer?.invalidate()
         timer = nil
         counter = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false)
     }
     
     @objc private func timerAction() {
+    
         counter += 1
         let (h, m, s) = secondsToHoursMinutesSeconds(seconds: counter)
         var timeString = ""

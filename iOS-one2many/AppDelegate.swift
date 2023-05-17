@@ -9,13 +9,17 @@
 import UIKit
 import IQKeyboardManagerSwift
 import AVFoundation
+import iOSSDKStreaming
+import MMWormhole
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let navigationController = UINavigationController()
-    
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP,
+                              optionalDirectory: Constants.Wormhole)
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -26,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
-     
+        
         guard let _ =  VDOTOKObject<UserResponse>().getData() else  {
             let viewController = LoginBuilder().build(with: self.navigationController)
             viewController.modalPresentationStyle = .fullScreen
@@ -45,9 +49,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpAudioSession()
         return true
     }
-
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+       sessionKill()
+    }
    
-
+    func sessionKill(){
+        if VdotokShare.shared.getSession() != nil{
+            VdotokShare.shared.getSdk().hangup(session: VdotokShare.shared.getSession()!)
+            let message : NSString =  WormHoleConstants.hangup as NSString
+            wormhole.passMessageObject(message, identifier: WormHoleConstants.sessionKill)
+        }
+    }
 
 }
 

@@ -34,7 +34,7 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     var vtokSdk: VideoTalkSDK?
     var broadCastData: BroadcastData = BroadcastData(broadcastType: .publicURL,
                                                      broadcastOptions: .screenShareWithAppAudio)
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     var contacts: [User] = []
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     
@@ -93,11 +93,12 @@ extension LandingViewModelImpl {
         else {return}
         let request = RegisterRequest(type: Constants.Request,
                                       requestType: Constants.Register,
-                                      referenceID: user.refID!,
+                                      referenceId: user.refID!,
                                       authorizationToken: user.authorizationToken!,
-                                      requestID: getRequestId(),
-                                      projectID: AuthenticationConstants.PROJECTID)
+                                      requestId: getRequestId(),
+                                      projectId: AuthenticationConstants.PROJECTID)
         self.vtokSdk = VTokSDK(url: url, registerRequest: request, connectionDelegate: self)
+        VdotokShare.shared.setSdk(sdk: self.vtokSdk!)
         
     }
     
@@ -132,14 +133,14 @@ extension LandingViewModelImpl: SDKConnectionDelegate {
 extension LandingViewModelImpl {
     
     func unRegisterForCommand(){
-        wormhole.stopListeningForMessage(withIdentifier: "Command")
+        wormhole.stopListeningForMessage(withIdentifier: WormHoleConstants.command)
     }
     
     func registerForCommand() {
         
-        wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.command, listener: { [weak self] (messageObject) -> Void in
             
-            if let message = messageObject as? String, message == "StartScreenSharing"  {
+            if let message = messageObject as? String, message == WormHoleConstants.startScreenSharing  {
                 self?.output?(.dismissView)
                 
                 guard let sdk = self?.vtokSdk, let broadcastData = self?.broadCastData else {return }

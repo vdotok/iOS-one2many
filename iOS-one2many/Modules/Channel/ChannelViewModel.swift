@@ -67,7 +67,7 @@ class ChannelViewModelImpl: ChannelViewModel, ChannelViewModelInput {
     var selectedItems = [Int]()
     var broadCastData: BroadcastData
     var selectedGroup: Group?
-    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: "wormhole")
+    let wormhole = MMWormhole(applicationGroupIdentifier: AppsGroup.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
     private let allUserStoreAble: AllUserStoreAble = AllUsersService(service: NetworkService())
     
@@ -263,14 +263,14 @@ extension ChannelViewModelImpl: SDKConnectionDelegate {
 extension ChannelViewModelImpl {
     
     func unRegisterForCommand(){
-        wormhole.stopListeningForMessage(withIdentifier: "Command")
+        wormhole.stopListeningForMessage(withIdentifier: WormHoleConstants.command)
     }
     
     
     func registerForCommand() {
         
-        wormhole.listenForMessage(withIdentifier: "Command", listener: { [weak self] (messageObject) -> Void in
-            if let message = messageObject as? String, message == "StartScreenSharing"  {
+        wormhole.listenForMessage(withIdentifier: WormHoleConstants.command, listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String, message == WormHoleConstants.startScreenSharing  {
                 self?.startSessions()
             }
         })

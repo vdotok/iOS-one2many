@@ -51,7 +51,16 @@ class SampleHandler: RPBroadcastSampleHandler {
                       let session = self.screenShareData
                 else { return }
                 self.setScreenShareScreen(with: message)
-                sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
+                //sdk.disableScreen(for: session.baseSession, state: self.screenState.screenShareScreen)
+            }
+        })
+        
+        
+        wormhole.listenForMessage(withIdentifier: "sessionKill", listener: { [weak self] (messageObject) -> Void in
+            if let message = messageObject as? String, message == "hangup"  {
+                let userInfo = [NSLocalizedFailureReasonErrorKey : "App is killed"]
+                let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
+                self!.finishBroadcastWithError(error)
             }
         })
         
@@ -83,11 +92,11 @@ class SampleHandler: RPBroadcastSampleHandler {
         guard let screenShareData = screenShareData else {return }
         request = RegisterRequest(type: "request",
                                       requestType: "register",
-                                      referenceID: screenShareData.baseSession.from,
-                                      authorizationToken: screenShareData.authenticationToken,
-                                      socketType: .screenShare,
-                                      requestID: getRequestId(),
-                                      projectID: AuthenticationConstants.PROJECTID)
+                                  referenceId: screenShareData.baseSession.from,
+                                  authorizationToken: screenShareData.authenticationToken,
+                                  socketType: .screenShare,
+                                  requestId: getRequestId(),
+                                  projectId: AuthenticationConstants.PROJECTID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -107,18 +116,18 @@ class SampleHandler: RPBroadcastSampleHandler {
     }
     
     override func broadcastFinished() {
+
         // User has requested to finish the broadcast.
-        
         let message: String = "sessionTerminated"
-        guard let vtokSdk = vtokSdk, let session = screenShareData?.baseSession else {return}
+        guard let vtokSdk = self.vtokSdk, let session = screenShareData?.baseSession else {return}
         let jsonData = try! JSONEncoder().encode(session)
         let jsonString = String(data: jsonData, encoding: .utf8)! as NSString
         wormhole.passMessageObject(jsonString, identifier: message)
+      
         vtokSdk.hangup(session: session)
         
-        
     }
-    
+  
     override func processSampleBuffer(_ sampleBuffer: CMSampleBuffer, with sampleBufferType: RPSampleBufferType) {
         switch sampleBufferType {
         case .video:
@@ -178,7 +187,6 @@ extension SampleHandler: SessionDelegate {
 
     
     func stateDidUpdate(for session: VTokBaseSession) {
-        
         switch session.state {
 
         case .calling:
@@ -186,7 +194,7 @@ extension SampleHandler: SessionDelegate {
         case .ringing:
             break
         case .connected:
-            break
+              break
         case .failed:
             break
         case .rejected:
@@ -203,11 +211,12 @@ extension SampleHandler: SessionDelegate {
         case .invalidTarget:
             break
         case .hangup:
+            let userInfo = [NSLocalizedFailureReasonErrorKey : "User ended the Call"]
+            let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
+            finishBroadcastWithError(error)
             print("test")
             break
         case .tryingToConnect:
-            break
-        case .reconnect:
             break
         case .updateParticipent:
             break
@@ -215,6 +224,10 @@ extension SampleHandler: SessionDelegate {
             break
         case .insufficientBalance:
             break
+        case .reConnect:
+            break
+        case .temporaryUnAvailable:
+           break
         }
         
         let message = String(session.connectedUsers.count) as NSString
@@ -238,7 +251,7 @@ extension SampleHandler {
         let myTimeInterval = TimeInterval(timestamp)
         let time = Date(timeIntervalSince1970: TimeInterval(myTimeInterval)).stringValue()
         let tenantId = "12345"
-        let requestId = self.request?.referenceID ?? ""
+        let requestId = self.request?.referenceId ?? ""
         let token = generatable.getUUID(string: time + tenantId + requestId)
         return token
         

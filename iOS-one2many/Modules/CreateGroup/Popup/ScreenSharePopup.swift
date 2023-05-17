@@ -54,7 +54,6 @@ class ScreenSharePopup: UIViewController {
         visualEffectView.colorTintAlpha = 0.2
         visualEffectView.blurRadius = 10
         visualEffectView.scale = 1
-
         blurView.addSubview(visualEffectView)
     }
     

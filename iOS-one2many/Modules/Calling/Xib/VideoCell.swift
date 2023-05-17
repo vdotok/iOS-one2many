@@ -35,7 +35,7 @@ class VideoCell: UICollectionViewCell {
     
     func configure(with stream: UserStream, users: [User]?) {
         
-        guard let user = users, let currentUser = user.filter({$0.refID == stream.referenceID}).first else{return}
+        guard let user = users, let currentUser = user.filter({$0.refID == stream.referenceId}).first else{return}
         remoteName.text = currentUser.fullName
         
         switch stream.sessionMediaType {
