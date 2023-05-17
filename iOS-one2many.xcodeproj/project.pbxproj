@@ -122,7 +122,6 @@
 		5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */; };
 		A85D93E22702FE7D003A3375 /* BroadcastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A85D93E12702FE7D003A3375 /* BroadcastView.xib */; };
 /* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		5DE4B3A326970899009DAE5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -139,7 +138,6 @@
 			remoteInfo = ScreenShare;
 		};
 /* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		49E6849E297FA5580039C025 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -174,7 +172,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		49CFD4952994CDF400A74579 /* VdotokShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdotokShare.swift; sourceTree = "<group>"; };
 		49CFD498299516CF00A74579 /* WormHoleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WormHoleConstants.swift; sourceTree = "<group>"; };
@@ -294,7 +291,6 @@
 		5DE5836D269D7B8400985CFA /* ScreenSharePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSharePopup.swift; sourceTree = "<group>"; };
 		A85D93E12702FE7D003A3375 /* BroadcastView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BroadcastView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		5DA7BBE0267562A800A3E292 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -321,7 +317,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
 		5D0A25552698416500231087 /* Landing */ = {
 			isa = PBXGroup;
@@ -671,7 +666,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
 /* Begin PBXNativeTarget section */
 		5DA7BBE2267562A800A3E292 /* iOS-one2many */ = {
 			isa = PBXNativeTarget;
@@ -730,7 +724,6 @@
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
-
 /* Begin PBXProject section */
 		5DA7BBDB267562A800A3E292 /* Project object */ = {
 			isa = PBXProject;
@@ -769,7 +762,6 @@
 			);
 		};
 /* End PBXProject section */
-
 /* Begin PBXResourcesBuildPhase section */
 		5DA7BBE1267562A800A3E292 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -813,7 +805,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		5DA7BBDF267562A800A3E292 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -926,7 +917,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
 /* Begin PBXTargetDependency section */
 		5DE4B3A426970899009DAE5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -939,7 +929,6 @@
 			targetProxy = 5DE4B3A626970899009DAE5B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		5DA7BBEC267562A800A3E292 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -958,7 +947,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		5DA7BBF5267562AA00A3E292 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1221,7 +1209,6 @@
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
-
 /* Begin XCConfigurationList section */
 		5DA7BBDE267562A800A3E292 /* Build configuration list for PBXProject "iOS-one2many" */ = {
 			isa = XCConfigurationList;
