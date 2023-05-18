@@ -24,9 +24,6 @@ If command is not found then you don’t have Cocoapods installed on your system
 * If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
 
-### Project Signup and Project ID
-Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER** and **PROJECT ID**
-
 ### Code Setup
 *	On VdoTok Github repo,click on **Code** button 
 *	From HTTPS section, copy **repo URL** 
@@ -45,9 +42,8 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
       
 <img width="500" alt="Screen Shot 2022-08-22 at 5 10 37 PM" src="https://user-images.githubusercontent.com/111276411/186087301-81952093-eabf-4c3a-85f9-21f34dbd9b3f.png">
 
-### Updating  Project ID and Authentication Token
-
-*  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://console.vdotok.com/login)
+### Project Signup and Project ID
+*  Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER** and **PROJECT ID**
 *  In cloned directory, double-click to open **.xcworkspace file** in Xcode
 *  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
 
@@ -79,8 +75,11 @@ To run on a real device:
    *   Open the Project Navigator and navigate to the **[Pods]** project.
    *   Select **"each"** target listed beneath it,then
    *   In the drop-down list there, change the Minimum Deployments value to **11.0 version**. (DO NOT enter manually)
-  <img width="500" alt="Screenshot 2023-05-18 at 9 59 12 AM" src="https://github.com/vdotok/iOS-one2many/assets/109524378/8517c7de-e309-4fe9-a5fd-ce60fabf5042">
-   
+  
+<img width="500" alt="Screenshot 2023-05-18 at 9 59 12 AM" src="https://github.com/vdotok/iOS-one2many/assets/109524378/8517c7de-e309-4fe9-a5fd-ce60fabf5042">
+
+   This Issue is Respective of XCode Version 14.3
+  
    *   Thereafter, **clean build** folder from Product Menu, and hopefully you'll be able to **build the project successfully**.
    *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
