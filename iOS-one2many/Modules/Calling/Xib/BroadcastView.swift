@@ -146,7 +146,7 @@ class BroadcastView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapLocalView))
         tap.numberOfTapsRequired = 2
         smallLocalView.addGestureRecognizer(tap)
-        smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width: 120, height: 170)
+        smallLocalView.frame = CGRect(x: UIScreen.main.bounds.size.width - smallLocalView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - smallLocalView.frame.size.height * 1.1, width:  1080, height: 1920)
         
     }
     
