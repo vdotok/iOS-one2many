@@ -8,6 +8,7 @@
 
 import Foundation
 struct Constants {
+    
     static let Request = "request"
     static let Register = "register"
     static let Wormhole = "wormhole"
