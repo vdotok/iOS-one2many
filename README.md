@@ -7,7 +7,7 @@ iOSSDKStreaming-one2many Broadcast
 ## Requirements
 
 ##### Development Requirements
-* Xcode 13.4.1 or latest version
+* Xcode 14.3 or latest version
 * [Click here](https://developer.apple.com/xcode/resources/) to download Xcode on your Macbook
 
 ##### System Requirements
@@ -66,7 +66,6 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 * Now checkmark the box to enable **Group ID** and tap on Refresh icon 
 * **App Group ID** must be kept same for all targets
 * Repeat the above action for **Screen Share**, and **Screenshare Utility Target**
-* Now go to AppsGroup struct **(iOS-one2many -> common -> constants)**, replace the values for **APP_GROUP** and **SCREEN_SHARE_PREFERED_EXTENSION** with your **App Group Identifier** and **Screenshare Target's Bundle Identifier** respectively
 
 ### Building On Device
 *Please be noted that iOSSDKStreaming does not work for iOS Simulator*
@@ -76,6 +75,13 @@ To run on a real device:
    *   Connect your device with MacBook
    *   Select your device from the run destination menu in toolbar
    *   Click on play button on xcode toolbar
+   *   If you face this issue **ERROR: File not found:   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/arc/libarclite_iphoneos.a**, then
+   *   Open the Project Navigator and navigate to the **[Pods]** project.
+   *   Select **"each"** target listed beneath it,then
+   *   In the drop-down list there, change the Minimum Deployments value to **11.0 version**. (DO NOT enter manually)
+  <img width="500" alt="Screenshot 2023-05-18 at 9 59 12 AM" src="https://github.com/vdotok/iOS-one2many/assets/109524378/8517c7de-e309-4fe9-a5fd-ce60fabf5042">
+   
+   *   Thereafter, **clean build** folder from Product Menu, and hopefully you'll be able to **build the project successfully**.
    *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
