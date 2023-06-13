@@ -188,7 +188,6 @@ extension SampleHandler: SessionDelegate {
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
-
         case .calling:
             break
         case .ringing:
@@ -224,10 +223,10 @@ extension SampleHandler: SessionDelegate {
             break
         case .insufficientBalance:
             break
-        case .reConnect:
-            break
         case .temporaryUnAvailable:
            break
+        default:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString

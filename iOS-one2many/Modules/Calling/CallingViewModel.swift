@@ -421,6 +421,7 @@ extension CallingViewModelImpl: SessionDelegate {
         output?(.configureRemote(streams: streams, session: session))
         guard let localStream = streams.filter({$0.streamDirection == .outgoing}).first else {return}
         output?(.configureLocal(view: localStream.renderer, session: session))
+     
     }
     
     func stateDidUpdate(for session: VTokBaseSession) {

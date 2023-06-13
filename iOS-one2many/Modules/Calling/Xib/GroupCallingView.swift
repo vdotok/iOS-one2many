@@ -57,7 +57,7 @@ class GroupCallingView: UIView {
         configureCollectionView()
         connectedView.isHidden = true
         callStatus.isHidden = true
-        localView.frame = CGRect(x: UIScreen.main.bounds.size.width - localView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - localView.frame.size.height * 1.1, width:  1080, height: 1920)
+        localView.frame = CGRect(x: UIScreen.main.bounds.size.width - localView.frame.size.width + 1.1, y: UIScreen.main.bounds.size.height - localView.frame.size.height * 1.1, width:  120, height: 170)
         
     }
     

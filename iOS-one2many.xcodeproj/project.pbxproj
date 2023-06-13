@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491FCA542A31A93F001930F7 /* iphone_11_pro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */; };
 		49A243E42A1E335D003A37C8 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A243E32A1E335D003A37C8 /* AppsGroup.swift */; };
 		49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD4952994CDF400A74579 /* VdotokShare.swift */; };
 		49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD498299516CF00A74579 /* WormHoleConstants.swift */; };
@@ -175,6 +176,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = iphone_11_pro.mp3; sourceTree = "<group>"; };
 		49A243DE2A1E2E86003A37C8 /* iOS-one2many.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = "iOS-one2many.entitlements"; path = "../../../../Downloads/iOS-one2many.entitlements"; sourceTree = "<group>"; };
 		49A243DF2A1E2FE7003A37C8 /* ScreenShare.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		49A243E32A1E335D003A37C8 /* AppsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		5DA7BBE5267562A800A3E292 /* iOS-one2many */ = {
 			isa = PBXGroup;
 			children = (
+				491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */,
 				49A243DE2A1E2E86003A37C8 /* iOS-one2many.entitlements */,
 				5DA7BC262675FDF700A3E292 /* Modules */,
 				5DA7BC212675FDCA00A3E292 /* Model */,
@@ -784,6 +787,7 @@
 				5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */,
 				5DA7BBF3267562AA00A3E292 /* LaunchScreen.storyboard in Resources */,
 				5D0A255C2698420700231087 /* Landing.storyboard in Resources */,
+				491FCA542A31A93F001930F7 /* iphone_11_pro.mp3 in Resources */,
 				5D7CD5322677EC8C004799EA /* CreateGroupPopup.xib in Resources */,
 				5D7CD56F2678AE29004799EA /* GroupCallingView.xib in Resources */,
 				5D4738DF26F1FF3300C67F6E /* TVBroadcastCell.xib in Resources */,
