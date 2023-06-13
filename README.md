@@ -49,7 +49,7 @@ Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER
 
 *  Get **Project ID** and **TENANT TESTING SERVER** from [Admin Panel](https://console.vdotok.com/login)
 *  In cloned directory, double-click to open **.xcworkspace file** in Xcode
-*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** ( without `https://` ) with your values
+*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **HOST** ( without `https://` ) with your values
 
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
