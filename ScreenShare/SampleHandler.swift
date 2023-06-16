@@ -16,12 +16,13 @@ class SampleHandler: RPBroadcastSampleHandler {
     var request: RegisterRequest?
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
+    var projectID : String!
 
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.norgic.ios.broadcasting", optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
-    
+
     
     override init() {
         super.init()
@@ -64,6 +65,13 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+        wormhole.listenForMessage(withIdentifier: "Project_id") { [weak self] message -> Void  in
+            if let projectId = message as? String {
+                self!.projectID  = projectId
+                
+            }
+        }
+        
     }
     
     func setScreenShareAppAudio(with message: String) {
@@ -96,7 +104,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                   authorizationToken: screenShareData.authenticationToken,
                                   socketType: .screenShare,
                                   requestId: getRequestId(),
-                                  projectId: AuthenticationConstants.PROJECTID)
+                                  projectId: self.projectID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }

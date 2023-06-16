@@ -20,5 +20,6 @@ struct WormHoleConstants {
     static let sessionTerminated = "sessionTerminated"
     static let initScreenSharingSdk = "InitScreenSharingSdk"
     static let hangup = "hangup"
+    static let project_id = "Project_id"
     static let sessionKill = "sessionKill"
 }

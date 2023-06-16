@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		491FCA542A31A93F001930F7 /* iphone_11_pro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */; };
+		499D2E3E2A3B464C004431AB /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E3D2A3B464C004431AB /* AuthenticationModel.swift */; };
+		499D2E452A3B4681004431AB /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499D2E402A3B4681004431AB /* QRScanner.storyboard */; };
+		499D2E462A3B4681004431AB /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E412A3B4681004431AB /* QRScannerViewController.swift */; };
+		499D2E472A3B4681004431AB /* QRScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E422A3B4681004431AB /* QRScannerRouter.swift */; };
+		499D2E482A3B4681004431AB /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E432A3B4681004431AB /* QRScannerViewModel.swift */; };
+		499D2E492A3B4681004431AB /* QRScannerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E442A3B4681004431AB /* QRScannerBuilder.swift */; };
 		49A243E42A1E335D003A37C8 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A243E32A1E335D003A37C8 /* AppsGroup.swift */; };
 		49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD4952994CDF400A74579 /* VdotokShare.swift */; };
 		49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD498299516CF00A74579 /* WormHoleConstants.swift */; };
@@ -177,6 +183,12 @@
 
 /* Begin PBXFileReference section */
 		491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = iphone_11_pro.mp3; sourceTree = "<group>"; };
+		499D2E3D2A3B464C004431AB /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		499D2E402A3B4681004431AB /* QRScanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
+		499D2E412A3B4681004431AB /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		499D2E422A3B4681004431AB /* QRScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerRouter.swift; sourceTree = "<group>"; };
+		499D2E432A3B4681004431AB /* QRScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
+		499D2E442A3B4681004431AB /* QRScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerBuilder.swift; sourceTree = "<group>"; };
 		49A243DE2A1E2E86003A37C8 /* iOS-one2many.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = "iOS-one2many.entitlements"; path = "../../../../Downloads/iOS-one2many.entitlements"; sourceTree = "<group>"; };
 		49A243DF2A1E2FE7003A37C8 /* ScreenShare.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		49A243E32A1E335D003A37C8 /* AppsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
@@ -324,6 +336,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		499D2E3F2A3B4664004431AB /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				499D2E402A3B4681004431AB /* QRScanner.storyboard */,
+				499D2E442A3B4681004431AB /* QRScannerBuilder.swift */,
+				499D2E422A3B4681004431AB /* QRScannerRouter.swift */,
+				499D2E412A3B4681004431AB /* QRScannerViewController.swift */,
+				499D2E432A3B4681004431AB /* QRScannerViewModel.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		5D0A25552698416500231087 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,6 +597,7 @@
 				5DA2C27C2677A5A100B6F36C /* AllUsersReponse.swift */,
 				5DA2C2822677A62A00B6F36C /* CreateGroupResponse.swift */,
 				5D0A253B26981F0000231087 /* BroadcastData.swift */,
+				499D2E3D2A3B464C004431AB /* AuthenticationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -580,6 +605,7 @@
 		5DA7BC262675FDF700A3E292 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				499D2E3F2A3B4664004431AB /* QRCode */,
 				5D0A25552698416500231087 /* Landing */,
 				5D7CD5672678A955004799EA /* Calling */,
 				5DA2C26C2677921600B6F36C /* CreateGroup */,
@@ -795,6 +821,7 @@
 				5D1A8F812725D7890061BFB4 /* Assets.xcassets in Resources */,
 				5D7CD5612678A950004799EA /* Calling.storyboard in Resources */,
 				5D7CD57B2678B1E2004799EA /* VideoCell.xib in Resources */,
+				499D2E452A3B4681004431AB /* QRScanner.storyboard in Resources */,
 				5DA2C29B2677A98100B6F36C /* CreateGroupCell.xib in Resources */,
 				5DA7BC8326775A3900A3E292 /* GroupCell.xib in Resources */,
 				5DA7BC3A2675FE6400A3E292 /* SignUp.storyboard in Resources */,
@@ -858,21 +885,26 @@
 				5DA7BC132675FD3500A3E292 /* BaseDataStore.swift in Sources */,
 				5DA7BC772677595700A3E292 /* AllGroupRequest.swift in Sources */,
 				5DA7BC8726775AB900A3E292 /* Color+Extension.swift in Sources */,
+				499D2E482A3B4681004431AB /* QRScannerViewModel.swift in Sources */,
 				5DA7BC482675FE8300A3E292 /* ChannelRouter.swift in Sources */,
 				5DA2C2762677922E00B6F36C /* CreateGroupViewModel.swift in Sources */,
 				5DA2C2832677A62A00B6F36C /* CreateGroupResponse.swift in Sources */,
 				5DA7BC6E2677567000A3E292 /* SignupRequest.swift in Sources */,
 				5DA7BC742677594300A3E292 /* AllGroupService.swift in Sources */,
+				499D2E472A3B4681004431AB /* QRScannerRouter.swift in Sources */,
 				5DA7BC072675FCCD00A3E292 /* AuthenticationService.swift in Sources */,
 				5D20D785268C56E500B78BFE /* DeleteGroupRequest.swift in Sources */,
 				5D7CD5312677EC8C004799EA /* CreateGroupPopup.swift in Sources */,
 				5DE5836E269D7B8400985CFA /* ScreenSharePopup.swift in Sources */,
 				5DA2C29A2677A98100B6F36C /* CreateGroupCell.swift in Sources */,
+				499D2E492A3B4681004431AB /* QRScannerBuilder.swift in Sources */,
 				5DA7BC4A2675FE8300A3E292 /* ChannelBuilder.swift in Sources */,
 				5DA2C2802677A61000B6F36C /* CreateGroupService.swift in Sources */,
 				5D20D787268C570900B78BFE /* DeleteGroupService.swift in Sources */,
 				5D7CD5642678A950004799EA /* CallingBuilder.swift in Sources */,
+				499D2E462A3B4681004431AB /* QRScannerViewController.swift in Sources */,
 				5DA7BC162675FD4500A3E292 /* ApiRequest.swift in Sources */,
+				499D2E3E2A3B464C004431AB /* AuthenticationModel.swift in Sources */,
 				5D83A8EC2678B68000F001DE /* Constants.swift in Sources */,
 				49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */,
 				5D2DC2C028410CF900535179 /* Bundle+Extension.swift in Sources */,
@@ -1087,7 +1119,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-one2many/iOS-one2many.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 21;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2XMPHHJW2J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1115,7 +1147,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS-one2many/iOS-one2manyRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 21;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2XMPHHJW2J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
