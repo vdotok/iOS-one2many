@@ -223,8 +223,14 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             let sessionUUID = getRequestId()
             guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
+            let messageID = String(UserDefaults.projectId) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+<<<<<<< HEAD
                 self.wormhole.passMessageObject(message, identifier: "InitScreenSharingSdk")
+=======
+                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
+                self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
+>>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
             })
         case .videoCall:
             let sessionUUID = getRequestId()
@@ -234,7 +240,9 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
+            let messageID = String(UserDefaults.projectId) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         
@@ -430,6 +438,7 @@ extension CallingViewModelImpl: SessionDelegate {
         output?(.configureRemote(streams: streams, session: session))
         guard let localStream = streams.filter({$0.streamDirection == .outgoing}).first else {return}
         output?(.configureLocal(view: localStream.renderer, session: session))
+     
     }
     
     func stateDidUpdate(for session: VTokBaseSession) {

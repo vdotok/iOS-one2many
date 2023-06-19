@@ -16,14 +16,19 @@ class SampleHandler: RPBroadcastSampleHandler {
     var request: RegisterRequest?
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
+    var projectID : String!
 
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.norgic.ios.broadcasting", optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
+<<<<<<< HEAD
     
     var counter = 0
     
+=======
+
+>>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
     
     override init() {
         super.init()
@@ -66,11 +71,20 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+<<<<<<< HEAD
         
         
         wormhole.listenForMessage(withIdentifier: "InitReInviteFromSampleHandler", listener: { [weak self] (messageObject) -> Void in
             self?.initReInvite()
         })
+=======
+        wormhole.listenForMessage(withIdentifier: "Project_id") { [weak self] message -> Void  in
+            if let projectId = message as? String {
+                self!.projectID  = projectId
+                
+            }
+        }
+>>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
         
     }
     
@@ -104,7 +118,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                   authorizationToken: screenShareData.authenticationToken,
                                   socketType: .screenShare,
                                   requestId: getRequestId(),
-                                  projectId: AuthenticationConstants.PROJECTID)
+                                  projectId: self.projectID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -213,7 +227,6 @@ extension SampleHandler: SessionDelegate {
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
-
         case .calling:
             break
         case .ringing:
@@ -249,10 +262,10 @@ extension SampleHandler: SessionDelegate {
             break
         case .insufficientBalance:
             break
-        case .reConnect:
-            break
         case .temporaryUnAvailable:
            break
+        default:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString
