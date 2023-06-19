@@ -244,6 +244,10 @@ extension ChannelViewModelImpl {
 }
 
 extension ChannelViewModelImpl: SDKConnectionDelegate {
+    func initReInvite() {
+        print("")
+    }
+    
     
     func didGenerate(output: SDKOutPut) {
         switch output {

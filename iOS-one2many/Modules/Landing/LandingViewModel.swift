@@ -116,12 +116,27 @@ extension LandingViewModelImpl {
 }
 
 extension LandingViewModelImpl: SDKConnectionDelegate {
+    func initReInvite() {
+        print("")
+        let message : NSString =  "StartScreenSharing"
+        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+            self.wormhole.passMessageObject(message, identifier: "InitReInviteFromSampleHandler")
+        })
+    }
+    
     func didGenerate(output: SDKOutPut) {
         switch output {
         case .disconnected(_):
             self.output?(.disconnected)
         case .registered:
             self.output?(.connected)
+            
+            if(vtokSdk?.sessionCount() == 0){
+                let message : NSString =  "initiateSampleSession"
+                wormhole.passMessageObject(message, identifier: "initiateSampleSession")
+            }
+            
+            
         case .sessionRequest(let sessionRequest):
             guard let sdk = vtokSdk else {return}
             router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)

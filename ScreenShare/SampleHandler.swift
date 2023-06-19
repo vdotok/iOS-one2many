@@ -22,6 +22,8 @@ class SampleHandler: RPBroadcastSampleHandler {
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
     
+    var counter = 0
+    
     
     override init() {
         super.init()
@@ -62,6 +64,12 @@ class SampleHandler: RPBroadcastSampleHandler {
                 let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
                 self!.finishBroadcastWithError(error)
             }
+        })
+        
+        
+        
+        wormhole.listenForMessage(withIdentifier: "InitReInviteFromSampleHandler", listener: { [weak self] (messageObject) -> Void in
+            self?.initReInvite()
         })
         
     }
@@ -105,6 +113,7 @@ class SampleHandler: RPBroadcastSampleHandler {
         // User has requested to start the broadcast. Setup info from the UI extension can be supplied but optional.
         let message : NSString =  "StartScreenSharing"
         wormhole.passMessageObject(message, identifier: "Command")
+        
     }
     
     override func broadcastPaused() {
@@ -152,13 +161,28 @@ class SampleHandler: RPBroadcastSampleHandler {
 }
 
 extension SampleHandler: SDKConnectionDelegate {
+    func initReInvite() {
+        guard let sdk = vtokSdk, let session = screenShareData else {return}
+        
+        
+                    var myString = String(sdk.sessionCount())
+                    let message : NSString =  NSString(string: myString)
+                    wormhole.passMessageObject(message, identifier: "fireNotification")
+        
+        
+        sdk.startReInvite(session: session.baseSession, sessionDelegate: self)
+    }
+    
     func didGenerate(output: SDKOutPut) {
         switch output {
         case .registered:
             print("==== screeen share registerd ====")
             guard let sdk = vtokSdk, let session = screenShareData else {return}
             self.screenShareData = session
-            sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            if(counter == 0){
+                counter = 1
+                sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            }
         case .disconnected(_):
             print("==== screeen failed to registerd ====")
             break
@@ -166,6 +190,7 @@ extension SampleHandler: SDKConnectionDelegate {
             break
         }
     }
+    
     
 }
 
