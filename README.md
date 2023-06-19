@@ -21,7 +21,7 @@ Open **Terminal** and type command `pod --version` and hit **Enter**.
 If command is not found then you don’t have Cocoapods installed on your system. To install Cocoapods, here are the steps to follow:
 #### Installing Cocoapods
 * Type the following command in **Terminal** `sudo gem install cocoapods` and hit **Enter**
-* If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`
+* If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`. [Click here](https://brew.sh/) to install **brew**
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
 
 ### Code Setup
@@ -45,7 +45,7 @@ If command is not found then you don’t have Cocoapods installed on your system
 ### Project Signup and Project ID
 *  Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER** and **PROJECT ID**
 *  In cloned directory, double-click to open **.xcworkspace file** in Xcode
-*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **HOST** ( without `https://` ) with your values
+*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **HOST** with your values
 
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
