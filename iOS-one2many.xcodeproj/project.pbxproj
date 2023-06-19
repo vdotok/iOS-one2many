@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
 		0FABBE0D2A37300200E54FE6 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABBE0C2A372FFA00E54FE6 /* iOSSDKStreaming.framework */; };
 		0FABBE0E2A37300200E54FE6 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABBE0C2A372FFA00E54FE6 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0FABBE0F2A37300600E54FE6 /* iOSSDKStreaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABBE0C2A372FFA00E54FE6 /* iOSSDKStreaming.framework */; };
 		0FABBE102A37300600E54FE6 /* iOSSDKStreaming.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABBE0C2A372FFA00E54FE6 /* iOSSDKStreaming.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-=======
+
 		491FCA542A31A93F001930F7 /* iphone_11_pro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */; };
 		499D2E3E2A3B464C004431AB /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E3D2A3B464C004431AB /* AuthenticationModel.swift */; };
 		499D2E452A3B4681004431AB /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499D2E402A3B4681004431AB /* QRScanner.storyboard */; };
@@ -20,7 +19,6 @@
 		499D2E472A3B4681004431AB /* QRScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E422A3B4681004431AB /* QRScannerRouter.swift */; };
 		499D2E482A3B4681004431AB /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E432A3B4681004431AB /* QRScannerViewModel.swift */; };
 		499D2E492A3B4681004431AB /* QRScannerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D2E442A3B4681004431AB /* QRScannerBuilder.swift */; };
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
 		49A243E42A1E335D003A37C8 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A243E32A1E335D003A37C8 /* AppsGroup.swift */; };
 		49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD4952994CDF400A74579 /* VdotokShare.swift */; };
 		49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD498299516CF00A74579 /* WormHoleConstants.swift */; };
@@ -200,11 +198,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
 		0FABBE072A372FFA00E54FE6 /* iOSSDKStreaming.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iOSSDKStreaming.xcodeproj; path = "../../../iOS-StreamingSDK/ios-sdk-streaming/iOSSDKStreaming.xcodeproj"; sourceTree = "<group>"; };
 		2380E8A6E404E35947FA6EAE /* Pods-ScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScreenShare.release.xcconfig"; path = "Target Support Files/Pods-ScreenShare/Pods-ScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		41836F60B109339CA0EE511E /* Pods_iOS_one2many.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOS_one2many.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-=======
 		491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = iphone_11_pro.mp3; sourceTree = "<group>"; };
 		499D2E3D2A3B464C004431AB /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		499D2E402A3B4681004431AB /* QRScanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
@@ -212,7 +208,6 @@
 		499D2E422A3B4681004431AB /* QRScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerRouter.swift; sourceTree = "<group>"; };
 		499D2E432A3B4681004431AB /* QRScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
 		499D2E442A3B4681004431AB /* QRScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerBuilder.swift; sourceTree = "<group>"; };
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
 		49A243DE2A1E2E86003A37C8 /* iOS-one2many.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = "iOS-one2many.entitlements"; path = "../../../../Downloads/iOS-one2many.entitlements"; sourceTree = "<group>"; };
 		49A243DF2A1E2FE7003A37C8 /* ScreenShare.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ScreenShare.entitlements; sourceTree = "<group>"; };
 		49A243E32A1E335D003A37C8 /* AppsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
@@ -368,14 +363,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-<<<<<<< HEAD
 		0FABBE082A372FFA00E54FE6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				0FABBE0C2A372FFA00E54FE6 /* iOSSDKStreaming.framework */,
 			);
 			name = Products;
-=======
 		499D2E3F2A3B4664004431AB /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +379,6 @@
 				499D2E432A3B4681004431AB /* QRScannerViewModel.swift */,
 			);
 			path = QRCode;
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
 			sourceTree = "<group>";
 		};
 		5D0A25552698416500231087 /* Landing */ = {
@@ -535,11 +527,8 @@
 		5DA7BBE5267562A800A3E292 /* iOS-one2many */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				0FABBE072A372FFA00E54FE6 /* iOSSDKStreaming.xcodeproj */,
-=======
 				491FCA532A31A93F001930F7 /* iphone_11_pro.mp3 */,
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
 				49A243DE2A1E2E86003A37C8 /* iOS-one2many.entitlements */,
 				5DA7BC262675FDF700A3E292 /* Modules */,
 				5DA7BC212675FDCA00A3E292 /* Model */,
