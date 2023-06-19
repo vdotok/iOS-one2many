@@ -25,10 +25,10 @@ public class LoginViewController: UIViewController {
     }
     
     @IBAction func didTapScanner(_ sender: Any) {
-        let builder = QRScannerBuilder().build(with: UINavigationController())
-        builder.modalPresentationStyle = .fullScreen
-        builder.modalTransitionStyle = .crossDissolve
-        self.present(builder, animated: true, completion: nil)
+//        let builder = QRScannerBuilder().build(with: UINavigationController())
+//        builder.modalPresentationStyle = .fullScreen
+//        builder.modalTransitionStyle = .crossDissolve
+//        self.present(builder, animated: true, completion: nil)
     }
     
     @IBAction func didTapLogin(_ sender: UIButton) {

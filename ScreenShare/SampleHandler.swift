@@ -22,13 +22,10 @@ class SampleHandler: RPBroadcastSampleHandler {
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
-<<<<<<< HEAD
     
     var counter = 0
     
-=======
 
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
     
     override init() {
         super.init()
@@ -71,21 +68,17 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
-<<<<<<< HEAD
         
         
         wormhole.listenForMessage(withIdentifier: "InitReInviteFromSampleHandler", listener: { [weak self] (messageObject) -> Void in
             self?.initReInvite()
         })
-=======
         wormhole.listenForMessage(withIdentifier: "Project_id") { [weak self] message -> Void  in
             if let projectId = message as? String {
                 self!.projectID  = projectId
                 
             }
-        }
->>>>>>> 694d017658401580b768560b77429e5ceda9e2fa
-        
+        }        
     }
     
     func setScreenShareAppAudio(with message: String) {
