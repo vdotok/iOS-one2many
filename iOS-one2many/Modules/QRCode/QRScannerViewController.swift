@@ -8,13 +8,13 @@
 
 import UIKit
 import AVFoundation
-import MMWormhole
 
 public class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     @IBOutlet weak var cameraView: UIView!
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+
     var viewModel: QRScannerViewModel!
     
     override public func viewDidLoad() {
@@ -120,9 +120,8 @@ extension QRScannerViewController {
             let model  = try JSONDecoder().decode(AuthenticationModel.self, from: data)
             UserDefaults.baseUrl = model.tenantApiUrl
             UserDefaults.projectId = model.projectId
-            AuthenticationConstants.PROJECTID = model.projectId
             AuthenticationConstants.TENANTSERVER = model.tenantApiUrl
-        
+            AuthenticationConstants.PROJECTID = model.projectId
         } catch (let error) {
             print(error)
         }

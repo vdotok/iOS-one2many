@@ -9,8 +9,7 @@ target 'iOS-one2many' do
   # Pods for IOS-one2many
   pod 'KRProgressHUD'
   pod 'IQKeyboardManagerSwift'
-  #pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-  pod 'InternalStrategy', :path => '../internal_strategy'
+  pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
   pod "VisualEffectView"
 
 end
@@ -18,7 +17,7 @@ target 'ScreenShare' do
   # Pods for screen share
     use_frameworks!
     pod 'MMWormhole'
-    #pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-    pod 'InternalStrategy', :path => '../internal_strategy'
+    pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
+    
 end
 
