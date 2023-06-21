@@ -16,12 +16,16 @@ class SampleHandler: RPBroadcastSampleHandler {
     var request: RegisterRequest?
     var audioState: ScreenShareAudioState!
     var screenState: ScreenShareScreenState!
+    var projectID : String!
 
     let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.norgic.ios.broadcasting", optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
     
+    var counter = 0
+    
+
     
     override init() {
         super.init()
@@ -64,6 +68,17 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         })
         
+        
+        
+        wormhole.listenForMessage(withIdentifier: "InitReInviteFromSampleHandler", listener: { [weak self] (messageObject) -> Void in
+            self?.initReInvite()
+        })
+        wormhole.listenForMessage(withIdentifier: "Project_id") { [weak self] message -> Void  in
+            if let projectId = message as? String {
+                self!.projectID  = projectId
+                
+            }
+        }        
     }
     
     func setScreenShareAppAudio(with message: String) {
@@ -96,7 +111,7 @@ class SampleHandler: RPBroadcastSampleHandler {
                                   authorizationToken: screenShareData.authenticationToken,
                                   socketType: .screenShare,
                                   requestId: getRequestId(),
-                                  projectId: AuthenticationConstants.PROJECTID)
+                                  projectId: self.projectID)
         
         vtokSdk = VTokSDK(url: screenShareData.url, registerRequest: request!, connectionDelegate: self, connectionType: .screenShare)
     }
@@ -105,6 +120,7 @@ class SampleHandler: RPBroadcastSampleHandler {
         // User has requested to start the broadcast. Setup info from the UI extension can be supplied but optional.
         let message : NSString =  "StartScreenSharing"
         wormhole.passMessageObject(message, identifier: "Command")
+        
     }
     
     override func broadcastPaused() {
@@ -152,13 +168,28 @@ class SampleHandler: RPBroadcastSampleHandler {
 }
 
 extension SampleHandler: SDKConnectionDelegate {
+    func initReInvite() {
+        guard let sdk = vtokSdk, let session = screenShareData else {return}
+        
+        
+                    var myString = String(sdk.sessionCount())
+                    let message : NSString =  NSString(string: myString)
+                    wormhole.passMessageObject(message, identifier: "fireNotification")
+        
+        
+        sdk.startReInvite(session: session.baseSession, sessionDelegate: self)
+    }
+    
     func didGenerate(output: SDKOutPut) {
         switch output {
         case .registered:
             print("==== screeen share registerd ====")
             guard let sdk = vtokSdk, let session = screenShareData else {return}
             self.screenShareData = session
-            sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            if(counter == 0){
+                counter = 1
+                sdk.initiate(session: session.baseSession, sessionDelegate: self)
+            }
         case .disconnected(_):
             print("==== screeen failed to registerd ====")
             break
@@ -166,6 +197,7 @@ extension SampleHandler: SDKConnectionDelegate {
             break
         }
     }
+    
     
 }
 
@@ -188,7 +220,6 @@ extension SampleHandler: SessionDelegate {
     
     func stateDidUpdate(for session: VTokBaseSession) {
         switch session.state {
-
         case .calling:
             break
         case .ringing:
@@ -224,10 +255,10 @@ extension SampleHandler: SessionDelegate {
             break
         case .insufficientBalance:
             break
-        case .reConnect:
-            break
         case .temporaryUnAvailable:
            break
+        default:
+            break
         }
         
         let message = String(session.connectedUsers.count) as NSString

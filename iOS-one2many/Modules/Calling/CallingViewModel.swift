@@ -76,14 +76,14 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         addNotificationObserver()
     
         if let baseSession = session, baseSession.state == .receivedSessionInitiation {
-            vtokSdk?.set(sessionDelegate: self, for: baseSession)
+            self.vtokSdk?.set(sessionDelegate: self, for: baseSession)
         }
         
         loadViews()
         listenForPublicURL()
         listenForParticipantAdd()
         listenForSessionTerminate()
-
+        listenForSampleHandlerSession()
     }
     
     func addNotificationObserver(){
@@ -99,7 +99,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             if !UIScreen.main.isCaptured {
               //    UIApplication.shared.isIdleTimerDisabled = false
                 guard let options = broadcastData?.broadcastOptions,
-                      let sdk = vtokSdk,
+                      let sdk = self.vtokSdk,
                       sessionDirection == .outgoing
                 else {return}
                 switch options {
@@ -128,6 +128,15 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
                 self?.setScreenShareSession(with: message)
             }
          
+        })
+    }
+    
+    
+    private func listenForSampleHandlerSession(){
+        
+        wormhole.listenForMessage(withIdentifier: "initiateSampleSession", listener: { [weak self] (messageObject) -> Void in
+            guard let session = self?.ssSession else { return }
+            self?.vtokSdk?.startReInvite(session: session, sessionDelegate: self!)
         })
     }
     
@@ -214,7 +223,12 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             let sessionUUID = getRequestId()
             guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
+            let messageID = String("1RN1RP") as NSString   //String(UserDefaults.projectId) as NSString
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
+            })
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         case .videoCall:
@@ -225,7 +239,9 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
+            let messageID = String(UserDefaults.projectId) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         
@@ -278,7 +294,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             output?(.loadBroadcastView(session: baseSession))
         }
         
-        vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
+        self.vtokSdk?.initiate(session: baseSession, sessionDelegate: self)
         callHangupHandling()
         return requestId
     }
@@ -368,12 +384,12 @@ extension CallingViewModelImpl {
             output?(.updateVideoView(session: session))
         }
         output?(.updateHangupButton(status: false))
-        vtokSdk?.accept(session: session)
+        self.vtokSdk?.accept(session: session)
         
     }
     
     func rejectCall(session: VTokBaseSession) {
-        vtokSdk?.reject(session: session)
+        self.vtokSdk?.reject(session: session)
         timer.invalidate()
         counter = 0
         output?(.dismissCallView)
@@ -384,23 +400,23 @@ extension CallingViewModelImpl {
         stopSound()
         timer.invalidate()
         counter = 0
-        vtokSdk?.hangup(session: session)
+        self.vtokSdk?.hangup(session: session)
     }
     
     func mute(session: VTokBaseSession, state: AudioState) {
-        vtokSdk?.mute(session: session, state: state)
+        self.vtokSdk?.mute(session: session, state: state)
     }
     
     func speaker(session: VTokBaseSession, state: SpeakerState) {
-        vtokSdk?.speaker(session: session, state: state)
+        self.vtokSdk?.speaker(session: session, state: state)
     }
     
     func flipCamera(session: VTokBaseSession, state: CameraType) {
-        vtokSdk?.switchCamera(session: session, to: state)
+        self.vtokSdk?.switchCamera(session: session, to: state)
     }
     
     func disableVideo(session: VTokBaseSession, state: VideoState) {
-        vtokSdk?.disableVideo(session: session, State: state)
+        self.vtokSdk?.disableVideo(session: session, State: state)
     }
     
 }
@@ -421,6 +437,7 @@ extension CallingViewModelImpl: SessionDelegate {
         output?(.configureRemote(streams: streams, session: session))
         guard let localStream = streams.filter({$0.streamDirection == .outgoing}).first else {return}
         output?(.configureLocal(view: localStream.renderer, session: session))
+     
     }
     
     func stateDidUpdate(for session: VTokBaseSession) {

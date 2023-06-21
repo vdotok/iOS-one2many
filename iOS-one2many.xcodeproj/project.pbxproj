@@ -10,6 +10,12 @@
 		49A243E42A1E335D003A37C8 /* AppsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A243E32A1E335D003A37C8 /* AppsGroup.swift */; };
 		49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD4952994CDF400A74579 /* VdotokShare.swift */; };
 		49CFD499299516CF00A74579 /* WormHoleConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFD498299516CF00A74579 /* WormHoleConstants.swift */; };
+		49E166382A4170E5000B828A /* QRScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E166332A4170E5000B828A /* QRScannerRouter.swift */; };
+		49E1663A2A4170E5000B828A /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E166352A4170E5000B828A /* QRScannerViewModel.swift */; };
+		49E1663B2A4170E5000B828A /* QRScannerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E166362A4170E5000B828A /* QRScannerBuilder.swift */; };
+		49E1663C2A4170E5000B828A /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E166372A4170E5000B828A /* QRScannerViewController.swift */; };
+		49E1663E2A417104000B828A /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E1663D2A417104000B828A /* AuthenticationModel.swift */; };
+		49E166652A432D6C000B828A /* QRScanner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49E166632A432D6C000B828A /* QRScanner.storyboard */; };
 		5D0A253826970C9800231087 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D83A8EB2678B68000F001DE /* Constants.swift */; };
 		5D0A253C26981F0100231087 /* BroadcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0A253B26981F0000231087 /* BroadcastData.swift */; };
 		5D0A255C2698420700231087 /* Landing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D0A25572698420700231087 /* Landing.storyboard */; };
@@ -180,6 +186,12 @@
 		49A243E32A1E335D003A37C8 /* AppsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppsGroup.swift; sourceTree = "<group>"; };
 		49CFD4952994CDF400A74579 /* VdotokShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdotokShare.swift; sourceTree = "<group>"; };
 		49CFD498299516CF00A74579 /* WormHoleConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WormHoleConstants.swift; sourceTree = "<group>"; };
+		49E166332A4170E5000B828A /* QRScannerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerRouter.swift; sourceTree = "<group>"; };
+		49E166352A4170E5000B828A /* QRScannerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
+		49E166362A4170E5000B828A /* QRScannerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerBuilder.swift; sourceTree = "<group>"; };
+		49E166372A4170E5000B828A /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		49E1663D2A417104000B828A /* AuthenticationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		49E166632A432D6C000B828A /* QRScanner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = QRScanner.storyboard; sourceTree = "<group>"; };
 		5D0A253B26981F0000231087 /* BroadcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastData.swift; sourceTree = "<group>"; };
 		5D0A25572698420700231087 /* Landing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Landing.storyboard; sourceTree = "<group>"; };
 		5D0A25582698420700231087 /* LandingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingRouter.swift; sourceTree = "<group>"; };
@@ -322,6 +334,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49E166302A41706A000B828A /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				49E166632A432D6C000B828A /* QRScanner.storyboard */,
+				49E166362A4170E5000B828A /* QRScannerBuilder.swift */,
+				49E166332A4170E5000B828A /* QRScannerRouter.swift */,
+				49E166372A4170E5000B828A /* QRScannerViewController.swift */,
+				49E166352A4170E5000B828A /* QRScannerViewModel.swift */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		5D0A25552698416500231087 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +587,7 @@
 		5DA7BC212675FDCA00A3E292 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49E1663D2A417104000B828A /* AuthenticationModel.swift */,
 				49A243E32A1E335D003A37C8 /* AppsGroup.swift */,
 				5DA7BC222675FDDC00A3E292 /* UserResponse.swift */,
 				5DA7BC672677562300A3E292 /* CheckUserNameResponse.swift */,
@@ -577,6 +602,7 @@
 		5DA7BC262675FDF700A3E292 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				49E166302A41706A000B828A /* QRCode */,
 				5D0A25552698416500231087 /* Landing */,
 				5D7CD5672678A955004799EA /* Calling */,
 				5DA2C26C2677921600B6F36C /* CreateGroup */,
@@ -781,6 +807,7 @@
 				5DA7BC8C26775C9E00A3E292 /* Colors.xcassets in Resources */,
 				5DA7BC472675FE8300A3E292 /* Channel.storyboard in Resources */,
 				5DA7BC2C2675FE0900A3E292 /* Login.storyboard in Resources */,
+				49E166652A432D6C000B828A /* QRScanner.storyboard in Resources */,
 				5DE5836B269D7B7000985CFA /* ScreenSharePopup.xib in Resources */,
 				5DA7BBF3267562AA00A3E292 /* LaunchScreen.storyboard in Resources */,
 				5D0A255C2698420700231087 /* Landing.storyboard in Resources */,
@@ -822,6 +849,7 @@
 				5D0A25742698B37C00231087 /* BroadcastView.swift in Sources */,
 				5DA7BC5F2677553900A3E292 /* LoginRequest.swift in Sources */,
 				5DA7BBEB267562A800A3E292 /* ViewController.swift in Sources */,
+				49E1663A2A4170E5000B828A /* QRScannerViewModel.swift in Sources */,
 				5D0A256426984B4C00231087 /* RadioButton.swift in Sources */,
 				5DA7BC5C2677552500A3E292 /* LoginService.swift in Sources */,
 				5D4738E226F1FF3300C67F6E /* TVBroadCastViewController.swift in Sources */,
@@ -829,6 +857,7 @@
 				5D0A255E2698420700231087 /* LandingViewController.swift in Sources */,
 				49CFD4962994CDF400A74579 /* VdotokShare.swift in Sources */,
 				5D7CD5632678A950004799EA /* CallingViewController.swift in Sources */,
+				49E1663C2A4170E5000B828A /* QRScannerViewController.swift in Sources */,
 				5DA2C2732677922E00B6F36C /* CreateGroupRouter.swift in Sources */,
 				5DA7BC2D2675FE0900A3E292 /* LoginRouter.swift in Sources */,
 				5D20D782268C56CF00B78BFE /* EditGroupRequest.swift in Sources */,
@@ -843,6 +872,7 @@
 				5DA2C2742677922E00B6F36C /* CreateGroupViewController.swift in Sources */,
 				49A243E42A1E335D003A37C8 /* AppsGroup.swift in Sources */,
 				5DA7BC59267754CD00A3E292 /* ProgresHud.swift in Sources */,
+				49E1663E2A417104000B828A /* AuthenticationModel.swift in Sources */,
 				5DA7BC682677562300A3E292 /* CheckUserNameResponse.swift in Sources */,
 				5DA2C2862677A64E00B6F36C /* CreateGroupRequest.swift in Sources */,
 				5D7CD5652678A950004799EA /* CallingViewModel.swift in Sources */,
@@ -851,11 +881,13 @@
 				5DA7BC3B2675FE6400A3E292 /* SignUpRouter.swift in Sources */,
 				5DA7BC3E2675FE6400A3E292 /* SignUpViewModel.swift in Sources */,
 				5DA7BC3C2675FE6400A3E292 /* SignUpViewController.swift in Sources */,
+				49E166382A4170E5000B828A /* QRScannerRouter.swift in Sources */,
 				5DA7BC132675FD3500A3E292 /* BaseDataStore.swift in Sources */,
 				5DA7BC772677595700A3E292 /* AllGroupRequest.swift in Sources */,
 				5DA7BC8726775AB900A3E292 /* Color+Extension.swift in Sources */,
 				5DA7BC482675FE8300A3E292 /* ChannelRouter.swift in Sources */,
 				5DA2C2762677922E00B6F36C /* CreateGroupViewModel.swift in Sources */,
+				49E1663B2A4170E5000B828A /* QRScannerBuilder.swift in Sources */,
 				5DA2C2832677A62A00B6F36C /* CreateGroupResponse.swift in Sources */,
 				5DA7BC6E2677567000A3E292 /* SignupRequest.swift in Sources */,
 				5DA7BC742677594300A3E292 /* AllGroupService.swift in Sources */,

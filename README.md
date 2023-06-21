@@ -44,8 +44,11 @@ If command is not found then you don’t have Cocoapods installed on your system
 
 ### Project Signup and Project ID
 *  Register at [VdoTok HomePage](https://vdotok.com) to get **TENANT TESTING SERVER** and **PROJECT ID**
-*  In cloned directory, double-click to open **.xcworkspace file** in Xcode
-*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **HOST** with your values
+*  In cloned directory,Double-click to open **.xcworkspace file** in Xcode
+  
+ **Ways To Add Project ID and Tenant Server**
+*  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** with your values
+*  You can use the QR code scanner provided on the Login and Signup screens once you have **BUILD** the application
 
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
