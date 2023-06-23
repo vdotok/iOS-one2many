@@ -223,12 +223,9 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             let sessionUUID = getRequestId()
             guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
-            let messageID = String("1RN1RP") as NSString   //String(UserDefaults.projectId) as NSString
-            DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
-                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
-            })
+            let messageID = String(UserDefaults.projectId) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-//                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
+                self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
             })
         case .videoCall:
