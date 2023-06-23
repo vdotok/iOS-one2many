@@ -50,7 +50,6 @@ If command is not found then you don’t have Cocoapods installed on your system
 *  In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **PROJECTID** and **TENANTSERVER** with your values
 *  You can use the QR code scanner provided on the Login and Signup screens once you have **BUILD** the application
 
-  
 ### Set up Bundle identifier & App groups
 * Go to your **Main Target->Signing and Capabilities**
 * Select your Team and setup your bundle identifier like `com.company.appname` for all the targets
@@ -79,8 +78,11 @@ To run on a real device:
    *   Open the Project Navigator and navigate to the **[Pods]** project.
    *   Select **"each"** target listed beneath it,then
    *   In the drop-down list there, change the Minimum Deployments value to **11.0 version**. (DO NOT enter manually)
-  <img width="500" alt="Screenshot 2023-05-18 at 9 59 12 AM" src="https://github.com/vdotok/iOS-one2many/assets/109524378/8517c7de-e309-4fe9-a5fd-ce60fabf5042">
-   
+  
+<img width="500" alt="Screenshot 2023-05-18 at 9 59 12 AM" src="https://github.com/vdotok/iOS-one2many/assets/109524378/8517c7de-e309-4fe9-a5fd-ce60fabf5042">
+
+   This Issue is Respective of XCode Version 14.3
+  
    *   Thereafter, **clean build** folder from Product Menu, and hopefully you'll be able to **build the project successfully**.
    *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
