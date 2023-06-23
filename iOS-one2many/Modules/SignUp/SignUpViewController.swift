@@ -31,6 +31,15 @@ public class SignUpViewController: UIViewController {
         viewModel.viewModelWillAppear()
     }
     
+    @IBAction func didTapScanner(_ sender: Any) {
+        let builder = QRScannerBuilder().build(with: UINavigationController())
+        builder.modalPresentationStyle = .fullScreen
+        builder.modalTransitionStyle = .crossDissolve
+        self.present(builder, animated: true, completion: nil)
+    }
+    
+    
+    
     @IBAction func didTapRegister(_ sender: UIButton) {
         guard let userName = userName.text, let password = password.text, let email = email.text else { return }
         if (AuthenticationConstants.PROJECTID.isEmpty && AuthenticationConstants.TENANTSERVER.isEmpty) {
