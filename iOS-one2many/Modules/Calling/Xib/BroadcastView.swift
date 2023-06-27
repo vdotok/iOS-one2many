@@ -21,6 +21,7 @@ import iOSSDKStreaming
 import MMWormhole
 import ReplayKit
 import AVKit
+import MaterialComponents.MaterialSnackbar
 
 protocol BroadcastDelegate: AnyObject {
     func didTapMute(for baseSession: VTokBaseSession, state: AudioState)
@@ -233,6 +234,10 @@ class BroadcastView: UIView {
         print("<<<<<public url \(url)")
         let pastBoard = UIPasteboard.general
         pastBoard.string = url
+        let message = MDCSnackbarMessage()
+        message.duration = 1
+        message.text = "URL is Copied to Clipboard."
+        MDCSnackbarManager.show(message)
     }
     
     @IBAction func didTapVideo(_ sender: UIButton) {

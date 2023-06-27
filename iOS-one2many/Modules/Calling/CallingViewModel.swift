@@ -444,7 +444,7 @@ extension CallingViewModelImpl: SessionDelegate {
             output?(.updateView(session: session))
         case .connected:
           didConnect()
-            output?(.updateUsers(session.connectedUsers.count))
+            output?(.updateUsers(countParticpant(session: session)))
         case .rejected:
           sessionReject()
         case .missedCall:
@@ -467,8 +467,8 @@ extension CallingViewModelImpl: SessionDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.sessionHangup()
             }
-//        case .updateParticipent:
-//            output?(.updateUsers(session.connectedUsers.count))
+        case .updateParticipent:
+            output?(.updateUsers(countParticpant(session: session)))
         default:
             break
         }
@@ -547,6 +547,12 @@ extension CallingViewModelImpl {
 }
 
 extension CallingViewModelImpl {
+    
+    func countParticpant(session:VTokBaseSession)->Int {
+        let participants = Array(Set(session.connectedUsers))
+        return participants.count
+    }
+    
     func callHangupHandling() {
         timer.invalidate()
         counter = 0
