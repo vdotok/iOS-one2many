@@ -18,5 +18,6 @@ struct AuthenticationConstants {
 
     static var TENANTSERVER = ""
     static var PROJECTID =  ""
+    static let APP_GROUP = ""
 }
 

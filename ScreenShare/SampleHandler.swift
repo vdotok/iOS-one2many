@@ -18,7 +18,7 @@ class SampleHandler: RPBroadcastSampleHandler {
     var screenState: ScreenShareScreenState!
     var projectID : String!
 
-    let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.norgic.ios.broadcasting", optionalDirectory: Constants.Wormhole)
+    let wormhole = MMWormhole(applicationGroupIdentifier: AuthenticationConstants.APP_GROUP, optionalDirectory: Constants.Wormhole)
     
     var baseSession : VTokBaseSession?
     var screenShareData: ScreenShareAppData?
@@ -261,7 +261,7 @@ extension SampleHandler: SessionDelegate {
             break
         }
         
-        let message = String(session.connectedUsers.count) as NSString
+        let message = String(countParticpant(session: session)) as NSString
         wormhole.passMessageObject(message, identifier: "participantAdded")
     }
     
@@ -270,11 +270,18 @@ extension SampleHandler: SessionDelegate {
         wormhole.passMessageObject(message, identifier: "didGetPublicURL")
     }
     
+    
 }
 
 
 
 extension SampleHandler {
+    
+    func countParticpant(session:VTokBaseSession)->Int {
+        let participants = Array(Set(session.connectedUsers))
+        return participants.count
+    }
+    
     func getRequestId() -> String {
         
         let generatable = IdGenerator()

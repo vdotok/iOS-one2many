@@ -223,7 +223,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
         case .screenShareWithAppAudio, .screenShareWithMicAudio:
             let sessionUUID = getRequestId()
             guard let message = getScreenShareDataString(for: sessionUUID, with: nil) else {return}
-            let messageID = String(UserDefaults.projectId) as NSString
+            let messageID = String(AuthenticationConstants.PROJECTID) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
@@ -236,7 +236,7 @@ class CallingViewModelImpl: NSObject, CallingViewModel, CallingViewModelInput {
             let screenShareUUID: String = getRequestId()
             makeSession(with: .videoCall, sessionUUID: callSessionUUID, associatedSessionUUID: screenShareUUID)
             guard let message = getScreenShareDataString(for: screenShareUUID, with: callSessionUUID) else {return}
-            let messageID = String(UserDefaults.projectId) as NSString
+            let messageID = String(AuthenticationConstants.PROJECTID) as NSString
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 self.wormhole.passMessageObject(messageID, identifier: WormHoleConstants.project_id)
                 self.wormhole.passMessageObject(message, identifier: WormHoleConstants.initScreenSharingSdk)
@@ -444,7 +444,7 @@ extension CallingViewModelImpl: SessionDelegate {
             output?(.updateView(session: session))
         case .connected:
           didConnect()
-            output?(.updateUsers(session.connectedUsers.count))
+            output?(.updateUsers(countParticpant(session: session)))
         case .rejected:
           sessionReject()
         case .missedCall:
@@ -467,8 +467,8 @@ extension CallingViewModelImpl: SessionDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.sessionHangup()
             }
-//        case .updateParticipent:
-//            output?(.updateUsers(session.connectedUsers.count))
+        case .updateParticipent:
+            output?(.updateUsers(countParticpant(session: session)))
         default:
             break
         }
@@ -547,6 +547,12 @@ extension CallingViewModelImpl {
 }
 
 extension CallingViewModelImpl {
+    
+    func countParticpant(session:VTokBaseSession)->Int {
+        let participants = Array(Set(session.connectedUsers))
+        return participants.count
+    }
+    
     func callHangupHandling() {
         timer.invalidate()
         counter = 0

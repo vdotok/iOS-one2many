@@ -27,6 +27,7 @@ protocol CreateGroupViewModel: CreateGroupViewModelInput {
     var searchContacts: [User] {get set}
     func viewModelDidLoad()
     func viewModelWillAppear()
+    func reloadUsers()
     func rowsCount() -> Int
     func viewModelItem(row: Int) -> User
     func filterGroups(with text: String)
@@ -62,6 +63,9 @@ class CreateGroupViewModelImpl: CreateGroupViewModel, CreateGroupViewModelInput 
         
     }
     
+    func reloadUsers() {
+        getUsers()
+    }
     //For all of your viewBindings
     enum Output {
         case reload

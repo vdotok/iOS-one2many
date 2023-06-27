@@ -18,6 +18,7 @@ public class CreateGroupViewController: UIViewController {
     @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     let navigationTitle = UILabel()
+    lazy var refreshControl = UIRefreshControl()
     override public func viewDidLoad() {
         super.viewDidLoad()
         configureAppearance()
@@ -45,6 +46,7 @@ public class CreateGroupViewController: UIViewController {
                 let selectedIndexPath = IndexPath(item:index , section: 0)
                 self.tableView.reloadRows(at: [selectedIndexPath], with: .none)
             case .reload:
+                self.refreshControl.endRefreshing()
                 tableView.reloadData()
             case .groupCreated(group: let group):
                 viewModel.delegate?.didGroupCreated(group: group)
@@ -68,8 +70,14 @@ extension CreateGroupViewController {
         searchBar.delegate = self
         tableView.register(UINib(nibName: "CreateGroupCell", bundle: nil), forCellReuseIdentifier: "CreateGroupCell")
         configureNavigation()
-
-    }
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+   }
+            
+   @objc func refresh() {
+       viewModel.reloadUsers()
+   }
     
     private func configureNavigation() {
         let image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysOriginal)

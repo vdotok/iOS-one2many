@@ -65,6 +65,7 @@ If command is not found then you don’t have Cocoapods installed on your system
 * Now checkmark the box to enable **Group ID** and tap on Refresh icon 
 * **App Group ID** must be kept same for all targets
 * Repeat the above action for **Screen Share**, and **Screenshare Utility Target**
+* In struct AuthenticationConstants(iOS-one2many -> common -> constants), replace the values for **App_Group** with your **App Group ID**
 
 ### Building On Device
 *Please be noted that iOSSDKStreaming does not work for iOS Simulator*

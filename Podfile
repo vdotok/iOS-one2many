@@ -11,6 +11,8 @@ target 'iOS-one2many' do
   pod 'IQKeyboardManagerSwift'
   pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
   pod "VisualEffectView"
+  pod 'MaterialComponents/Snackbar','109.2.0'
+ 
 
 end
 target 'ScreenShare' do
@@ -18,7 +20,6 @@ target 'ScreenShare' do
     use_frameworks!
     pod 'MMWormhole'
     pod 'VdoTokStreaming', :git => 'https://github.com/vdotok/VdoTokStreaming.git'
-
     
 end
 
