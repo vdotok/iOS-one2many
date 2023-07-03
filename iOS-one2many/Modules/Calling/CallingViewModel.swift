@@ -443,13 +443,17 @@ extension CallingViewModelImpl: SessionDelegate {
         case .ringing:
             output?(.updateView(session: session))
         case .connected:
+          stopSound()
           didConnect()
-            output?(.updateUsers(countParticpant(session: session)))
+          output?(.updateUsers(countParticpant(session: session)))
         case .rejected:
           sessionReject()
+          stopSound()
         case .missedCall:
             sessionMissed()
+            stopSound()
         case .hangup:
+            stopSound()
             guard session.connectedUsers.count != 0 else {
                 sessionHangup()
                 return
