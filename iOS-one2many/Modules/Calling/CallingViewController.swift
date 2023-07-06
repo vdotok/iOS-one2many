@@ -103,7 +103,6 @@ public class CallingViewController: UIViewController {
     }
     
     private func configureView(for session: VTokBaseSession) {
-        
         switch session.callType {
         case .onetoone, .manytomany:
             guard let groupCallingView = groupCallingView else {return}

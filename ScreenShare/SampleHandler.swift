@@ -254,6 +254,9 @@ extension SampleHandler: SessionDelegate {
         case .suspendedByProvider:
             break
         case .insufficientBalance:
+            let userInfo = [NSLocalizedFailureReasonErrorKey : "Insufficient fund"]
+            let error = NSError(domain: "RPBroadcastErrorDomain", code: 401, userInfo: userInfo)
+            finishBroadcastWithError(error)
             break
         case .temporaryUnAvailable:
            break
