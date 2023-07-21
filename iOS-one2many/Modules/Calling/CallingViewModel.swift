@@ -530,7 +530,8 @@ extension CallingViewModelImpl {
 
         do {
             /// this codes for making this app ready to takeover the device audio
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord)
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
             try AVAudioSession.sharedInstance().setActive(true)
 
             /// change fileTypeHint according to the type of your audio file (you can omit this)
@@ -543,6 +544,8 @@ extension CallingViewModelImpl {
 
             // no need for prepareToPlay because prepareToPlay is happen automatically when calling play()
             player!.numberOfLoops = 3
+            player?.prepareToPlay()
+            player?.volume = 3.0
             player!.play()
         } catch let error as NSError {
             print("error: \(error.localizedDescription)")

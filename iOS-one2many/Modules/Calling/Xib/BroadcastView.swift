@@ -352,6 +352,14 @@ class BroadcastView: UIView {
             default:
                 break
             }
+            
+            switch session.state{
+            case .insufficientBalance:
+                broadCastTitle.text = "Insufficient fund...."
+            default:
+                break
+            }
+            
             VdotokShare.shared.setSession(session: session)
             setOutGoingView(for: session)
             
