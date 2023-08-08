@@ -23,7 +23,6 @@ If command is not found then you don’t have Cocoapods installed on your system
 * Type the following command in **Terminal** `sudo gem install cocoapods` and hit **Enter**
 * If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`. [Click here](https://brew.sh/) to install **brew**
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
-<img width="1236" alt="Screenshot 2023-08-08 at 2 07 14 PM" src="https://github.com/vdotok/iOS-one2many/assets/121437187/87aa5899-3fdc-4c94-9a75-8c3bc3673195">
 
 ### Code Setup
 *	On VdoTok Github repo,click on **Code** button 
