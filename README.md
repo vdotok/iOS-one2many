@@ -23,6 +23,7 @@ If command is not found then you don’t have Cocoapods installed on your system
 * Type the following command in **Terminal** `sudo gem install cocoapods` and hit **Enter**
 * If you face this issue **ERROR: Failed to build gem native extension**, then run `brew install cocoapods`. [Click here](https://brew.sh/) to install **brew**
 * After installation is complete, type command `pod --version` and hit **Enter** to confirm installation is successful
+<img width="1236" alt="Screenshot 2023-08-08 at 2 07 14 PM" src="https://github.com/vdotok/iOS-one2many/assets/121437187/87aa5899-3fdc-4c94-9a75-8c3bc3673195">
 
 ### Code Setup
 *	On VdoTok Github repo,click on **Code** button 
@@ -60,7 +61,8 @@ If command is not found then you don’t have Cocoapods installed on your system
 * To establish a connection between your main “Main Target” and “Extension Target”, add **appgoups** in your all targets
 * Go to your **Main Target->Signing and Capabilities->Capabilities(+ icon)**
 * Tap on the **App groups Icon** and create your **Group ID**
-<img width="500" alt="Screenshot 2022-08-16 at 12 12 05 PM" src="https://user-images.githubusercontent.com/111276411/185366612-0cf449f5-b37e-4eab-8ced-c97d77eaf3e7.png">
+
+<img width="1236" alt="Screenshot 2023-08-08 at 2 07 14 PM" src="https://github.com/vdotok/iOS-one2many/assets/121437187/912ff823-1b36-4e19-bea9-e8a951165ea8">
 
 * Now checkmark the box to enable **Group ID** and tap on Refresh icon 
 * **App Group ID** must be kept same for all targets
@@ -88,5 +90,3 @@ To run on a real device:
    *   For details on how to run application on a real device, please [click here](https://codewithchris.com/deploy-your-app-on-an-iphone/) to follow instructions.
 
 
-
-	     
