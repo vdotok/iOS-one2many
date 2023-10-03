@@ -18,6 +18,6 @@ struct AuthenticationConstants {
 
     static var TENANTSERVER = ""
     static var PROJECTID =  ""
-    static let APP_GROUP = ""
+    static let APP_GROUP = "group.com.vdotok.ios.broadcasting"
 }
 

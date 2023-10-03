@@ -56,7 +56,11 @@ class LandingViewModelImpl: LandingViewModel, LandingViewModelInput {
     }
     
     func viewModelWillAppear() {
-        registerForCommand()
+        if #available(iOS 15.0, *) {
+            registerForCommand()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func viewModelWillDisappear() {
@@ -148,7 +152,11 @@ extension LandingViewModelImpl: SDKConnectionDelegate {
             
         case .sessionRequest(let sessionRequest):
             guard let sdk = vtokSdk else {return}
-            router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
+            if #available(iOS 15.0, *) {
+                router.moveToIncomingCall(sdk: sdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 
@@ -168,7 +176,11 @@ extension LandingViewModelImpl {
                 self?.output?(.dismissView)
                 
                 guard let sdk = self?.vtokSdk, let broadcastData = self?.broadCastData else {return }
-                self?.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+                if #available(iOS 15.0, *) {
+                    self?.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+                } else {
+                    // Fallback on earlier versions
+                }
                 print("screen share start")
             }
         })
@@ -176,6 +188,10 @@ extension LandingViewModelImpl {
     
     func moveToCalling(with broadcastData: BroadcastData) {
         guard let sdk = self.vtokSdk else {return }
-        self.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+        if #available(iOS 15.0, *) {
+            self.router.moveToCalling(sdk: sdk, screenType: .videoAndScreenShare, broadcastData: broadcastData)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

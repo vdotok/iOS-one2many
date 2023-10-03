@@ -19,6 +19,7 @@ enum ScreenType {
 
 class CallingBuilder {
 
+    @available(iOS 15.0, *)
     func build(with navigationController: UINavigationController?, vtokSdk: VideoTalkSDK, group: Group?, screenType: ScreenType, session: VTokBaseSession? = nil, contact: [User]? = nil, broadcastData: BroadcastData?, sessionDirection: SessionDirection) -> UIViewController {
         
         let storyboard = UIStoryboard(name: "Calling", bundle: Bundle(for: CallingBuilder.self))

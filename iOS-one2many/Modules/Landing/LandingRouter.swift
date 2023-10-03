@@ -24,12 +24,14 @@ extension LandingRouter {
         self.navigationController?.pushViewController(builder, animated: true)
     }
     
+    @available(iOS 15.0, *)
     func moveToIncomingCall(sdk: VideoTalkSDK, baseSession: VTokBaseSession, users: [User], broadcastData: BroadcastData?) {
         let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, group: nil, screenType: .incomingCall, session: baseSession, contact: users, broadcastData: broadcastData, sessionDirection: .incoming)
         builder.modalPresentationStyle = .fullScreen
         navigationController?.present(builder, animated: true, completion: nil)
     }
     
+    @available(iOS 15.0, *)
     func moveToCalling(sdk: VideoTalkSDK, group: Group? = nil, users: [User] = [], screenType: ScreenType, broadcastData: BroadcastData ) {
         let builder = CallingBuilder().build(with: self.navigationController, vtokSdk: sdk, group: group, screenType: screenType, contact: users, broadcastData: broadcastData, sessionDirection: .outgoing)
         builder.modalPresentationStyle = .fullScreen

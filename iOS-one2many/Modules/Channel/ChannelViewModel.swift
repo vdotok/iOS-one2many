@@ -111,12 +111,20 @@ extension ChannelViewModelImpl {
     
     func moveToVideo(group: Group) {
         
-        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoView, broadcastData: broadCastData)
+        if #available(iOS 15.0, *) {
+            router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoView, broadcastData: broadCastData)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     func moveToAudio(group: Group) {
         
-        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .audioView, broadcastData: broadCastData)
+        if #available(iOS 15.0, *) {
+            router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .audioView, broadcastData: broadCastData)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     
@@ -257,7 +265,11 @@ extension ChannelViewModelImpl: SDKConnectionDelegate {
             self.output?(.connected)
         case .sessionRequest(let sessionRequest):
             
-            router.moveToIncomingCall(sdk: vtokSdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
+            if #available(iOS 15.0, *) {
+                router.moveToIncomingCall(sdk: vtokSdk, baseSession: sessionRequest, users: self.contacts, broadcastData: broadCastData)
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
     
@@ -289,7 +301,11 @@ extension ChannelViewModelImpl {
         guard let myUser = VDOTOKObject<UserResponse>().getData(), let refID = myUser.refID else {return}
 //        guard let users = selectedGroup?.participants.filter({$0.refID != refID}) else {return}
         guard let group = selectedGroup else {return}
-        router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoAndScreenShare, broadcastData: broadCastData)
+        if #available(iOS 15.0, *) {
+            router.moveToCalling(sdk: vtokSdk, group: group, users: contacts, screenType: .videoAndScreenShare, broadcastData: broadCastData)
+        } else {
+            // Fallback on earlier versions
+        }
         
     }
 
