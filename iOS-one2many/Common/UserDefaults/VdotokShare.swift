@@ -32,7 +32,7 @@ class VdotokShare{
     }
     
     func getSession()->VTokBaseSession?{
-        return self.session!
+        return self.session != nil ? self.session : nil
     }
     
 }
